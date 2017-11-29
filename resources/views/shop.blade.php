@@ -315,7 +315,7 @@
                   <!-- ngIf: food.image_path -->
                   <span class="col-1 ng-scope" ng-if="food.image_path">
                     <a href="javascript:" ng-click="showInfo(food)">
-                      <img ng-src="//fuss10.elemecdn.com/7/a3/07b9a1363ad4a93651e9faeb450fdjpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85" alt="红烧狮子头饭的图片" src="{{asset('/a/elm/07b9a1363ad4a93651e9faeb450fdjpeg.jpeg')}}"></a>
+                      <img ng-src="//fuss10.elemecdn.com/7/a3/07b9a1363ad4a93651e9faeb450fdjpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85" alt="红烧狮子头饭的图片" src="{{asset('/a/elm/3cf81fb6227d00706b085742205b489e.jpg')}}"></a>
                   </span>
                   <!-- end ngIf: food.image_path -->
                   <div class="col-2 shopmenu-food-main">
@@ -328,9 +328,10 @@
                       <span class="color-mute ng-binding">(2)</span>
                       <span class="color-mute ng-binding">月售29份</span></p>
                   </div>
+
                   <span class="col-3 shopmenu-food-price color-stress ng-binding">15
                     <small class="ng-binding"></small></span>
-                  <span class="col-4">
+
                     <div shop-cartbutton="" food="food" ng-hide="shop.id == &#39;656683&#39;" class="ng-isolate-scope">
                       <!-- ngIf: !menuFood.hasSpec -->
                       <div ng-if="!menuFood.hasSpec" class="ng-scope">
@@ -759,9 +760,6 @@
                     </div>
                   </div>
 
-
-
-
                   <!-- ngIf: !shopCart.vm.groups[shopCart.currentGroupIndex].length -->
                   <div class="shop-cartbasket-empty ng-scope" ng-if="!shopCart.vm.groups[shopCart.currentGroupIndex].length">
                     <div class="icon-cart"></div>
@@ -871,17 +869,7 @@
         <a href="JavaScript:" class="sidetools-item icon-arrow-up" title="回到顶部" tooltip="回到顶部" tooltip-placement="left" ng-click="backToTop()"></a>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
+=
     <footer class="footer" role="contentinfo">
       <div class="container clearfix">
         <div class="footer-link">
@@ -1001,7 +989,6 @@
         ['id'=>1, 'name'=>'zhangsan'],
         ['id'=>2, 'name'=>'lisi']
     ];
-
     ?>
 
     <table border = '1'>
