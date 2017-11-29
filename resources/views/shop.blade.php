@@ -273,6 +273,9 @@
                     <a href="javascript:" ng-click="showInfo(food)">
                       <img ng-src="//fuss10.elemecdn.com/d/7c/6940261e9231d507a67ba49300f4cjpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85" alt="单个狮子头的图片" src="{{asset('/a/elm/6940261e9231d507a67ba49300f4cjpeg.jpeg')}}"></a>
                   </span>
+
+
+
                   <!-- end ngIf: food.image_path -->
                   <div class="col-2 shopmenu-food-main">
                     <h3 class="shopmenu-food-name ui-ellipsis ng-binding">单个狮子头</h3>
@@ -299,6 +302,9 @@
                       <!-- ngIf: menuFood.hasSpec --></div>
                   </span>
                 </div>
+
+
+
                 <!-- end ngRepeat: food in category.foods --></div>
               <!-- end ngRepeat: category in categorys -->
               <div class="shopmenu-list clearfix ng-scope" ng-repeat="category in categorys">
@@ -610,16 +616,16 @@
                   </span>
                   <!-- end ngIf: food.image_path -->
                   <div class="col-2 shopmenu-food-main">
-                    <h3 class="shopmenu-food-name ui-ellipsis ng-binding">鱼香肉丝饭</h3>
-                    <p class="color-mute ui-ellipsis ng-binding" tooltip="鱼香肉丝饭">鱼香肉丝饭</p>
+                    <h3 class="shopmenu-food-name ui-ellipsis ng-binding" class = 'name'>鱼香肉丝饭</h3>
+                    <p class="color-mute ui-ellipsis ng-binding" tooltip="鱼香肉丝饭 class = 'description'>鱼香肉丝饭</p>
                     <p>
                       <div class="starrating icon-star ng-isolate-scope" title="评分4.2分" rate-star="" rating="food.rating">
                         <span class="icon-star" ng-style="{ width: (rating * 20) + &#39;%&#39; }" style="width: 84%;"></span>
                       </div>
                       <span class="color-mute ng-binding">(5)</span>
-                      <span class="color-mute ng-binding">月售32份</span></p>
+                      <span class="color-mute ng-binding sales">月售32份</span></p>
                   </div>
-                  <span class="col-3 shopmenu-food-price color-stress ng-binding">16
+                  <span class="col-3 shopmenu-food-price color-stress ng-binding price">16
                     <small class="ng-binding"></small></span>
                   <span class="col-4">
                     <div shop-cartbutton="" food="food" ng-hide="shop.id == &#39;656683&#39;" class="ng-isolate-scope">
@@ -716,7 +722,7 @@
                         <span class="icon-star" ng-style="{ width: (rating * 20) + &#39;%&#39; }" style="width: 86.6%;"></span>
                       </div>
                       <span class="color-mute ng-binding">(6)</span>
-                      <span class="color-mute ng-binding">月售30份</span></p>
+                      15
                   </div>
                   <span class="col-3 shopmenu-food-price color-stress ng-binding">15
                     <small class="ng-binding"></small></span>
@@ -741,7 +747,7 @@
               <div class="shop-cart">
                 <div class="shop-cartbasket" id="shopbasket" style="top: -44px; height: auto;">
                   <div shop-groupswitcher="" cart="shopCart" class="ng-isolate-scope">
-                    <!-- ngIf: shopCart.vm.groups.length> 1 -->
+                    {{--<!-- ngIf: shopCart.vm.groups.length> 1 -->--}}
                     <div class="shop-grouphead single" ng-class="{ single: shopCart.vm.groups.length === 1 }">
                       <!-- ngIf: shopCart.vm.groups.length===1 -->
                       <a href="javascript:" class="icon-cart-add ng-scope" ng-if="shopCart.vm.groups.length === 1" ng-click="addGroup()" tooltip="添加购物车"></a>
@@ -752,6 +758,9 @@
                         <a href="javascript:" ng-click="shopCart.clearGroup(shopCart.currentGroupIndex)">[清空]</a></div>
                     </div>
                   </div>
+
+
+
 
                   <!-- ngIf: !shopCart.vm.groups[shopCart.currentGroupIndex].length -->
                   <div class="shop-cartbasket-empty ng-scope" ng-if="!shopCart.vm.groups[shopCart.currentGroupIndex].length">
@@ -862,6 +871,17 @@
         <a href="JavaScript:" class="sidetools-item icon-arrow-up" title="回到顶部" tooltip="回到顶部" tooltip-placement="left" ng-click="backToTop()"></a>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
     <footer class="footer" role="contentinfo">
       <div class="container clearfix">
         <div class="footer-link">
@@ -974,8 +994,49 @@
     </footer>
     <script src="{{asset('/a/elm/home')}}"></script>
     <script src="{{asset('/a/js/textStatic.js')}}"></script>
-    <script src="{{asset('/a/js/textStatic.js')}}"></script>
-    <script src="{{asset('/a/js/textStatic.js')}}"></script>
-  </body>
+    <script src="{{asset('/a/js/jquery-1.8.3.min.js')}}"></script>
 
+    <?php
+    $data = [
+        ['id'=>1, 'name'=>'zhangsan'],
+        ['id'=>2, 'name'=>'lisi']
+    ];
+
+    ?>
+
+    <table border = '1'>
+      <tr>
+
+        <td>id</td>
+        <td>name</td>
+      </tr>
+    <div >
+      @foreach($data as $v)
+        <tr>
+          <td>{{$v['id']}}</td>
+          <td>{{$v['name']}}</td>
+
+         <td> <button id="{{$v['id']}}" class = 'btn'>提交</button> </td>
+        </tr>
+      @endforeach
+    </div>
+      </table>
+    <script>
+
+        $('.btn').on('click',function() {
+
+           var id = $(this).attr('id');
+//           alert(id);
+            $.ajax("/home/cart",{
+                data:{id,id},
+                success:function(data){
+                    console.log(data);
+                },
+                datatype:'json',
+            }
+            )
+        });
+    </script>
+
+  </body>
 </html>

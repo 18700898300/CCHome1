@@ -18,3 +18,9 @@ Route::get('/', function () {
 Route::get('/shop',function (){
     return view('shop');
 });
+
+Route::get('/order',function (){
+    return view('order');
+});
+
+Route::get('/home/cart/','Home\CartController@cart');
