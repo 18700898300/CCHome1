@@ -1,5 +1,6 @@
 <?php
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -7,7 +8,6 @@ Route::get('/', function () {
 Route::get('/shop',function (){
     return view('shop');
 });
-
 Route::get('/order',function (){
     return view('order');
 });
@@ -29,3 +29,15 @@ Route::get('/admin/shop_type/edit/{id}','Admin\ShoptypeController@edit');
 Route::post('/admin/shop_type/update','Admin\ShoptypeController@update');
 // 删除分类
 Route::get('/admin/shop_type/del/{id}','Admin\ShoptypeController@delete');
+
+Route::get('/index',function(){
+    return view('index');
+});
+//商户登录
+Route::get('/admin/mlogin','Admin\MerchantController@mlogin');
+Route::post('/admin/domlogin','Admin\MerchantController@domlogin');
+Route::get('/admin/yzm','Admin\MerchantController@yzm');
+Route::get('/admin/crypt','Admin\MerchantController@crypt');
+//商户后台
+Route::get('/admin/merindex','Admin\MerController@merindex');
+
