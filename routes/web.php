@@ -27,4 +27,15 @@ Route::post('/admin/domlogin','Admin\MerchantController@domlogin');
 Route::get('/admin/yzm','Admin\MerchantController@yzm');
 Route::get('/admin/crypt','Admin\MerchantController@crypt');
 //商户后台
-Route::get('/admin/merindex','Admin\MerController@merindex');
+
+//进入商户后台首页的路由组
+//注册好中间件之后,直接用别名islogin就可以
+Route::group(['middleware'=>'islogin','prefix'=>'admin','namespace'=>'Admin'],function(){
+    Route::get('merindex','MerController@merindex');
+
+});
+
+
+//友情链接管理
+//系统后台控制登录后进入,后期加入
+Route::resource('admin/slideshow','Admin\SlideshowController');

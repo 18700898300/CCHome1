@@ -9,6 +9,6 @@ class MerController extends Controller
 {
     public function merindex()
     {
-        dd(111);
+        dd(999);
     }
 }
