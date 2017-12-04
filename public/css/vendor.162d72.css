@@ -1,0 +1,164 @@
+/* Code tidied up by ScrapBook */
+html {
+    color: rgb(51, 51, 51);
+    background: none repeat scroll 0% 0% rgb(255, 255, 255);
+    text-rendering: optimizelegibility;
+    box-sizing: border-box;
+}
+
+*, *:after, *:before {
+    box-sizing: inherit;
+}
+
+article, aside, blockquote, body, button, code, dd, details, dl, dt, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hr, input, legend, li, menu, nav, ol, p, pre, section, td, textarea, th, ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+body, button, input, select, textarea {
+    font: 400 1em/1.5 PingFang SC, Lantinghei SC, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+}
+
+button, input {
+    line-height: normal;
+}
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+    padding: 0px;
+    border: 0px none;
+}
+
+fieldset, img {
+    border: 0px none;
+}
+
+@media only screen and (max-width: 640px) {
+}
+
+a {
+    color: rgb(0, 137, 220);
+}
+
+a, ins {
+    text-decoration: none;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    height: 0px;
+    clear: both;
+}
+
+.serif {
+    font-family: Palatino, Optima, Georgia, serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: PingFang SC, Lantinghei SC, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "eleme";
+    font-style: normal;
+    font-weight: 400;
+    src: local("☺︎"), url("eleme.a61c32.woff") format("woff"), url("eleme.8e5aeb.ttf") format("truetype"), url("eleme.94ccdd.svg") format("svg");
+}
+
+body {
+    background: none repeat scroll 0% 0% rgb(247, 247, 247);
+    padding-right: 35px;
+}
+
+body.whitebody {
+    background-color: rgb(255, 255, 255);
+}
+
+body.hidesidebar {
+    padding-right: 0px;
+}
+
+.container {
+    font-size: 14px;
+    width: 960px;
+    margin: 0px auto;
+}
+
+@media (min-width: 1260px) {
+    .container, body.hidesidebar .container {
+        width: 1180px;
+    }
+}
+
+.color-stress {
+    color: rgb(247, 67, 66);
+}
+
+[class*=" btn-"], [class^="btn-"] {
+    display: inline-block;
+    padding: 8px 17px;
+    line-height: 1;
+    border: medium none;
+    border-radius: 2px;
+    outline: 0px none;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+.btn-sm {
+    padding: 7px 14px;
+    font-size: 12px;
+}
+
+.btn-stress {
+    background-color: rgb(247, 67, 66);
+    color: rgb(255, 255, 255);
+}
+
+.btn-stress:hover {
+    background-color: rgb(230, 38, 37);
+}
+
+.btn-security, .btn-security:hover {
+    background-color: rgb(93, 180, 35);
+}
+
+.btn-security {
+    color: rgb(255, 255, 255);
+}
+
+.footer-copyright {
+    font-size: 12px;
+    clear: both;
+    padding-top: 60px;
+    color: rgb(153, 153, 153);
+    text-align: center;
+}
+
+.footer-copyright a {
+    color: inherit;
+}
+
+.footer-copyright a:hover {
+    color: rgb(51, 51, 51);
+    text-decoration: underline;
+}
+
+.footer-police {
+    padding: 0.5em 0px;
+    text-align: center;
+}
+
+@media not all, all and (min-resolution: 2dppx) {
+}
+
+@media (min-width: 1260px) {
+}
+
+@media (max-height: 520px) {
+}
+
+@media (min-width: 1260px) {
+}

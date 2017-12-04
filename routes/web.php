@@ -1,22 +1,13 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+
 // 系统后台
-Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
+Route::group(['prefix'=>'admin/xtAdmin','namespace'=>'Admin\xtAdmin'],function(){
     //进入系统后台首页
     Route::get('index','IndexController@index');
     Route::get('info','IndexController@info');
@@ -38,4 +29,39 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 //    删除分类
     Route::post('/shop_type/delCate/{id}','Shop_typeController@delete');
 });
+
+// CChome前台
+Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
+//    进入前台首页
+    Route::get('index','IndexController@index');
+//    进入商家店铺
+    Route::get('shop/{id}','IndexController@shop');
+});
+
+
+
+
+Route::get('/shop',function (){
+    return view('shop');
+});
+Route::get('/order',function (){
+    return view('order');
+});
+
+Route::get('/home/cart/','Home\CartController@cart');
+
+
+
+
+Route::get('/index',function(){
+    return view('index');
+});
+//商户登录
+Route::get('/admin/mlogin','Admin\MerchantController@mlogin');
+Route::post('/admin/domlogin','Admin\MerchantController@domlogin');
+Route::get('/admin/yzm','Admin\MerchantController@yzm');
+Route::get('/admin/crypt','Admin\MerchantController@crypt');
+//商户后台
+Route::get('/admin/merindex','Admin\MerController@merindex');
+
 
