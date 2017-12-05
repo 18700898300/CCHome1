@@ -14,6 +14,9 @@ Route::get('/order',function (){
 //购物车
 Route::get('/home/addcart/{id}','Home\CartController@addcart');
 Route::get('/home/cart/','Home\CartController@cart');
+Route::get('/home/cart/jian/','Home\CartController@jian');
+Route::get('/home/cart/jia/','Home\CartController@jia');
+Route::get('/home/cart/remove/','Home\CartController@remove');
 
 Route::get('/home/index',function(){
     return view('home/index');
