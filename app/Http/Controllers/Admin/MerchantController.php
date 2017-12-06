@@ -60,15 +60,17 @@ class MerchantController extends Controller
 //        var_dump(strtolower($input['code']));
 //        dd(strtolower(Session::get('code')));
         if(strtolower($input['code'])!=strtolower(Session::get('code'))){
-            return redirect('admin/mlogin')->with('errors','验证码错误');
+            return redirect('admin/mlogin')->with('errors','验证码错误')
+                ->withInput();//有此步验证码错误返回登录页后才可以保持用户名
+
         }
 
         //错误提示中的模板引擎语法必须正确如@
 //        3.1判断是否有此用户
 
-            $user= MerUser::where('bname',$input['bname'])->first();
+            $meruser= MerUser::where('bname',$input['bname'])->first();
 //            dd($user);
-            if(!$user){
+            if(!$meruser){
                 return redirect('admin/mlogin')->with('errors','用户名不存在');
             }
 //        3.2密码是否正确
@@ -82,12 +84,12 @@ class MerchantController extends Controller
 //        dd($input['bpassword']);
 //        dd(Crypt::decrypt($user->bpassword));
         //必须加密存入数据库此处才可以使用解密方法
-        if( Crypt::decrypt($user->bpassword) != trim($input['bpassword']) ){
+        if( Crypt::decrypt($meruser->bpassword) != trim($input['bpassword']) ){
             return redirect('admin/mlogin')->with('errors','密码不正确');
         }
 
 //        4.登录成功将用户信息存入session
-        Session::put('user',$user);
+        Session::put('meruser',$meruser);
         return redirect('admin/merindex');
 
 
