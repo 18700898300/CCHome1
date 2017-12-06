@@ -32,12 +32,12 @@ class CartController extends Controller
     {
         //全部商品信息
         $cart =  Cart::content();
-      // dd($cart);
+
         //总额
         $total= Cart::subtotal();
         //购物车商品的数量
         $count = Cart::count();
-    //  dd($count);
+//    dd($cart);
         return view('/home/cart', ['cart'=> $cart,'total'=>$total,'count'=>$count]);
 
     }
@@ -58,9 +58,9 @@ class CartController extends Controller
         $total= Cart::subtotal();
         //购物车商品的数量
         $count = Cart::count();
-       return ['qty'=>$qty,'total'=>$total,'count'=>$count];
+       return ['total'=>$total,'count'=>$count,'qty'=>$qty];
     }
-
+    //对数量进行递加
     public function jia(Request $request)
     {
 
@@ -72,16 +72,28 @@ class CartController extends Controller
 
         //对购物车数量进行更新
         Cart :: update($rowId,$qty);
+
         $total= Cart::subtotal();
         //购物车商品的数量
         $count = Cart::count();
-        return ['qty'=>$qty,'total'=>$total,'count'=>$count];
+        return ['total'=>$total,'count'=>$count,'qty'=>$qty];
     }
     //移除一个菜品
     public function remove(Request $request)
     {
         $rowId = $request ->input('id');
         Cart ::  remove($rowId);
+        //获取购物车的总钱数
+        $total= Cart::subtotal();
+        //购物车商品的数量
+        $count = Cart::count();
+        return ['total'=>$total,'count'=>$count];
+    }
+    //清除所有菜品
+    public function removes()
+    {
+
+        Cart :: destroy();
         //获取购物车的总钱数
         $total= Cart::subtotal();
         //购物车商品的数量

@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>购物车的实现</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('/a/js/bootstrap.min.css')}}">
-    <script src="{{asset('/a/js/index.js')}}" type="text/javascript" charset="utf-8"></script>
-    <script src=""http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"" type="text/javascript" charset="utf-8"></script>
-    <script src="{{asset('/a/js/jquery-1.8.3.min.js')}}"></script>
-    <script src="{{asset('/layer/layer.js')}}"></script>
-</head>
-<body ng-app>
+@extends('/layouts/order')
+@section('body')
+    <div class="ng-scope" ng-view="" role="main">
+        <div checkout-guide="" guide="guide" class="checkoutguide ng-isolate-scope">
+            <div class="container"><a class="checkoutguide-logo icon-logo" href="https://www.ele.me/"></a> <span
+                        class="checkoutguide-text ng-binding" ng-bind="guide.text">购物车</span><!-- ngIf: guide.step -->
+                <div class="checkoutguide-content step2" ng-if="">
 
-
-
+                   </div>
+                <!-- end ngIf: guide.step --></div>
+        </div>
 <div ng-controller="cartController" class="container">
     <table class="table" ng-show="cart.length">
         <thead>
@@ -45,13 +40,18 @@
         @endforeach
         <tr>
             <td>总购买数量</td>
-            <td id = 'count' ng-bind="totalQuantity()">{{$count}}</td>
+            <td id = 'count' >{{$count}}</td>
             <td></td>
             <td>总购物价</td>
-            <td id = 'total' ng-bind="totalPrice()">{{ $total}}</td>
-
-            <td colspan="2"><button type="button"  ng-click="cart = {}" class="btn btn-danger btn-sm">清空购物车</button></td>
-            <td colspan="2"><button type="button"  ng-click="cart = {}" class="btn btn-danger btn-sm">去结算</button></td>
+            <td id = 'total' >{{ $total}}</td>
+            <td colspan="2"><button type="button" class="btn btn-danger btn-sm removes">清空购物车</button></td>
+        </tr>
+        <tr>
+            <td colspan="2" ><a href="{{url('/shop')}}"><button type="button" class="btn btn-danger btn-sm ">继续购物</button></a></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td colspan="2"><a href="{{url('/home/order/index')}}"><button type="button" class="btn btn-danger btn-sm jsy">去结算</button></a></td>
         </tr>
         </tbody>
     </table>
@@ -75,13 +75,12 @@
                    $('#total').text(data['total']);
             });
         });
-
+        //对商品数量进行递加
         $('.jia').on('click',function(){
             var id = $(this).attr('id');
             var qty= $(this).attr('qty');
             var price =$(this).attr('price');
             var a = $(this);
-
             $.get("{{url('/home/cart/jia')}}",{id:id,qty:qty},function(data){
                 //设置input的数量
                 a .prev().val(data['qty']);
@@ -94,7 +93,7 @@
                 $('#total').text(data['total']);
             });
         });
-
+        //删除某个菜品
         $('.remove').on('click',function(){
 
             var id = $(this).attr('id');
@@ -106,7 +105,23 @@
                 $('#total').text(data['total']);
             });
         });
+            //清空所有菜品
+         $('.removes').on('click',function(){
+             var a = $(this);
+             $.get("{{url('/home/cart/removes')}}",function(data){
+                 a.parent().parent().next().siblings().remove();
+                 //设置总钱数和总数量
+                 $('#count').text(data['count']);
+                 $('#total').text(data['total']);
+             });
+         });
+
+         {{--//去结算--}}
+        {{--$('.jsy').on('click',function(){--}}
+            {{--$.get("{{url('/home/order/index')}}",function(data){--}}
+
+            {{--});--}}
+        {{--});--}}
     </script>
 </div>
-</body>
-</html>
+@stop

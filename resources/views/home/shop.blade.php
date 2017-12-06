@@ -30,7 +30,7 @@
     <script>window.location.href = 'https://h.ele.me/activities/landing';</script>
     <![endif]-->
     <script src="{{asset('/wf/home/elm/api')}}" data-ref="API_CONFIG"></script>
-    <script src="D:/Desktop/project/www.ele.me/www.elm.com/js/perf.js" type="text/javascript"></script>
+    <script src="{{asset('wf/home/js/perf.js')}}" type="text/javascript"></script>
     <script src="{{asset('/wf/home/js/vendor.6b3834.js')}}" type="text/javascript"></script>
     <script src="{{asset('/wf/home/js/222.js')}}" type="text/javascript"></script>
     <!--<base href="/">s-->
@@ -64,7 +64,7 @@
                         <i class="topbar-nav-icon icon-mobile"></i>手机应用
                         <div class="dropbox topbar-mobile-dropbox">
                             <span>扫一扫, 手机订餐更方便</span>
-                            <img src="{{asset('/wf/home/elm/appqc.95e532.png')}}" class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div>
+                            {{--<img src="{{asset('/wf/home/elm/appqc.95e532.png')}}" class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div>--}}
                     </div>
                     <div topbar-profilebox="">
                         <div class="topbar-profilebox">
@@ -115,7 +115,7 @@
             <div class="toolbar-btn icon-QR-code">
                 <div class="dropbox toolbar-tabs-dropbox">
                     <a href="http://static11.elemecdn.com/eleme/desktop/mobile/index.html" target="_blank">
-                        <img src="{{asset('/wf/home/elm/appqc.95e532.png')}}" alt="下载手机应用">
+{{--                        <img src="{{asset('/wf/home/elm/appqc.95e532.png')}}" alt="下载手机应用">--}}
                         <p>下载手机应用</p>
                         <p class="icon-QR-code-bonus">即可参加分享红包活动</p></a>
                 </div>
@@ -509,7 +509,7 @@
     <div class="sidetools" side-tools="">
         <a href="http://kaidian.ele.me/" class="sidetools-item icon-visit-history" target="_blank" title="我要开店" tooltip="我要开店" tooltip-placement="left"></a>
         <div class="sidetools-item icon-qrcode">
-            <img class="sidetools-qrcode" src="{{asset('/wf/home/elm/appqc.95e532.png')}}" alt="扫描二维码免费下载手机App"></div>
+{{--            <img class="sidetools-qrcode" src="{{asset('/wf/home/elm/appqc.95e532.png')}}" alt="扫描二维码免费下载手机App"></div>--}}
         <a href="JavaScript:" class="sidetools-item icon-service" title="在线客服" tooltip="在线客服" tooltip-placement="left" online-service="" target="_blank" style="visibility: visible;"></a>
         <a href="{{$foods[0]['sid']}}#top" class="sidetools-item icon-arrow-up" title="回到顶部" tooltip="回到顶部" tooltip-placement="left" ng-click="backToTop()"></a>
     </div>
@@ -551,7 +551,7 @@
         </div>
         <div class="footer-mobile">
             <a href="https://h.ele.me/landing" target="_blank">
-                <img src="{{asset('/wf/home/elm/appqc.95e532.png')}}" class="footer-mobile-icon" alt="扫一扫下载饿了么手机 App"></a>
+                {{--<img src="{{asset('/wf/home/elm/appqc.95e532.png')}}" class="footer-mobile-icon" alt="扫一扫下载饿了么手机 App"></a>--}}
             <div class="footer-mobile-content">
                 <h3>下载手机版</h3>
                 <p>扫一扫,手机订餐方便</p>
@@ -606,7 +606,7 @@
         </div>
         <div class="footer-mobile">
             <a href="https://h.ele.me/landing" target="_blank">
-                <img src="{{asset('/wf/home/elm/appqc.95e532.png')}}" class="footer-mobile-icon" alt="扫一扫下载饿了么手机 App"></a>
+{{--                <img src="{{asset('/wf/home/elm/appqc.95e532.png')}}" class="footer-mobile-icon" alt="扫一扫下载饿了么手机 App"></a>--}}
             <div class="footer-mobile-content">
                 <h3>下载手机版</h3>
                 <p>扫一扫,手机订餐方便</p>
