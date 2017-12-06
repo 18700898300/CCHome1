@@ -136,7 +136,7 @@
                 <img ng-src="//fuss10.elemecdn.com/3/bf/43ba71d180d43fb084348a40a428fjpeg.jpeg?imageMogr2/thumbnail/95x95/format/webp/quality/85" alt="田老师红烧肉（怀柔青春路店）" itemprop="image" src="{{asset('/wf/home/elm/7e0844ca398f08aa8b8ea08483ae0a87.jpg')}}">
                 <div class="shopguide-info-wrapper">
                     <div>
-                        <h1 title="田老师红烧肉（怀柔青春路店）" ng-class="{hastip: shop.tip}" itemprop="name" class="ng-binding">田老师红烧肉（怀柔青春路店）</h1>
+                        <h1 title="田老师红烧肉（怀柔青春路店）" ng-class="{hastip: shop.tip}" itemprop="name" class="ng-binding">{{$shop->name}}</h1>
                         <!-- ngIf: shop.tip -->
                         <a ng-href="/shop/1195106/info" href="https://www.ele.me/shop/1195106/info">
                             <!-- ngIf: cityId===6 7 --></a>
@@ -145,8 +145,8 @@
                     <div class="starrating icon-star ng-isolate-scope" title="评分4.3分" rate-star="" rating="shop.rating">
                         <span class="icon-star" ng-style="{ width: (rating * 20) + &#39;%&#39; }" style="width: 86%;"></span>
                     </div>(
-                    <a ng-href="/shop/1195106/rate" class="ng-binding" href="https://www.ele.me/shop/1195106/rate">456</a>)
-                    <span class="ng-binding">月售758单</span></p>
+                    <a ng-href="/shop/1195106/rate" class="ng-binding" href="https://www.ele.me/shop/1195106/rate">456总评价</a>)
+                    <span class="ng-binding">月售{{$shop->sum}}单</span></p>
                     <p>
                         <!-- ngRepeat: flavor in shop.flavor --></p>
                 </div>
@@ -178,34 +178,34 @@
                         </li>
                         <!-- end ngIf: shopRatingScore -->
                         <!-- ngIf: shop.description -->
-                        <li class="shopguide-extra-item ng-binding ng-scope" ng-if="shop.description" itemprop="description">田老师红烧肉，属于食堂型快餐连锁店。主营盖饭，种类虽“不多”，口味蛮“家常”，且配菜丰富。主菜里招牌红烧肉果然名不虚传，鱼香肉丝、酸豆角等也都不错。出菜速度快，价格又实惠！</li>
+                        <li class="shopguide-extra-item ng-binding ng-scope" ng-if="shop.description" itemprop="description">{{$shop->description}}</li>
                         <!-- end ngIf: shop.description -->
                         <li class="shopguide-extra-item address">
                             <p itemscope="" itemprop="streetAddress" itemtype="http://schema.org/PostalAddress">
                                 <span class="label">商家地址：</span>
-                                <span class="ng-binding">北京市怀柔区青春路15号一层的住所南起第三间门店</span>
+                                <span class="ng-binding">{{$shop->position}}</span>
                                 <meta itemprop="telephone" content="010-61604876 15001072754"></p>
                             <p>
                                 <span class="label">营业时间：</span>
-                                <span itemprop="openingHours" class="ng-binding">08:00-21:00</span></p>
+                                <span itemprop="openingHours" class="ng-binding">{{$shop->time}}</span></p>
                         </li>
                         <li class="shopguide-extra-item">
                             <p class="shopguide-extra-delivery">由
-                                <span class="ng-binding">田老师红烧肉（怀柔青春路店）</span>提供配送服务</p></li>
+                                <span class="ng-binding">{{$shop->name}}</span>提供配送服务</p></li>
                     </ul>
                 </div>
             </div>
             <div class="shopguide-server">
             <span ng-hide="shop.id == 656683" class="">
               <em>起送价</em>
-              <em class="shopguide-server-value ng-binding">15元</em></span>
+              <em class="shopguide-server-value ng-binding">{{$shop->staprice}}元</em></span>
                 <span ng-hide="shop.id == 656683" class="">
               <em>配送费</em>
-              <em class="shopguide-server-value ng-binding">配送费¥5</em>
+              <em class="shopguide-server-value ng-binding">配送费¥{{$shop->sprice}}</em>
                     <!-- ngIf: shop.delivery_mode.description --></span>
                 <span ng-hide="shop.id == 656683" class="">
               <em>平均送达速度</em>
-              <em class="shopguide-server-value ng-binding">33分钟</em></span>
+              <em class="shopguide-server-value ng-binding">{{$shop->statime}}分钟</em></span>
             </div>
             <a class="shopguide-favor" href="javascript:" ng-click="favor()">
                 <!-- ngIf: isFavorShop -->
@@ -253,6 +253,7 @@
     </div>
     <div class="shopmain clearfix container ng-scope">
         <!-- ngIf: shopAction===' menu' -->
+
         <div ng-if="shopAction === &#39;menu&#39;" shop-menu="" shop-cache="shopCache" filter-data="shop.filter" display-type="shop.displayType" class="shopmenu ng-isolate-scope" perf-click="desktop/201">
             <div class="loading ng-binding ng-isolate-scope ng-hide" loading="" ng-show="loading">
                 <!-- ngIf: type==='profile' -->
@@ -314,62 +315,27 @@
 
 
 
-                        <div class="shopmenu-food ng-isolate-scope" ng-class="{noimg: !food.image_path}" id="626100714" ng-repeat="food in category.foods" shop-menu-item="" food="food" shop="shopCache">
-                            <!-- ngIf: food.image_path -->
-                            <span class="col-1 ng-scope" ng-if="food.image_path">
-                    <a href="javascript:" ng-click="showInfo(food)">
-                      <img ng-src="//fuss10.elemecdn.com/7/a3/07b9a1363ad4a93651e9faeb450fdjpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85" alt="红烧狮子头饭的图片" src="{{asset('/wf/home/elm/7e0844ca398f08aa8b8ea08483ae0a87.jpg')}}"></a>
-                  </span>
-                            <!-- end ngIf: food.image_path -->
-                            <div class="col-2 shopmenu-food-main">
-                                <h3 class="shopmenu-food-name ui-ellipsis ng-binding">红烧狮子头饭</h3>
-                                <p class="color-mute ui-ellipsis ng-binding" tooltip="红烧狮子头饭">红烧狮子头饭</p>
-                                <p>
-                                <div class="starrating icon-star ng-isolate-scope" title="评分3.0分" rate-star="" rating="food.rating">
-                                    <span class="icon-star" ng-style="{ width: (rating * 20) + &#39;%&#39; }" style="width: 60%;"></span>
-                                </div>
-                                <span class="color-mute ng-binding">(2)</span>
-                                <span class="color-mute ng-binding">月售55份</span></p>
-                            </div>
-                            <span class="col-3 shopmenu-food-price color-stress ng-binding">33
-                    <small class="ng-binding"></small></span>
-                            <span class="col-4">
-                    <div shop-cartbutton="" food="food" ng-hide="shop.id == &#39;656683&#39;" class="ng-isolate-scope">
-                      <!-- ngIf: !menuFood.hasSpec -->
-                      <div ng-if="!menuFood.hasSpec" class="ng-scope">
-                        <!-- ngIf: !cartItem.quantity && menuFood.stock -->
-                        <button class="shop-cartbutton ng-binding ng-scope" ng-if="!cartItem.quantity &amp;&amp; menuFood.stock" ng-click="cartItem.add($event)">加入购物车</button>
-                          <!-- end ngIf: !cartItem.quantity && menuFood.stock -->
-                          <!-- ngIf: !menuFood.stock -->
-                          <!-- ngIf: cartItem.quantity> 0 || cartItem.quantity === '' --></div>
-                        <!-- end ngIf: !menuFood.hasSpec -->
-                        <!-- ngIf: menuFood.hasSpec --></div>
-                  </span>
-                        </div>
-                        <!-- end ngRepeat: food in category.foods -->
-
-
-
-
+                    @foreach($foods as $k=>$v)
                         <!-- end ngRepeat: food in category.foods -->
                         <div class="shopmenu-food ng-isolate-scope" ng-class="{noimg: !food.image_path}" id="667240426" ng-repeat="food in category.foods" shop-menu-item="" food="food" shop="shopCache">
                             <!-- ngIf: food.image_path -->
                             <span class="col-1 ng-scope" ng-if="food.image_path">
                     <a href="javascript:" ng-click="showInfo(food)">
-                      <img ng-src="//fuss10.elemecdn.com/e/e8/cc3d941aa785d2f0c603fb08a0bfcjpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85" alt="碳烧鸡饭的图片" src="{{asset('/wf/home/elm/cc3d941aa785d2f0c603fb08a0bfcjpeg.jpeg')}}"></a>
+                      <img ng-src="//fuss10.elemecdn.com/e/e8/cc3d941aa785d2f0c603fb08a0bfcjpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85" alt="碳烧鸡饭的图片" src="{{asset('/wf/home/elm/cc3d941aa785d2f0c603fb08a0bfcjpeg.jpeg')}}">
+                    </a>
                   </span>
                             <!-- end ngIf: food.image_path -->
                             <div class="col-2 shopmenu-food-main">
-                                <h3 class="shopmenu-food-name ui-ellipsis ng-binding">碳烧鸡饭</h3>
-                                <p class="color-mute ui-ellipsis ng-binding" tooltip="碳烧鸡饭">碳烧鸡饭</p>
+                                <h3 class="shopmenu-food-name ui-ellipsis ng-binding">{{$v->fname}}</h3>
+                                <p class="color-mute ui-ellipsis ng-binding" tooltip="碳烧鸡饭">{{$v->fname}}</p>
                                 <p>
                                 <div class="starrating icon-star ng-isolate-scope" title="评分4.3分" rate-star="" rating="food.rating">
                                     <span class="icon-star" ng-style="{ width: (rating * 20) + &#39;%&#39; }" style="width: 86.6%;"></span>
                                 </div>
-                                <span class="color-mute ng-binding">(6)</span>
-                                <span class="color-mute ng-binding">月售30份</span></p>
+                                <span class="color-mute ng-binding">(6)商品评价</span>
+                                <span class="color-mute ng-binding">月售{{$v->sum}}份</span></p>
                             </div>
-                            <span class="col-3 shopmenu-food-price color-stress ng-binding">15
+                            <span class="col-3 shopmenu-food-price color-stress ng-binding">{{$v->price}}
                     <small class="ng-binding"></small></span>
                             <span class="col-4">
                     <div shop-cartbutton="" food="food" ng-hide="shop.id == &#39;656683&#39;" class="ng-isolate-scope">
@@ -384,6 +350,7 @@
                         <!-- ngIf: menuFood.hasSpec --></div>
                   </span>
                         </div>
+                @endforeach
 
 
 
@@ -480,10 +447,10 @@
             <div class="shopbulletin">
                 <div class="shopbulletin-section">
                     <h3 class="shopbulletin-section-title">商家公告</h3>
-                    <p class="shopbulletin-content ng-binding">近几日大雨，请提前订餐。骑手小哥送餐有一定难度，有可能会时间稍长一些。当餐品送达后，请给个好评。</p>
+                    <p class="shopbulletin-content ng-binding">{{$shop->notice}}</p>
                     <div class="shopbulletin-delivery">
                         <h4>配送说明：</h4>
-                        <p class="ng-binding">配送费¥5</p></div>
+                        <p class="ng-binding">配送费¥{{$shop->sprice}}</p></div>
                     <ul class="shopbulletin-supports">
                         <!-- ngRepeat: support in shop.supports -->
                         <li ng-repeat="support in shop.supports" class="ng-binding ng-scope">
@@ -511,7 +478,7 @@
         <div class="sidetools-item icon-qrcode">
 {{--            <img class="sidetools-qrcode" src="{{asset('/wf/home/elm/appqc.95e532.png')}}" alt="扫描二维码免费下载手机App"></div>--}}
         <a href="JavaScript:" class="sidetools-item icon-service" title="在线客服" tooltip="在线客服" tooltip-placement="left" online-service="" target="_blank" style="visibility: visible;"></a>
-        <a href="{{$foods[0]['sid']}}#top" class="sidetools-item icon-arrow-up" title="回到顶部" tooltip="回到顶部" tooltip-placement="left" ng-click="backToTop()"></a>
+        <a href="{{$shop->sid}}#top" class="sidetools-item icon-arrow-up" title="回到顶部" tooltip="回到顶部" tooltip-placement="left" ng-click="backToTop()"></a>
     </div>
 </div>
 <footer class="footer" role="contentinfo">

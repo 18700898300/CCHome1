@@ -1,12 +1,12 @@
 @extends('admin.xtAdmin.common')
 @section('title')
-    <title>后台用户添加页面</title>
+    <title>后台角色浏览页面</title>
 @endsection
 @section('body')
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">分类管理</a> &raquo; 查看分类
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">角色管理</a> &raquo; 查看角色
     </div>
     <!--面包屑导航 结束-->
 
@@ -49,25 +49,24 @@
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th class="tc" width="5%">排序</th>
                         <th class="tc" width="5%">ID</th>
-                        <th>分类名称</th>
-                        <th>操作</th>
+                        <th class="tc">管理员名称</th>
+                        <th class="tc">密码</th>
+                        <th class="tc">操作</th>
                     </tr>
 
 
-                @foreach($cates as $k=>$v)
+                @foreach($adminUser as $k=>$v)
                     <tr>
+                        <td class="tc">{{$v->id}}</td>
+                        <td class="tc">{{$v->aname}}</td>
+
+                        <td class="tc">{{$v->password}}</td>
+
                         <td class="tc">
-                            <input type="text" onchange="changeOrder(this,{{$v->tid}})" value="{{$v->torder}}">
-                        </td>
-                        <td class="tc">{{$v->tid}}</td>
-
-                        <td>{{$v->tnames}}</td>
-
-                        <td>
-                            <a href="{{url('admin/xtAdmin/shop_type/edit')}}/{{$v->tid}}">修改</a>
-                            <a href="javascript:;" onclick="delCate({{$v->tid}})">删除</a>
+                            <a href="{{url('admin/xtAdmin/adminUser/auth')}}/{{$v->id}}">授权</a>
+                            <a href="{{url('admin/xtAdmin/adminUser/'.$v->id.'/edit')}}">修改</a>
+                            <a href="javascript:;" onclick="delCate({{$v->id}})">删除</a>
                         </td>
                     </tr>
 

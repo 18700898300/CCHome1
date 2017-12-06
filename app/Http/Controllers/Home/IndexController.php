@@ -23,8 +23,18 @@ class IndexController extends Controller
 
     public function shop($id)
     {
-        $foods = Shop::find($id)->food;
+//        获得当前店铺信息
+        $shop = Shop::find($id);
+//        dd($shop);
+//        获得当前店铺所有菜品
+        $foods = $shop->food;
 //        dd($foods);
-        return view('home/shop',compact('foods'));
+//        求得店铺总销量
+        $sum = 0;
+        foreach ($foods as $k=>$v){
+            $sum += $v->sum;
+        }
+        $shop->sum = $sum;
+        return view('home/shop',compact('shop','foods'));
     }
 }

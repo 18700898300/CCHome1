@@ -17,7 +17,13 @@ class IndexController extends Controller
     {
         return view('admin/xtAdmin/info');
     }
-//    退出登录
+
+    /**
+     * 退出登录
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function logout()
     {
         session()->flush();
