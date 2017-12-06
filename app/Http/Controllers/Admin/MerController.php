@@ -9,6 +9,10 @@ class MerController extends Controller
 {
     public function merindex()
     {
-        dd(999);
+       return view('admin/merindex');
+    }
+    public function info()
+    {
+        return view('admin/info');
     }
 }

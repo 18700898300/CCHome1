@@ -60,7 +60,9 @@ class MerchantController extends Controller
 //        var_dump(strtolower($input['code']));
 //        dd(strtolower(Session::get('code')));
         if(strtolower($input['code'])!=strtolower(Session::get('code'))){
-            return redirect('admin/mlogin')->with('errors','验证码错误');
+            return redirect('admin/mlogin')->with('errors','验证码错误')
+                ->withInput();//有此步验证码错误返回登录页后才可以保持用户名
+
         }
 
         //错误提示中的模板引擎语法必须正确如@
@@ -103,7 +105,7 @@ class MerchantController extends Controller
 
         $str = 666666;
         $bpassword = Crypt::encrypt($str);
-//        dd($bpassword);
+       dd($bpassword);
     }
 
 

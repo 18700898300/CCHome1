@@ -18,7 +18,8 @@ class SlideshowController extends Controller
      */
     public function create()
     {
-
+//        dd(9999);
+        return view('admin/slideshow');
     }
 
     /**
