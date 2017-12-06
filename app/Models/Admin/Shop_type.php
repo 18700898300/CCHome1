@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Shop_type extends Model
 {
-    //
+    // 系统后台 商户分类模型
     public $table = 'shop_type';
     public $primaryKey = 'tid';
     public $guarded = [];
@@ -44,5 +44,11 @@ class Shop_type extends Model
             }
         }
         return $arr;
+    }
+
+//    一对多,店铺类型对应店铺
+    public function shop()
+    {
+        return $this->hasMany('App\Models\Home\Shop','tid','tid');
     }
 }
