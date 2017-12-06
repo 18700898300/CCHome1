@@ -1,0 +1,50 @@
+/* Code tidied up by ScrapBook */
+.App-1EAON { width: 100%; height: 100%; }
+.App-3Q8Qb { width: 300px; display: flex; -moz-box-orient: vertical; -moz-box-direction: normal; flex-direction: column; -moz-box-pack: center; justify-content: center; margin: 0px auto; }
+.App-3Q8Qb > div:last-child { min-height: 296px; }
+.App-OjtAb { -moz-box-pack: center; justify-content: center; position: relative; width: 100%; background: rgb(245, 245, 245) none repeat scroll 0% 0%; }
+.App-1EAON, .App-OjtAb { display: flex; -moz-box-orient: vertical; -moz-box-direction: normal; flex-direction: column; }
+.App-1EAON { -moz-box-align: center; align-items: center; }
+.App-1EAON > div:first-child { -moz-box-flex: 1; flex: 1 1 auto; }
+.App-1EAON > div:first-child + div { -moz-box-flex: 0; flex: 0 0 104px; }
+@media (max-width: 768px) {
+  .App-1EAON { height: auto; min-height: 100%; padding-top: 40px; }
+  .App-3Q8Qb { -moz-box-pack: start; justify-content: flex-start; }
+  .App-OjtAb { background: rgb(255, 255, 255) none repeat scroll 0% 0%; -moz-box-pack: justify; justify-content: space-between; }
+}
+body, html { width: 100%; height: 100%; font-size: 12px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; }
+@media (max-width: 768px) {
+}
+.SubmitButton-2wG4T { display: block; width: 100%; height: 42px; margin-top: 30px; border-radius: 4px; background: rgb(76, 217, 111) none repeat scroll 0% 0%; color: rgb(255, 255, 255); cursor: pointer; text-align: center; font-size: 16px; line-height: 42px; }
+.SubmitButton-2wG4T:focus, .SubmitButton-2wG4T:hover { background: rgb(76, 217, 100) none repeat scroll 0% 0%; }
+.SubmitButton-2wG4T:disabled { background: rgb(204, 204, 204) none repeat scroll 0% 0%; }
+.form-Kr7wg { display: none; margin-top: 20px; text-align: center; color: rgb(153, 153, 153); }
+@media (max-width: 768px) {
+  .form-Kr7wg { display: block; }
+}
+.form-b6px1 { position: relative; margin-top: 16px; height: 48px; font-size: 14px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; }
+.form-b6px1 > * { display: inline-block; position: absolute; top: 50%; right: 10px; transform: translateY(-50%); }
+.form-b6px1 > input { width: 100%; height: 100%; left: 0px; padding-left: 10px; border: 1px solid rgb(221, 221, 221); border-radius: 4px; color: rgb(51, 51, 51); }
+.form-b6px1 > input::placeholder { color: rgb(153, 153, 153); }
+.form-b6px1 > input:focus { border-color: rgb(0, 137, 220); }
+.form-2o2sO { display: flex; -moz-box-align: center; align-items: center; }
+.form-2o2sO img { display: block; width: 85px; height: 32px; }
+.form-2DBWI { margin-left: 10px; color: rgb(102, 102, 102); font-size: 12px; line-height: 14px; }
+.form-2DBWI > span { color:var(--global-blue-color); cursor: pointer; }
+.SwitchButton-2b6RO { display: flex; -moz-box-align: center; align-items: center; padding: 0px 6px; width: 40px; height: 16px; color: rgb(153, 153, 153); font-size: 12px; border: 1px solid rgb(221, 221, 221); border-radius: 8px; transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s; }
+.SwitchButton-1rBfm { position: absolute; top: -1px; left: -1px; width: 16px; height: 16px; border: 1px solid rgb(221, 221, 221); border-radius: 50%; background: rgb(255, 255, 255) none repeat scroll 0% 0%; box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease 0s, -webkit-transform 0.3s ease 0s; }
+.SwitchButton-3BmOw { -moz-box-pack: end; justify-content: flex-end; }
+.LoginFooter-UxQIr_0 { display: flex; -moz-box-pack: center; justify-content: center; -moz-box-align: center; align-items: center; }
+.LoginFooter-2KaAB_0 { color: rgb(153, 153, 153); line-height: 18px; text-align: center; }
+.LoginFooter-2KaAB_0 > h2 { font-size: 12px; color: rgb(85, 85, 85); }
+.LoginFooter-2KaAB_0 > .LoginFooter-1QHDG_0 { display: inline-block; margin-top: 12px; }
+.LoginFooter-3s25U_0::after { content: "|"; padding: 0px 4px; }
+@media (max-width: 768px) {
+  .LoginFooter-2KaAB_0 { display: none; }
+}
+.LoginHeader-1jXn6_0 { text-align: center; }
+.LoginHeader-1jXn6_0 > svg { width: 140px; height: 56px; }
+.LoginHeader-22Up7_0 { margin-top: 40px; }
+.LoginHeader-22Up7_0 > a { font-size: 14px; padding-bottom: 4px; cursor: pointer; }
+.LoginHeader-22Up7_0 > a:first-child { margin-right: 40px; }
+.LoginHeader-22Up7_0 > a.LoginHeader-33EiC_0 { color: rgb(35, 149, 255); font-weight: 700; border-bottom: 2px solid rgb(35, 149, 255); }
