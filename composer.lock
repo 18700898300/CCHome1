@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "content-hash": "3c325fe727e87072abd5c4f8be5da8f6",
+
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1159,7 +1160,8 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/f0210e38881631afeafb56ab43405a92cafd9fd1",
+
+                "url": "https://files.phpcomposer.com/files/nrk/predis/f0210e38881631afeafb56ab43405a92cafd9fd1.zip",
                 "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1",
                 "shasum": ""
             },

@@ -1,4 +1,3 @@
-<!doctype html>
 <html ng-app="eleme" perf-error="desktop/">
 
 <head>
@@ -25,13 +24,13 @@
     <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-16x16.png" type="image/png" sizes="16x16" />
     <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-32x32.png" type="image/png" sizes="32x32" />
     <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon.png" type="image/png" sizes="96x96" />
-    <link href="{{url('/a/css/vendor.d724a8_2.css')}}" rel="stylesheet">
-    <link href="{{url('/a/css/main.0a7669.css')}}" rel="stylesheet">
+    <link href="{{asset('/wf/home/css/vendor.d724a8_2.css')}}" rel="stylesheet">
+    <link href="{{asset('/wf/home/css/main.0a7669.css')}}" rel="stylesheet">
     <!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
-    <script src="{{url('/a/js/69e30c57868b46e7a0d2b4a6c711970a.js')}}" data-ref="API_CONFIG"></script>
-    <script src="{{url('/a/js/perf.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="{{url('/a/js/vendor.8c3a5a.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="{{url('/a/js/main.a0cd82.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="{{asset('/wf/home/js/69e30c57868b46e7a0d2b4a6c711970a.js')}}" data-ref="API_CONFIG"></script>
+    <script src="{{asset('/wf/home/js/perf.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="{{asset('/wf/home/js/vendor.8c3a5a.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="{{asset('/wf/home/js/main.a0cd82.js')}}" type="text/javascript" crossorigin="anonymous"></script>
 </head>
 
 <body cute-title ng-class="{hidesidebar: layoutState && layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}">
@@ -41,13 +40,13 @@
         <header class="topbar" role="navigation" ng-class="{shoptopbar: state.type === 'shop'}">
             <div class="container clearfix">
                 <h1>
-                    <a class="topbar-logo icon-logo" href="/" hardjump="">
+                    <a class="topbar-logo icon-logo" href="{{url('/home/index')}}" hardjump="">
                         <span>饿了么</span>
                     </a>
                 </h1>
-                <a class="topbar-item topbar-homepage focus" href="/" hardjump="">首页</a>
+                <a class="topbar-item topbar-homepage focus" href="{{url('/home/index')}}" hardjump="">首页</a>
                 <a class="topbar-item" href="/profile/order" hardjump="" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a>
-                <a class="topbar-item cooperation" href="//h5.ele.me/service/cooperation/" target="_blank">加盟合作</a>
+                <a class="topbar-item cooperation" href="{{url('')}}" target="_blank">加盟合作</a>
                 <nav class="topbar-nav">
                     <a class="topbar-nav-link" href="/support/center" hardjump="" target="_blank">
                         <i class="topbar-nav-icon icon-service"></i> 服务中心
@@ -57,7 +56,7 @@
                         <i class="topbar-nav-icon icon-mobile"></i> 手机应用
                         <div class="dropbox topbar-mobile-dropbox">
                             <span>扫一扫, 手机订餐更方便</span>
-                            <img class="topbar-nav-qrcode" src="./img/appqc.95e532.png" alt="扫一扫下载饿了么手机 App">
+                            <img class="topbar-nav-qrcode" src="{{asset('/wf/home/img/appqc.95e532.png')}}" alt="扫一扫下载饿了么手机 App">
                         </div>
                     </div>
                     <div topbar-profilebox="">
@@ -99,7 +98,7 @@
             <div class="toolbar-btn icon-QR-code">
                 <div class="dropbox toolbar-tabs-dropbox">
                     <a href="http://static11.elemecdn.com/eleme/desktop/mobile/index.html" target="_blank">
-                        <img src="./img/appqc.95e532.png" alt="下载手机应用">
+                        <img src="{{asset('/wf/home/img/appqc.95e532.png')}}" alt="下载手机应用">
                         <p>下载手机应用</p>
                         <p class="icon-QR-code-bonus">即可参加分享红包活动</p>
                     </a>
@@ -115,12 +114,11 @@
 <!-- <div ng-view role="main"></div> -->
 <!-- 地址栏 -->
 <div class="container clearfix ng-scope">
-    <!-- <div class="location" ng-style="{visibility: geohash ? '' : 'hidden'}" role="navigation" location="" ng-if="geohash"> -->
     <span>当前位置:</span>
     <!-- <span class="location-current">
             <a class="inherit ng-binding" ng-href="/place/wx4eyv2e1qf" ubt-click="401" ng-bind="place.name || place.address" href="/place/wx4eyv2e1qf">昌平区回龙观村东区(龙域中街南70米)</a>
         </span>
-        <span class="location-change" ng-class="{ 'location-hashistory': user.username && userPlaces && userPlaces.length > 0 }">
+        <span class="location-change" >
             <a ng-href="/home" ubt-click="400" hardjump="" href="/home">[切换地址]</a>
             <ul class="dropbox location-dropbox" ubt-visit="398">
                 <li class="arrow"></li>
@@ -145,13 +143,23 @@
             <a class="excavator-filter-item ng-binding ng-scope active" href="javascript:">全部商家</a>
             <a class="excavator-filter-item ng-binding ng-scope" href="javascript:">美食</a>
             <a class="excavator-filter-item ng-binding ng-scope" href="javascript:">快餐便当</a>
+            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">特色菜系</a>
+            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">异国料理</a>
+            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">小吃夜宵</a>
+            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">甜品饮品</a>
+            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">果蔬生鲜</a>
+            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">商店超市</a>
+            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">早餐</a>
+            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">正餐优选</a>
+            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">下午茶</a>
+            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">夜宵</a>
+            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">鲜花蛋糕</a>
+            <div class="excavator-filter-subbox ng-hide" ng-show="subCategories"></div>
         </div>
     </div>
-
     <div class="place-rstbox clearfix">
-        <div class="clearfix" data="filteredRestaurants = (rstStream.restaurants | filter: rstStream.filter | filter: otherFilter | orderBy: [ '-is_opening', rstStream.orderBy || 'index' ])" style="height: 1600px;">
-
-            <a class="rstblock" href="{{url('/shop')}}" data-rst-id="152185819" data-bidding="" target="_blank">
+        <div class="clearfix"  style="height: 800px;">
+            <a class="rstblock" href="{{url('home/shop')}}" data-rst-id="152185819" data-bidding="" target="_blank">
                 <div class="rstblock-logo">
                     <img class="rstblock-logo-icon" src="//fuss10.elemecdn.com/8/05/dff0f9f103bd59af10cf0ef3b6accpng.png?imageMogr2/thumbnail/70x70" alt="麻小外卖（上地店）" width="70" height="70">
                     <span>36 分钟</span>
@@ -166,60 +174,31 @@
                     <div class="rstblock-activity"></div>
                 </div>
             </a>
-            <a class="rstblock" href="/shop/1863189" data-rst-id="1863189" data-bidding="" target="_blank">
-                <div class="rstblock-logo">
-                    <img class="rstblock-logo-icon" src="//fuss10.elemecdn.com/f/72/e71ae1f13f072841bf6b95867536apng.png?imageMogr2/thumbnail/70x70" alt="沙县小吃卓记黄焖鸡" width="70" height="70">
-                    <span>36 分钟</span>
-                </div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">沙县小吃卓记黄焖鸡</div>
-                    <div class="starrating icon-star">
-                        <span class="icon-star" style="width:78%;"></span>
-                    </div>
-                    <span class="rstblock-monthsales">月售141单</span>
-                    <div class="rstblock-cost">配送费¥6</div>
-                    <div class="rstblock-activity"></div>
-                </div>
-            </a>
 
-            <a class="rstblock-closed rstblock" href="/shop/155109409" data-rst-id="155109409" data-bidding="" target="_blank">
-                <div class="rstblock-logo">
-                    <img class="rstblock-logo-icon" src="//fuss10.elemecdn.com/4/f9/96874073facef13d225b8843694e4jpeg.jpeg?imageMogr2/thumbnail/70x70" alt="张姐烤肉脆皮鸡饭" width="70" height="70">
-                    <span>24 分钟</span>
-                </div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">张姐烤肉脆皮鸡饭</div>
-                    <div class="starrating icon-star">
-                        <span class="icon-star" style="width:96%;"></span>
-                    </div>
-                    <span class="rstblock-monthsales">月售1305单</span>
-                    <div class="rstblock-cost">配送费¥6</div>
-                    <div class="rstblock-relaxing">商家休息,暂不接单</div>
-                </div>
-            </a>
-            <a class="rstblock-closed rstblock" href="/shop/2218439" data-rst-id="2218439" data-bidding="" target="_blank">
+            @foreach($shops as $k=>$v)
+            <a class="rstblock-closed rstblock" href="{{url('/home/shop')}}/{{$v->sid}}" data-rst-id="2218439" data-bidding="" target="_blank">
                 <div class="rstblock-logo">
                     <img class="rstblock-logo-icon" src="//fuss10.elemecdn.com/c/1b/a7bb9dc920528d23e790b1a15bedajpeg.jpeg?imageMogr2/thumbnail/70x70" alt="麻辣香锅" width="70" height="70">
-                    <span class="rstblock-left-timeout">45+ 分钟</span>
+                    <span class="rstblock-left-timeout">{{$v->statime}} 分钟</span>
                 </div>
                 <div class="rstblock-content">
-                    <div class="rstblock-title">麻辣香锅</div>
+                    <div class="rstblock-title">{{$v->name}}</div>
                     <div class="starrating icon-star">
                         <span class="icon-star" style="width:90%;"></span>
                     </div>
                     <span class="rstblock-monthsales">月售2520单</span>
-                    <div class="rstblock-cost">配送费¥16</div>
+                    <div class="rstblock-cost">配送费¥{{$v->sprice}}</div>
                     <div class="rstblock-relaxing">商家休息,暂不接单</div>
                 </div>
             </a>
+            @endforeach
         </div>
-    </div>
-        <div class="loading ng-binding ng-isolate-scope ng-hide" ng-show="rstStream.status === 'LOADING'" loading="" content="正在载入更多商家..." type="normal">
-            <img class="normal ng-scope" ng-if="type==='normal'" src="./img/loading.0e7b2e.gif" alt="正在加载"> 正在载入更多商家...
+        <div class="loading ng-binding ng-isolate-scope ng-hide" ng-show="" loading="" content="正在载入更多商家..." type="normal">
+            <img class="normal ng-scope" ng-if="" src="" alt="正在加载"> 正在载入更多商家...
         </div>
         <div id="fetchMoreRst" class="">点击加载更多商家...</div>
-        <div class="place-rstbox-nodata ng-hide" ng-show="rstStream.status === 'COMPLETE' && !filteredRestaurants.length">
-            <img class="nodata" src="./img/icon-restaurant.b3a359.png" alt="找不到商家" width="100">
+        <div class="place-rstbox-nodata ng-hide" ng-show="">
+            <img class="nodata" src="" alt="找不到商家" width="100">
             <div class="typo-small">附近没有找到符合条件的商家，换个筛选条件试试吧</div>
         </div>
         <!-- </div> -->
@@ -260,7 +239,7 @@
                         关注我们 :
                         <div class="icon-wechat" href="JavaScript:" ubt-click="402">
                             <div class="dropbox dropbox-bottom footer-contect-dropbox" ubt-visit="402">
-                                <img src="./img/wexinqc100@2x.393ade.png" alt="微信号: elemeorder">
+                                <img src="" alt="微信号: elemeorder">
                                 <p>微信号: elemeorder</p>
                                 <p>饿了么网上订餐</p>
                             </div>
@@ -270,7 +249,7 @@
                 </div>
                 <div class="footer-mobile">
                     <a href="https://h.ele.me/landing" target="_blank">
-                        <img class="footer-mobile-icon" src="{{url('/a/img/appqc.95e532.png')}}" alt="扫一扫下载饿了么手机 App">
+                        <img class="footer-mobile-icon" src="{{asset('/wf/home/img/appqc.95e532.png')}}'" alt="扫一扫下载饿了么手机 App">
                     </a>
                     <div class="footer-mobile-content">
                         <h3>下载手机版</h3>
@@ -288,12 +267,12 @@
                 </div>
                 <div class="footer-police container">
                     <a href="http://www.zx110.org/picp/?sn=310100103568" rel="nofollow" target="_blank">
-                        <img alt="已通过沪公网备案，备案号 310100103568" src="{{url('/a/img/picp_bg.e373b3.jpg')}}" height="30">
+                        <img alt="已通过沪公网备案，备案号 310100103568" src="{{asset('/wf/home/img/picp_bg.e373b3.jpg')}}" height="30">
                     </a>
                 </div>
             </div>
         </footer>
-        <script src="{{url('/a/js/6936dbf3e7d94cffa954bcbcf2b79f38.js')}}"></script>
+        <script src="{{asset('/wf/home/js/6936dbf3e7d94cffa954bcbcf2b79f38.js')}}"></script>
 </body>
 
 </html>
