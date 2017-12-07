@@ -14,7 +14,7 @@
 		</div>
 		<div class="top_right">
 			<ul>
-				<li>管理员：admin</li>
+				<li>管理员：{{session('user')->aname}}</li>
 				<li><a href="pass.html" target="main">修改密码</a></li>
 				<li><a href="{{url('admin/xtAdmin/logout')}}">退出</a></li>
 			</ul>
@@ -26,10 +26,10 @@
 	<div class="menu_box">
 		<ul>
             <li>
-            	<h3><i class="fa fa-fw fa-clipboard"></i>用户模块</h3>
+            	<h3><i class="fa fa-fw fa-clipboard"></i>管理员模块</h3>
                 <ul class="sub_menu">
-                    <li><a href="{{url('admin/user/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加用户</a></li>
-                    <li><a href="{{url('admin/user')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>用户列表</a></li>
+                    <li><a href="{{url('admin/xtAdmin/adminUser/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加管理员</a></li>
+                    <li><a href="{{url('admin/xtAdmin/adminUser')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>管理员列表</a></li>
 
                 </ul>
             </li>
@@ -38,6 +38,22 @@
 				<ul class="sub_menu">
 					<li><a href="{{url('admin/xtAdmin/shop_type/add')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加分类</a></li>
 					<li><a href="{{url('admin/xtAdmin/shop_type/lists')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>分类列表</a></li>
+
+				</ul>
+			</li>
+			<li>
+				<h3><i class="fa fa-fw fa-clipboard"></i>角色模块</h3>
+				<ul class="sub_menu">
+					<li><a href="{{url('admin/xtAdmin/role/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加角色</a></li>
+					<li><a href="{{url('admin/xtAdmin/role')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>角色列表</a></li>
+
+				</ul>
+			</li>
+			<li>
+				<h3><i class="fa fa-fw fa-clipboard"></i>权限模块</h3>
+				<ul class="sub_menu">
+					<li><a href="{{url('admin/xtAdmin/permission/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加权限</a></li>
+					<li><a href="{{url('admin/xtAdmin/permission')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>权限列表</a></li>
 
 				</ul>
 			</li>

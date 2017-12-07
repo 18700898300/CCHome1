@@ -5,13 +5,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// 登录系统后台
+Route::get('admin/xtAdmin/login','Admin\xtAdmin\LoginController@login');
+//验证登录
+Route::post('admin/xtAdmin/dologin','Admin\xtAdmin\LoginController@doLogin');
 
 // 系统后台
-Route::group(['prefix'=>'admin/xtAdmin','namespace'=>'Admin\xtAdmin'],function(){
+Route::group(['middleware'=>['adminIslogin','HasRole'],'prefix'=>'admin/xtAdmin','namespace'=>'Admin\xtAdmin'],function(){
     //进入系统后台首页
     Route::get('index','IndexController@index');
     Route::get('info','IndexController@info');
     Route::get('logout','IndexController@logout');
+
+//    管理员模块
+    Route::resource('adminUser','Admin_userController');
+//    授权管理员
+    Route::get('adminUser/auth/{id}','Admin_userController@auth');
+//    执行管理员授权
+    Route::post('adminUser/doauth','Admin_userController@doauth');
 
 //    商户分类模块
 //    添加分类
@@ -28,6 +39,20 @@ Route::group(['prefix'=>'admin/xtAdmin','namespace'=>'Admin\xtAdmin'],function()
     Route::post('/shop_type/update','Shop_typeController@update');
 //    删除分类
     Route::post('/shop_type/delCate/{id}','Shop_typeController@delete');
+
+//    角色模块
+    Route::resource('role','RoleController');
+//    角色授权
+    Route::get('role/auth/{id}','RoleController@auth');
+//    执行角色授权
+    Route::post('role/doauth','RoleController@doauth');
+
+//    权限模块
+    Route::resource('permission','PermissionController');
+});
+// 如果管理员没有权限则执行这个路由
+Route::get('errors/auth',function(){
+    return view('errors.auth');
 });
 
 
@@ -64,19 +89,20 @@ Route::post('/order/insertsite','OrderController@insertsite');
 
 });
 
-
+//商家后台, 菜品标签模块
+Route::resource('admin/foodlabel','Admin\shAdmin\FoodLabelController');
+//商家后台, 菜品管理模块
+Route::resource('admin/food','Admin\shAdmin\FoodController');
+Route::post('admin/food/upload','Admin\shAdmin\FoodController@upload');
 
 
 Route::get('/shop',function (){
     return view('shop');
 });
+
 Route::get('/order',function (){
     return view('order');
 });
-
-
-
-
 
 Route::get('/index',function(){
     return view('index');
@@ -129,4 +155,53 @@ Route::post('comment/add','CommentController@add');
 
 
 
+//前台登录
+Route::get('home/login','Home\LoginController@login');
+Route::get('home/login2','Home\LoginController@login2');
+Route::get('home/yzm','Home\LoginController@yzm');
+
+Route::get('/code/captcha/{tmp}', 'Home\LoginController@captcha');
+
+
+Route::post('home/dologin','Home\LoginController@dologin');
+
+
+//商户的入驻申请
+Route::get('home/reg','Home\RegController@reg');
+
+Route::post('home/doreg','Home\RegController@doreg');
+
+//前台的个人资料
+Route::get('home/person',function(){
+    return view('Home.person');
+});
+
+Route::get('home/person','Home\PersonController@index');
+Route::post('home/person/edit','Home\PersonController@edit');
+//编辑头像
+Route::get('home/avatar',function(){
+    return view('Home.avatar');
+});
+
+Route::post('home/avatar/upload','Home/PersonController@upload');
+
+//设置密码
+Route::get('home/setpwd','Home\PersonController@setpwd');
+Route::post('home/dosetpwd','Home\PersonController@dosetpwd');
+
+
+//修改密码
+Route::get('home/changepwd','Home\PersonController@changepwd');
+Route::post('home/dochangepwd','Home\PersonController@dochangepwd');
+
+//地址管理
+Route::get('home/address',function(){
+    return view('Home.address');
+});
+
+
+//安全中心
+Route::get('home/safe',function(){
+    return view('Home.safe');
+});
 

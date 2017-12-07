@@ -17,7 +17,7 @@
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                            <li  class="dh" style="color:red">{{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -26,7 +26,7 @@
             <div class="alert alert-danger">
                 <ul>
                     @if(session('msg'))
-                        <li style="color:red">{{session('msg')}}</li>
+                        <li class="dh" style="color:red">{{session('msg')}}</li>
                     @endif
                 </ul>
 
@@ -56,7 +56,7 @@
                 <tr>
                     <th><i class="require">*</i>分类名称：</th>
                     <td>
-                        <input type="text" name="tname">
+                        <input type="text" name="tname" value="{{old('tname')}}">
                         <span><i class="fa fa-exclamation-circle yellow"></i>分类名称必须填写</span>
                     </td>
                 </tr>
@@ -65,7 +65,7 @@
                 <tr>
                     <th><i class="require">*</i>分类排序：</th>
                     <td>
-                        <input type="text" name="torder">
+                        <input type="text" name="torder" value="{{old('torder')}}">
                     </td>
                 </tr>
 
@@ -80,5 +80,9 @@
             </table>
         </form>
     </div>
+    <script>
+        //    提示信息淡出
+        $('.dh').fadeOut('slow');
+    </script>
 @endsection
 

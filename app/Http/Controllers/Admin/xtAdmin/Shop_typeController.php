@@ -167,7 +167,10 @@ class Shop_typeController extends Controller
     public function delete($id)
     {
 //        找到要删除的记录
-        $res = Shop_type::find($id)->delete();
+        $cate = Shop_type::find($id);
+
+//        执行删除
+        $res = $cate->delete();
 //        判断是否删除
         if($res){
             $data =[
