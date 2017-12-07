@@ -71,11 +71,11 @@
                             <td class="tc">{{$v->content}}</td>
                             <td class="tc">{{$v->Ip }}</td>
                             <td class="tc">{{$v->create_time}}</td>
-                            <td class="tc"></td>
+                            <td class="tc">{{$v->food->fname}}</td>
                             {{--<td class="tc">{{}}</td>--}}
                             <td class="tc">
-                                <a href="{{url('admin/flink/'.$v->id.'/edit')}}" class="tc">修改</a>
-                                <a href="javascript:;" onclick="delFlinkt({{$v->fltid}})" class="tc">删除</a>
+                                <a href="{{url('admin/comment/'.$v->cid.'/edit')}}" class="tc">修改</a>
+                                <a href="javascript:;" onclick="delFlinkt({{$v->cid}})" class="tc">删除</a>
                             </td>
                         </tr>
                     @endforeach
@@ -84,7 +84,7 @@
                 <div class="page_list">
 
                     {{--appends(['keyword1'=>'a','keyword2'=>'aaa@q163.com','num'=>2])--}}
-                    {!! $flink->render() !!}
+                    {!! $comments->render() !!}
                 </div>
                 <style>
                     .page_list ul li span{

@@ -10,4 +10,7 @@ class Comment extends Model
     public $primaryKey = 'cid';
     public $guarded = [];
     public $timestamps = false;
+    public function  food(){
+        return $this->belongsTo('App\Models\Home\food','fid','fid');
+    }
 }

@@ -11,4 +11,5 @@ class Food extends Model
     public $primaryKey = 'fid';
     public $guarded = [];
     public $timestamps = false;
+
 }
