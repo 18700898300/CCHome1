@@ -69,3 +69,8 @@ Route::get('home/address',function(){
 Route::get('home/safe',function(){
     return view('Home.safe');
 });
+
+//我的收藏
+Route::get('home/collect',function(){
+   return view('Home.collect');
+});

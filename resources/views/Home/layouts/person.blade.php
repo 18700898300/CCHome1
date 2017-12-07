@@ -148,11 +148,11 @@
             <li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的资料</h2>
                 <ul>
                     <li ng-class="{ active: pageName === 'info' }" class="active"><a href="{{asset('/home/person')}}">个人资料</a></li>
-                    <li ng-class="{ active: pageName === 'address' }"><a href="{{asset('/home/address')}}">地址管理</a></li>
+                    <li ng-class="{ active: pageName === 'address' }"><a href="{{asset('home/address')}}">地址管理</a></li>
                     <li ng-class="{ active: pageName === 'security-center' }"><a href="{{url('/home/safe')}}">安全中心</a></li>
                     <li ng-class="{ active: pageName === 'changepassword' }"><a href="{{asset('/home/changepwd')}}">修改密码</a></li>
                 </ul></li>
-            <li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle" ng-class="{ active: pageName === 'favor' }"><a href="https://www.ele.me/profile/favor"><i class="icon-order-favor"></i>我的收藏</a></h2></li>
+            <li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle" ng-class="{ active: pageName === 'favor' }"><a href="{{asset('home/collect')}}"><i class="icon-order-favor"></i>我的收藏</a></h2></li>
         </ul>
         <div class="profile-panel" role="main">
 
