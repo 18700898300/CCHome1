@@ -6,15 +6,18 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Session;
 
 class PersonController extends Controller
 {
    public function index()
    {
-       //从数据库中获取信息
-       $users = \DB::table('users')->where('uid',2)->first();
+       $users = Session::get('user');
 //       dd($users);
-         return view('home/person',compact('users'));
+       //从数据库中获取信息
+//       $users = \DB::table('users')->where('uid',2)->first();
+//       dd($users);
+         return view('home.person.person',compact('users'));
 
    }
 
@@ -58,31 +61,42 @@ class PersonController extends Controller
    }
 
 
-   /*
-    * 处理客户端传过来的图片
-    * */
-//    public function upload(Request $request)
-//    {
-//        //获取上传的图片
-//        $avatar = $request->except('_token');
-//        dd($avatar);
-//
-//
-//
-//    }
+   //显示编辑头像的页面
+    public function avatar()
+    {
+        $users = Session::get('user');
+        return view('Home.person.avatar',compact('users'));
+    }
 
-    //添加地址
-//    public function add()
-//    {
-//        //从数据库中获取信息
-//        $add = \DB::table('udetail')->select()
-//    }
+    //显示地址管理页
+    public function address()
+    {
+        $users = Session::get('user');
+        return view('Home.person.address',compact('users'));
+    }
+
+    //显示安全中心页面
+    public function safe()
+    {
+        $users = Session::get('user');
+        return view('Home.person.safe',compact('users'));
+    }
+
+    //显示更改手机号的页面
+    public function changephone()
+    {
+        $users = Session::get('user');
+//        dd($users['uid']);
+        $users = \DB::table('users')->where('uid',$users['uid'])->first();
+//        dd($users);
+        return view('Home.person.changephone',compact('users'));
+    }
 
 //设置密码
     public function setpwd()
     {
-
-        return view('home.changepwd');
+        $users = Session::get('user');
+        return view('home.person.changepwd',compact('users'));
     }
 
     /*
@@ -144,8 +158,8 @@ class PersonController extends Controller
     //设置密码
     public function changepwd()
     {
-
-        return view('home.changepwd');
+        $users = Session::get('user');
+        return view('home.person.changepwd',compact('users'));
     }
 
     /*
@@ -186,7 +200,7 @@ class PersonController extends Controller
 
 //        加密
         $input['password']=encrypt($input['password']);
-//       dd( $input['password']);
+       dd( $input['password']);
 
         //将设置密码的数据添加并保存到users表中
 

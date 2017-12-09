@@ -62,6 +62,21 @@ return [
             'region' => env('AWS_REGION'),
             'bucket' => env('AWS_BUCKET'),
         ],
+        'qiniu' => [
+            'driver'     => 'qiniu',
+            'access_key' => env('QINIU_ACCESS_KEY', 'M3xsAymwJ6EkGUB4r4GnOCpVJtX5N41kJw8wgB4O'),
+            'secret_key' => env('QINIU_SECRET_KEY', 'NHEc3L5bHwx4Eak4iFPPimYjBho0P3eBzh53ko_k'),
+            'bucket'     => env('QINIU_BUCKET', 'cchome'),
+            'domain'     => env('QINIU_DOMAIN', 'http://p0bvp893u.bkt.clouddn.com'), // or host: https://xxxx.clouddn.com
+        ],
+
+        'qiniu' => [
+            'driver'     => 'qiniu',
+            'access_key' => env('QINIU_ACCESS_KEY', 'xxxxxxxxxxxxxxxx'),
+            'secret_key' => env('QINIU_SECRET_KEY', 'xxxxxxxxxxxxxxxx'),
+            'bucket'     => env('QINIU_BUCKET', 'test'),
+            'domain'     => env('QINIU_DOMAIN', 'xxx.clouddn.com'), // or host: https://xxxx.clouddn.com
+        ],
 
     ],
 

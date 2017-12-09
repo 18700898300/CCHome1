@@ -67,7 +67,7 @@
                             <span class="topbar-profilebox-avatar icon-profile ng-hide" ng-show="!$root.user.username"></span>
                             <span ng-show="!$root.user.username" class="ng-hide"><a ng-href="//h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fprofile%2F" target="_blank" href="https://h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fprofile%2F">登录/注册</a></span>
                             <span class="topbar-profilebox-wrapper" ng-show="$root.user.username">
-          <!-- ngIf: $root.topbarType === 'checkout' --> <span class="topbar-profilebox-username ng-binding">bbbbb</span>
+          <!-- ngIf: $root.topbarType === 'checkout' --> <span class="topbar-profilebox-username ng-binding">{{$users->uname}}</span>
                                 <!-- ngIf: $root.topbarType === 'checkout' -->
                                 <!-- ngIf: $root.topbarType !== 'checkout' --><span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span>
                                 <!-- end ngIf: $root.topbarType !== 'checkout' -->
@@ -136,7 +136,7 @@
                 <ul>
                     <li ng-class="{ active: pageName === 'order' }"><a href="https://www.ele.me/profile/order">近三个月订单</a></li>
                     <li ng-class="{ active: pageName === 'order-unrated' }"><a href="https://www.ele.me/profile/order/unrated">待评价订单
-                            <!-- ngIf: unratedNumber --></a></li>
+                    <!-- ngIf: unratedNumber --></a></li>
                     <li ng-class="{ active: pageName === 'order-refunding' }"><a href="https://www.ele.me/profile/order/refund">退单记录</a></li>
                 </ul></li>
             <li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i class="icon-yen"></i>我的资产</h2>
@@ -147,10 +147,10 @@
                 </ul></li>
             <li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的资料</h2>
                 <ul>
-                    <li ng-class="{ active: pageName === 'info' }" class="active"><a href="{{asset('/home/person')}}">个人资料</a></li>
+                    <li ng-class="{ active: pageName === 'info' }" class="active"><a href="{{asset('home/person')}}">个人资料</a></li>
                     <li ng-class="{ active: pageName === 'address' }"><a href="{{asset('home/address')}}">地址管理</a></li>
-                    <li ng-class="{ active: pageName === 'security-center' }"><a href="{{url('/home/safe')}}">安全中心</a></li>
-                    <li ng-class="{ active: pageName === 'changepassword' }"><a href="{{asset('/home/changepwd')}}">修改密码</a></li>
+                    <li ng-class="{ active: pageName === 'security-center' }"><a href="{{asset('home/safe')}}">安全中心</a></li>
+                    <li ng-class="{ active: pageName === 'changepassword' }"><a href="{{asset('home/changepwd')}}">修改密码</a></li>
                 </ul></li>
             <li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle" ng-class="{ active: pageName === 'favor' }"><a href="{{asset('home/collect')}}"><i class="icon-order-favor"></i>我的收藏</a></h2></li>
         </ul>

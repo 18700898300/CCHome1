@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-
+require_once app_path().'/MSG/lib/Ucpaas.class.php';
+use App\MSG\lib\Ucpaas;
 
 /*
  * 前台登录
@@ -20,15 +21,12 @@ use App\Http\Controllers\Controller;
  * */
 class LoginController extends Controller
 {
+    //密码登录的页面
     public function login()
     {
-        return view('Home.login');
+        return view('Home.login.login');
     }
-    public function login2()
-    {
-//        dd (1111);
-        return view('Home.login2');
-    }
+//验证码
     public function yzm()
     {
         $code = new Code();
@@ -110,49 +108,82 @@ class LoginController extends Controller
         if( Crypt::decrypt($user->password) != trim($input['password']) ){
             return redirect('home/login')->with('errors','密码不正确')->withInput();
         }
+
 //
-
-
-        //将用户提交的数据保存到数据库users表中
-        $res = \DB::table('users')->insert(
-            ['uname' => $input['uname'], 'password' => $input['password']]
-        );
         Session::put('user',$user);
         return redirect('home/index');
     }
-//public function crypt()
-//{-
+
+
+    //手机号发送验证码登录
+    public function login2()
+    {
+//        dd (1111);
+        return view('Home.login.login2');
+    }
+//执行短信验证码的方法
+    public function sendcode(Request $request)
+    {
+        $input = $request->except('_token');
+
+       // return $input;
+
+        $options['accountsid']='e85874b47ad67fa2273122fe1de0fed8';
+        $options['token']='0af8e8e98476032b2a246db2df0d2ffc';
+        $ucpass = new Ucpaas($options);
+        //dd($ucpass);
+
+
+//        1 短信发送接口
 //
-//    $str = 123456;
-//    $name = Crypt::encrypt($str);
-//    dd($name);
-//}
-////手机验证码
-//    public function telyzm()
-//    {
-//        //载入ucpass类
-//        require_once('lib/Ucpaas.class.php');
+//    1.appId：创建应用时系统分配的唯一标示，在“应用列表”中可以查询
+//    2.templateId：创建短信模板时系统分配的唯一标示，在“短信管理”中可以查询
+//    3. to：需要下发短信的手机号码,支持国际号码，需要加国家码。
+//    4.param：模板中的替换参数，如果有多个参数则需要写在同一个字符串中，以逗号分隔. （如：param=“a,b,c”）
+        $appId = "ff02050750a742c582a5a2b633c50dc6";
+        $to =  $input['phone'];
+        $templateId = "238242";
+        $param= mt_rand(1000,9999);
+////        //发送验证码成功后，将验证码存入session中
+        session('phone',$param);
+       return $ucpass->templateSMS($appId,$to,$templateId,$param);
+    }
+
+    //实现手机号注册
+    public function dologin2(Request $request)
+    {
+        //1.获取用户提交的数据
+        $input = $request->except('_token','code');
+//        dd($input);
+
+        //2.验证验证码
+//        if($input['code'] !== session('phone')){
+//            return redirect('home/login2');
+//        }
+
+        //3.向用户表添加注册用户
+        $phone = $input['phone'];
+        $name = mt_rand(1000000,9999999);
+       $aa =  \DB::table('users')->where('phone',$phone)->get();
+
+       if($aa !=$phone){
+           //如果没有就将传过来的手机号保存在数据库users表中
+           $res = \DB::table('users')->insert(['phone'=>$phone,'uname'=>$name]);
+           if($res)
+           {
+               //保存成功就跳转到前台首页
+               return redirect('home/index');
+           }else{
+               //保存失败就跳回短信登录页
+               return redirect('home/login2');
+           }
+       }else{
+           return redirect('home/index');
+       }
+
+
 //
-////初始化必填
-//        $options['accountsid']='e85874b47ad67fa2273122fe1de0fed8';
-//        $options['token']='0af8e8e98476032b2a246db2df0d2ffc';
-//
-//
-//
-////初始化 $options必填
-//        $ucpass = new Ucpaas($options);
-//
-////开发者账号信息查询默认为json或xml
-//        header("Content-Type:text/html;charset=utf-8");
-//
-////短信验证码（模板短信）,默认以65个汉字（同65个英文）为一条（可容纳字数受您应用名称占用字符影响），超过长度短信平台将会自动分割为多条发送。分割后的多条短信将按照具体占用条数计费。
-//        $appId = "ff02050750a742c582a5a2b633c50dc6";
-//        $to = "";
-//        $templateId = "";
-//        $param="";
-//
-//        echo $ucpass->templateSMS($appId,$to,$templateId,$param);
-//    }
+    }
 
 
 
