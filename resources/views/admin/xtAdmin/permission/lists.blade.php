@@ -64,8 +64,8 @@
                         <td class="tc">{{$v->description}}</td>
 
                         <td class="tc">
-                            <a href="{{url('admin/xtAdmin/permission/'.$v->rid.'/edit')}}">修改</a>
-                            <a href="javascript:;" onclick="delCate({{$v->tid}})">删除</a>
+                            <a href="{{url('admin/xtAdmin/permission/'.$v->pid.'/edit')}}">修改</a>
+                            <a href="javascript:;" onclick="delPerm({{$v->pid}})">删除</a>
                         </td>
                     </tr>
 
@@ -84,27 +84,7 @@
 
     <script>
 
-        //排序
-        function changeOrder(obj,tid){
-            //获取当前需要排序的记录的ID,cate_id
-            //获取当前记录的排序文本框中的值
-            var torder = $(obj).val();
-            $.post("{{url('admin/xtAdmin/shop_type/changeorder')}}",{'_token':"{{csrf_token()}}","tid":tid,"torder":torder},function(data){
-                //如果排序成功，提示排序成功
-                if(data.status == 0){
-
-                    layer.msg(data.msg,{icon: 6});
-                    var t=setTimeout("location.href = location.href;",2000);
-                }else{
-                    //如果排序失败，提示排序失败
-                    layer.msg(data.msg,{icon: 5});
-                    var t=setTimeout("location.href = location.href;",2000);
-                }
-            })
-
-        }
-        
-        function delCate(id) {
+        function delPerm(id) {
 
             //询问框
             layer.confirm('您确认删除吗？', {
@@ -113,7 +93,7 @@
 //                如果用户发出删除请求，应该使用ajax向服务器发送删除请求
 //                $.get("请求服务器的路径","携带的参数", 获取执行成功后的额返回数据);
                 //admin/user/1
-                $.post("{{url('admin/xtAdmin/shop_type/delCate')}}/"+id,{"_token":"{{csrf_token()}}"},function(data){
+                $.post("{{url('admin/xtAdmin/permission')}}/"+id,{"_token":"{{csrf_token()}}","_method":"delete"},function(data){
                     //alert(data);
 //                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
                    //var res =  JSON.parse(data);
@@ -140,7 +120,7 @@
             });
         }
         //    提示信息淡出
-        $('.dh').fadeOut('slow');
+        $('.dh').fadeOut(3000);
 
     </script>
 @endsection

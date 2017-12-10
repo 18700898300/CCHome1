@@ -55,7 +55,7 @@
                 <a name="top"></a>
                 <a href="https://www.ele.me/" hardjump="" class="topbar-item topbar-homepage" ng-class="{&#39;focus&#39;: $root.locationpath[0] === &#39;place&#39;}">首页</a>
                 <a href="https://www.ele.me/profile/order" hardjump="" class="topbar-item" ng-class="{&#39;focus&#39;: $root.locationpath[1] === &#39;order&#39;}">我的订单</a>
-                <a href="https://h5.ele.me/service/cooperation/" target="_blank" class="topbar-item cooperation">加盟合作</a>
+                <a href="{{url('home/reg')}}" target="_blank" class="topbar-item cooperation">加盟合作</a>
                 <nav class="topbar-nav">
                     <a href="https://www.ele.me/support/center" hardjump="" class="topbar-nav-link" target="_blank">
                         <i class="topbar-nav-icon icon-service"></i>服务中心</a>
@@ -66,13 +66,14 @@
                             <span>扫一扫, 手机订餐更方便</span>
                             {{--<img src="{{asset('/wf/home/elm/appqc.95e532.png')}}" class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div>--}}
                     </div>
+                    </div>
                     <div topbar-profilebox="">
                         <div class="topbar-profilebox">
                             @if(!0)
                             <!-- ngIf: $root.user.avatar && $root.topbarType !==' checkout' -->
                             <span class="topbar-profilebox-avatar icon-profile" ng-show="!$root.user.username"></span>
                             <span ng-show="!$root.user.username" class="">
-                    <a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fshop%2F1195106" target="_blank" href="{{url('')}}">登录/注册</a></span>
+                    <a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fshop%2F1195106" target="_blank" href="{{url('home/login2')}}">登录/注册</a></span>
                             @else
                             <span class="topbar-profilebox-wrapper" ng-show="$root.user.username">
                     <!-- ngIf: $root.topbarType===' checkout' -->
@@ -82,11 +83,11 @@
                     <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== &#39;checkout&#39;"></span>
                                 <!-- end ngIf: $root.topbarType !==' checkout' -->
                     <div class="dropbox topbar-profilebox-dropbox">
-                      <a class="icon-profile" href="https://www.ele.me/profile" hardjump="">个人中心</a>
+                      <a class="icon-profile" href="{{url('home/person')}}" hardjump="">个人中心</a>
                       <a class="icon-star" href="https://www.ele.me/profile/favor" hardjump="">我的收藏</a>
-                      <a class="icon-location" href="https://www.ele.me/profile/address" hardjump="">我的地址</a>
+                      <a class="icon-location" href="{{url('home/address')}}" hardjump="">我的地址</a>
                       <a class="icon-setting" href="https://www.ele.me/profile/security" hardjump="">安全设置</a>
-                      <a class="icon-logout" href="JavaScript:" ng-click="logout()">退出登录</a></div>
+                      <a class="icon-logout" href="{{url('')}}" ng-click="logout()">退出登录</a></div>
                   </span>
                          @endif
                         </div>

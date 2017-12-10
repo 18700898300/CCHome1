@@ -31,6 +31,8 @@
     <script src="{{asset('/wf/home/js/perf.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{asset('/wf/home/js/vendor.8c3a5a.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{asset('/wf/home/js/main.a0cd82.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="{{asset('/layer/layer.js')}}"></script>
+    <script type="text/javascript" src="{{asset('wf/admin/style/js/jquery.js')}}"></script>
 </head>
 
 <body cute-title ng-class="{hidesidebar: layoutState && layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}">
@@ -46,7 +48,7 @@
                 </h1>
                 <a class="topbar-item topbar-homepage focus" href="{{url('/home/index')}}" hardjump="">首页</a>
                 <a class="topbar-item" href="/profile/order" hardjump="" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a>
-                <a class="topbar-item cooperation" href="{{url('')}}" target="_blank">加盟合作</a>
+                <a class="topbar-item cooperation" href="{{url('home/reg')}}" target="_blank">加盟合作</a>
                 <nav class="topbar-nav">
                     <a class="topbar-nav-link" href="/support/center" hardjump="" target="_blank">
                         <i class="topbar-nav-icon icon-service"></i> 服务中心
@@ -69,9 +71,9 @@
 <span class="topbar-profilebox-username ng-binding"></span>
                                 <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span>
                                 <div class="dropbox topbar-profilebox-dropbox">
-                                    <a class="icon-profile" href="/profile" hardjump="">个人中心</a>
+                                    <a class="icon-profile" href="{{url('home/person')}}" hardjump="">个人中心</a>
                                     <a class="icon-star" href="/profile/favor" hardjump="">我的收藏</a>
-                                    <a class="icon-location" href="/profile/address" hardjump="">我的地址</a>
+                                    <a class="icon-location" href="{{url('home/address')}}" hardjump="">我的地址</a>
                                     <a class="icon-setting" href="/profile/security" hardjump="">安全设置</a>
                                     <a class="icon-logout" href="JavaScript:" ng-click="logout()">退出登录</a>
                                 </div>
@@ -115,6 +117,8 @@
 <!-- 地址栏 -->
 <div class="container clearfix ng-scope">
     <span>当前位置:</span>
+
+
     <!-- <span class="location-current">
             <a class="inherit ng-binding" ng-href="/place/wx4eyv2e1qf" ubt-click="401" ng-bind="place.name || place.address" href="/place/wx4eyv2e1qf">昌平区回龙观村东区(龙域中街南70米)</a>
         </span>
@@ -139,6 +143,7 @@
 <div class="container ng-scope" ng-show="!recentBoughtOnly">
     <div class="excavator container">
         <div class="excavator-filter ng-scope">
+
             <span>商家分类:</span>
             <a class="excavator-filter-item ng-binding ng-scope active" href="javascript:">全部商家</a>
             <a class="excavator-filter-item ng-binding ng-scope" href="javascript:">美食</a>
@@ -157,6 +162,17 @@
             <div class="excavator-filter-subbox ng-hide" ng-show="subCategories"></div>
         </div>
     </div>
+    <div class="alert alert-danger">
+        <ul>
+            @if(session('msg'))
+                <li class="dh" style="color:red">{{session('msg')}}</li>
+            @endif
+        </ul>
+    </div>
+    <script>
+        //    提示信息淡出
+        $('.dh').fadeOut(2000);
+    </script>
     <div class="place-rstbox clearfix">
         <div class="clearfix"  style="height: 800px;">
             <a class="rstblock" href="{{url('home/shop')}}" data-rst-id="152185819" data-bidding="" target="_blank">

@@ -7,18 +7,35 @@ Route::get('/', function () {
 
 // 登录系统后台
 Route::get('admin/xtAdmin/login','Admin\xtAdmin\LoginController@login');
+//验证码
+Route::get('admin/xtAdmin/code','Admin\xtAdmin\LoginController@code');
 //验证登录
 Route::post('admin/xtAdmin/dologin','Admin\xtAdmin\LoginController@doLogin');
+// 系统后台管理员申请
+Route::get('admin/xtAdmin/register','Admin\xtAdmin\RegisterController@register');
+//验证申请
+Route::post('admin/xtAdmin/doregister','Admin\xtAdmin\RegisterController@doregister');
 
 // 系统后台
 Route::group(['middleware'=>['adminIslogin','HasRole'],'prefix'=>'admin/xtAdmin','namespace'=>'Admin\xtAdmin'],function(){
     //进入系统后台首页
     Route::get('index','IndexController@index');
     Route::get('info','IndexController@info');
+//    退出登录
     Route::get('logout','IndexController@logout');
+
+//    修改密码
+    Route::get('password/edit/{id}','PasswordController@edit');
+//    执行修改
+    Route::post('password/update','PasswordController@update');
 
 //    管理员模块
     Route::resource('adminUser','Admin_userController');
+//    管理员申请列表
+    Route::get('ask','Admin_userController@ask');
+//    删除申请表中的申请记录
+    Route::post('delask/{id}','Admin_userController@delask');
+    Route::get('delasks/{id}','Admin_userController@delasks');
 //    授权管理员
     Route::get('adminUser/auth/{id}','Admin_userController@auth');
 //    执行管理员授权
@@ -38,7 +55,7 @@ Route::group(['middleware'=>['adminIslogin','HasRole'],'prefix'=>'admin/xtAdmin'
 //    执行修改
     Route::post('/shop_type/update','Shop_typeController@update');
 //    删除分类
-    Route::post('/shop_type/delCate/{id}','Shop_typeController@delete');
+    Route::post('/shop_type/delCate/{id}','Shop_typeController@del');
 
 //    角色模块
     Route::resource('role','RoleController');
@@ -146,8 +163,8 @@ Route::group(['middleware'=>'islogin','prefix'=>'admin','namespace'=>'Admin'],fu
 });
 
 //用户评论
-Route::get('home/comment/index','home/CommentController@index');
-Route::post('comment/add','CommentController@add');
+//Route::get('home/comment/index','home\CommentController@index');
+//Route::post('comment/add','CommentController@add');
 
 
 
@@ -183,7 +200,7 @@ Route::get('home/avatar',function(){
     return view('Home.avatar');
 });
 
-Route::post('home/avatar/upload','Home/PersonController@upload');
+Route::post('home/avatar/upload','Home\PersonController@upload');
 
 //设置密码
 Route::get('home/setpwd','Home\PersonController@setpwd');
