@@ -35,7 +35,7 @@
             <td ng-bind="item.price">{{$v->price}}</td>
             <td ng-bind="item.price">{{$v->qty * $v->price}}</td>
             {{--<td ng-bind="item.price*item.quantity">{{$v->qty * $v->price}}</td>--}}
-            <td><button  id = {{$v->rowId}} type="button" class="btn btn-danger btn-sm remove">移除</button></td>
+            <td><button  id = "{{$v->rowId}}" type="button" class="btn btn-danger btn-sm remove">移除</button></td>
         </tr>
         @endforeach
         <tr>
@@ -47,7 +47,7 @@
             <td colspan="2"><button type="button" class="btn btn-danger btn-sm removes">清空购物车</button></td>
         </tr>
         <tr>
-            <td colspan="2" ><a href="{{url('/shop')}}"><button type="button" class="btn btn-danger btn-sm ">继续购物</button></a></td>
+            <td colspan="2" ><a href="{{url('home/shop')}}/{{$shop['sid']}}"><button type="button" class="btn btn-danger btn-sm ">继续购物</button></a></td>
             <td></td>
             <td></td>
             <td></td>
@@ -116,12 +116,6 @@
              });
          });
 
-         {{--//去结算--}}
-        {{--$('.jsy').on('click',function(){--}}
-            {{--$.get("{{url('/home/order/index')}}",function(data){--}}
-
-            {{--});--}}
-        {{--});--}}
     </script>
 </div>
 @stop

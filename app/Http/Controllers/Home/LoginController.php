@@ -26,7 +26,6 @@ class LoginController extends Controller
     }
     public function login2()
     {
-//        dd (1111);
         return view('Home.login2');
     }
     public function yzm()
@@ -68,10 +67,7 @@ class LoginController extends Controller
   //  dd(1111);
         //1.获取用户提交的登录数据,
         $input = $request->except('_token');
-//     dd($input);
-//        $res = \DB::table('users')->insert(
-//            ['uname' => $input['uname'], 'password' => $input['password']]
-//        );
+
         //2.对数据进行后台表单验证
         $rule = [
             'uname'=>'required|regex:/^[\x{4e00}-\x{9fa5}A-Za-z0-9_]+$/u|between:5,20',
@@ -110,18 +106,15 @@ class LoginController extends Controller
         if( Crypt::decrypt($user->password) != trim($input['password']) ){
             return redirect('home/login')->with('errors','密码不正确')->withInput();
         }
-//
 
 
-        //将用户提交的数据保存到数据库users表中
-        $res = \DB::table('users')->insert(
-            ['uname' => $input['uname'], 'password' => $input['password']]
-        );
+
+
         Session::put('user',$user);
         return redirect('home/index');
     }
 //public function crypt()
-//{-
+//{
 //
 //    $str = 123456;
 //    $name = Crypt::encrypt($str);

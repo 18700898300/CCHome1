@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\Model\Food;
 
 use App\Http\Controllers\Controller;
+use App\Models\Home\Shop;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
@@ -16,17 +17,23 @@ class CartController extends Controller
      *@date 2017.11.30
      *
      * */
-    public function addcart($id)
+    public function addcart(Request $request)
     {
 
-        $goods= Food::find($id);
-
+      $input = $request->except('_token');
+//    dd($input);
+     $goods= Food::find($input['fid']);
+//       dd($goods);
         //添加到购物车
-        Cart::add($goods['fid'],$goods['fname'],1, $goods['price']);
+     Cart::add($goods['fid'],$goods['fname'],1, $goods['price'],['did'=>$goods['did'],'sprice'=>$input['sprice']]);
 
-        return redirect('/home/cart');
+       return redirect('/home/cart');
 
     }
+
+    /**
+     * 显示所有菜品
+     */
 
     public function cart()
     {
@@ -37,10 +44,25 @@ class CartController extends Controller
         $total= Cart::subtotal();
         //购物车商品的数量
         $count = Cart::count();
-//    dd($cart);
-        return view('/home/cart', ['cart'=> $cart,'total'=>$total,'count'=>$count]);
+
+
+            foreach($cart as $v)
+            {
+                $did = $v->options['did'];
+            }
+            $shop = Shop::find($did);
+
+        return view('/home/cart', ['cart'=> $cart,'total'=>$total,'count'=>$count,'shop'=>$shop]);
+
+
 
     }
+
+    /**
+     * @对菜品数量递减
+     * @return array
+     */
+
     public function jian(Request $request)
     {
         //接收ajax 传过来的id,和数量
@@ -60,7 +82,10 @@ class CartController extends Controller
         $count = Cart::count();
        return ['total'=>$total,'count'=>$count,'qty'=>$qty];
     }
-    //对数量进行递加
+    /**
+     * @对菜品数量递加
+     * @return array
+     */
     public function jia(Request $request)
     {
 
@@ -78,7 +103,11 @@ class CartController extends Controller
         $count = Cart::count();
         return ['total'=>$total,'count'=>$count,'qty'=>$qty];
     }
-    //移除一个菜品
+
+    /**
+     * @对某个菜品移除
+     * @
+     */
     public function remove(Request $request)
     {
         $rowId = $request ->input('id');
@@ -87,12 +116,17 @@ class CartController extends Controller
         $total= Cart::subtotal();
         //购物车商品的数量
         $count = Cart::count();
+        if($count == 0){
+            return redirect('home/index');
+        }
         return ['total'=>$total,'count'=>$count];
     }
-    //清除所有菜品
+    /**
+     * @清除所有菜品
+     *
+     */
     public function removes()
     {
-
         Cart :: destroy();
         //获取购物车的总钱数
         $total= Cart::subtotal();

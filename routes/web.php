@@ -11,7 +11,7 @@ Route::get('admin/xtAdmin/login','Admin\xtAdmin\LoginController@login');
 Route::post('admin/xtAdmin/dologin','Admin\xtAdmin\LoginController@doLogin');
 
 // 系统后台
-Route::group(['middleware'=>['adminIslogin','HasRole'],'prefix'=>'admin/xtAdmin','namespace'=>'Admin\xtAdmin'],function(){
+Route::group(['middleware'=>['adminIslogin'],'prefix'=>'admin/xtAdmin','namespace'=>'Admin\xtAdmin'],function(){
     //进入系统后台首页
     Route::get('index','IndexController@index');
     Route::get('info','IndexController@info');
@@ -55,20 +55,16 @@ Route::get('errors/auth',function(){
     return view('errors.auth');
 });
 
-
+//进入前台首页
+    Route::get('home/index','Home\IndexController@index');
+//    进入商家店铺
+    Route::get('home/shop/{id}','Home\IndexController@shop');
 
 // CChome前台
-Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
-//    进入前台首页
-    Route::get('index','IndexController@index');
-//    进入商家店铺
-    Route::get('shop/{id}','IndexController@shop');
-
-
-
+Route::group(['middleware'=>['homeIslogin'],'prefix'=>'home','namespace'=>'Home'],function(){
     //购物车
 //把菜品添加到购物车
-    Route::get('/addcart/{id}','CartController@addcart');
+    Route::post('/addcart/','CartController@addcart');
 //把菜品信息显示在购物车页面
     Route::get('/cart','CartController@cart');
 //对菜品的数量进行递减
@@ -82,11 +78,28 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 //订单
 //显示确认订单页
 Route::get('/order/index','OrderController@index');
+//移除订单某种菜品
+Route::get('/order/remove','OrederController@remove');
 //显示添加地址弹出层
 Route::get('/order/addsite','OrderController@addsite');
 //添加地址插入数据库
 Route::post('/order/insertsite','OrderController@insertsite');
-
+//显示地址
+Route::get('/order/indexsite','OrderController@indexsite');
+//修改地址页
+Route::get('/order/editsite','OrderController@editsite');
+//修改执行方法
+Route::post('/order/updatesite','OrderController@updatesite');
+//执行确认下单
+Route::post('/order/insert','OrderController@insert');
+//收银台页面
+Route::get('/order/syt/{syt}','OrderController@syt');
+//结算页
+Route::get('/order/jsy/','OrderController@jsy');
+//执行结算修改订单状态 (下单已支付)
+Route::get('/order/js','OrderController@js');
+//检测超出时间后修改订单状态 (支付超时,订单已取消)
+Route::get('/order/ddsx','OrderController@ddsx');
 });
 
 //商家后台, 菜品标签模块
@@ -96,17 +109,17 @@ Route::resource('admin/food','Admin\shAdmin\FoodController');
 Route::post('admin/food/upload','Admin\shAdmin\FoodController@upload');
 
 
-Route::get('/shop',function (){
-    return view('shop');
-});
-
-Route::get('/order',function (){
-    return view('order');
-});
-
-Route::get('/index',function(){
-    return view('index');
-});
+//Route::get('/shop',function (){
+//    return view('shop');
+//});
+//
+//Route::get('/order',function (){
+//    return view('order');
+//});
+//
+//Route::get('/index',function(){
+//    return view('index');
+//});
 
 //商户注册
 Route::get('/admin/meregister','Admin\MerregController@meregister');
@@ -119,6 +132,8 @@ Route::get('/admin/yzm','Admin\MerchantController@yzm');
 Route::get('/admin/crypt','Admin\MerchantController@crypt');
 //商户后台
 
+
+Route::get('/home/crypt','Home\LoginController@crypt');
 
 //进入商户后台首页的路由组
 //注册好中间件之后,直接用别名islogin就可以

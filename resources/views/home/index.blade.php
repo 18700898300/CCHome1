@@ -1,5 +1,4 @@
 <html ng-app="eleme" perf-error="desktop/">
-
 <head>
     <meta charset="utf-8" />
     <meta name="renderer" content="webkit" />
@@ -24,7 +23,7 @@
     <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-16x16.png" type="image/png" sizes="16x16" />
     <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-32x32.png" type="image/png" sizes="32x32" />
     <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon.png" type="image/png" sizes="96x96" />
-    <link href="{{asset('/wf/home/css/vendor.d724a8_2.css')}}" rel="stylesheet">
+    <link href="{{asset('/a/css/vendor.d724a8_2.css')}}" rel="stylesheet">
     <link href="{{asset('/wf/home/css/main.0a7669.css')}}" rel="stylesheet">
     <!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
     <script src="{{asset('/wf/home/js/69e30c57868b46e7a0d2b4a6c711970a.js')}}" data-ref="API_CONFIG"></script>
@@ -36,12 +35,12 @@
 <body cute-title ng-class="{hidesidebar: layoutState && layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}">
 <!-- <eleme-topbar state="layoutState"></eleme-topbar> -->
 <div class="ng-isolate-scope" ng-switch="state.type" state="layoutState">
-    <div class="ng-scope ng-isolate-scope" ng-switch-default="" topbar-default="" state="state">
+    <div class="ng-scope ng-isolate-scope"  state="state">
         <header class="topbar" role="navigation" ng-class="{shoptopbar: state.type === 'shop'}">
             <div class="container clearfix">
                 <h1>
                     <a class="topbar-logo icon-logo" href="{{url('/home/index')}}" hardjump="">
-                        <span>饿了么</span>
+                        <span>曹操到家</span>
                     </a>
                 </h1>
                 <a class="topbar-item topbar-homepage focus" href="{{url('/home/index')}}" hardjump="">首页</a>
@@ -59,14 +58,14 @@
                             <img class="topbar-nav-qrcode" src="{{asset('/wf/home/img/appqc.95e532.png')}}" alt="扫一扫下载饿了么手机 App">
                         </div>
                     </div>
-                    <div topbar-profilebox="">
+                    <div>
                         <div class="topbar-profilebox">
                             <span class="topbar-profilebox-avatar icon-profile" ng-show="!$root.user.username"></span>
                             <span class="" ng-show="!$root.user.username">
-<a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F" target="_blank" href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F">登录/注册</a>
-</span>
+                                <a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F" target="_blank" href="#">/注册</a>
+                            </span>
                             <span class="topbar-profilebox-wrapper ng-hide" ng-show="$root.user.username">
-<span class="topbar-profilebox-username ng-binding"></span>
+                                <span class="topbar-profilebox-username ng-binding"></span>
                                 <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span>
                                 <div class="dropbox topbar-profilebox-dropbox">
                                     <a class="icon-profile" href="/profile" hardjump="">个人中心</a>
@@ -75,7 +74,7 @@
                                     <a class="icon-setting" href="/profile/security" hardjump="">安全设置</a>
                                     <a class="icon-logout" href="JavaScript:" ng-click="logout()">退出登录</a>
                                 </div>
-                                </span>
+                            </span>
                         </div>
                     </div>
                 </nav>
@@ -113,6 +112,7 @@
 <!-- <eleme-sidebar ng-hide="layoutState && layoutState.hideSidebar"></eleme-sidebar> -->
 <!-- <div ng-view role="main"></div> -->
 <!-- 地址栏 -->
+
 <div class="container clearfix ng-scope">
     <span>当前位置:</span>
     <!-- <span class="location-current">
@@ -135,7 +135,7 @@
             <span class="ng-scope">服务中心</span>
         </span>-->
 </div>
-</div>
+
 <div class="container ng-scope" ng-show="!recentBoughtOnly">
     <div class="excavator container">
         <div class="excavator-filter ng-scope">
