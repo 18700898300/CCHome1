@@ -82,6 +82,9 @@
     </style>
     <script defer="">/* Code removed by ScrapBook */</script>
     <link href="{{url('/a/css/login.27b48eb.css')}}" rel="stylesheet" />
+    <script src="{{asset('/js/jquery-1.8.3.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/layer/layer.js')}}" type="text/javascript"></script>
+
 </head>
 <body style="font-size: 12px;">
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0px; height: 0px;">
@@ -140,6 +143,8 @@
                     </ul>
                 </div>
             @endif
+
+
 @yield('body')
 
 

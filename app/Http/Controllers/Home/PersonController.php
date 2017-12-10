@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Home;
 
 
+use App\Http\Model\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Session;
+use App\Http\Model\Users_addr;
 
 class PersonController extends Controller
 {
    public function index()
    {
-       //从数据库中获取信息
-       $users = \DB::table('users')->where('uid',2)->first();
-//       dd($users);
-         return view('home/person',compact('users'));
+       $users = Session::get('user');
+       return view('home.person.person',compact('users'));
 
    }
 
@@ -23,12 +24,9 @@ class PersonController extends Controller
    {
         //获取在表单中修改后的内容
         $input = $request->except('_token');
-//        dd($input);
-
        //对修改的表单中的uname进行验证
        $rule = [
            'uname'=>'required|regex:/^[\x{4e00}-\x{9fa5}A-Za-z0-9_]+$/u|between:5,20'
-
        ];
        $mess = [
            'uname.required'=>'用户名必须输入',
@@ -42,15 +40,16 @@ class PersonController extends Controller
        if($validator->fails()){
            return redirect('home/person')->withErrors($validator)->withInput();
        }
-
        //将修改后的数据保存到users表中
-       $res = \DB::table('users')
+       $user = \DB::table('users')
            ->where('uid', $input['uid'])
            ->update(['uname' => $input['uname']]);
 
-       if($res)
+      $user =  User::find($input['uid']);
+       Session::put('user',$user);
+       if($user)
        {
-             return  redirect('home/person');
+           return  redirect('home/person');
        }else{
            return redirect('home/person');
        }
@@ -58,31 +57,89 @@ class PersonController extends Controller
    }
 
 
-   /*
-    * 处理客户端传过来的图片
-    * */
-//    public function upload(Request $request)
-//    {
-//        //获取上传的图片
-//        $avatar = $request->except('_token');
-//        dd($avatar);
-//
-//
-//
-//    }
+   //显示编辑头像的页面
+    public function avatar()
+    {
+        $users = Session::get('user');
+        return view('Home.person.avatar',compact('users'));
+    }
 
-    //添加地址
-//    public function add()
-//    {
-//        //从数据库中获取信息
-//        $add = \DB::table('udetail')->select()
-//    }
+    //显示地址管理页
+    public function address()
+    {
+        $area = \DB::table('area')->get();
+        $users = Session::get('user');
+
+        $addr = Users_addr::orderBy('id','desc')->take(10)->where('uid',$users['uid'])->get();
+//        dd($addr[0]['name']);
+        return view('Home.person.address',compact('users','area','addr'));
+    }
+    //执行添加地址
+    public function insertsite(Request $request)
+    {
+        $input = $request->except('_token');
+//        dd($input);
+        $rule = [
+            'name'=>'required|regex:/^[\x{4e00}-\x{9fa5}A-Za-z0-9]+$/u|between:2,5',
+            "sex"=>'required',
+            "addr"=>'required',
+            "areaid" =>'required',
+            "phone"=>'required|regex:/^1[34578][0-9]{9}$/',
+        ];
+
+
+        $mess = [
+            'name.require'=>'用户名必须输入',
+            'name.regex'=>'用户名必须汉字字母',
+            'name.between'=>'用户名必须在2到5位之间',
+            'sex.require'=>'性别必须选择',
+            'addr.required'=>'地址必须输入',
+            'areaid.required'=>'商圈必须选择',
+            'phone.required'=>'手机号必须输入',
+            'phone.regex'=>'手机号格式不正确',
+
+        ];
+
+
+        $validator =  Validator::make($input,$rule,$mess);
+        //如果表单验证失败 passes()
+        if ($validator->fails()) {
+            return redirect('/home/order/index')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $res  = \DB::table('users_addrs')->insert($input);
+        if($res)
+        {
+            return redirect('/home/address');
+        }else{
+            return redirect('/home/address');
+        }
+
+    }
+
+    //显示安全中心页面
+    public function safe()
+    {
+        $users = Session::get('user');
+        return view('Home.person.safe',compact('users'));
+    }
+
+    //显示更改手机号的页面
+    public function changephone()
+    {
+        $users = Session::get('user');
+//        dd($users['uid']);
+        $users = \DB::table('users')->where('uid',$users['uid'])->first();
+//        dd($users);
+        return view('Home.person.changephone',compact('users'));
+    }
 
 //设置密码
     public function setpwd()
     {
-
-        return view('home.changepwd');
+        $users = Session::get('user');
+        return view('home.person.changepwd',compact('users'));
     }
 
     /*
@@ -144,8 +201,8 @@ class PersonController extends Controller
     //设置密码
     public function changepwd()
     {
-
-        return view('home.changepwd');
+        $users = Session::get('user');
+        return view('home.person.changepwd',compact('users'));
     }
 
     /*
@@ -186,7 +243,7 @@ class PersonController extends Controller
 
 //        加密
         $input['password']=encrypt($input['password']);
-//       dd( $input['password']);
+       dd( $input['password']);
 
         //将设置密码的数据添加并保存到users表中
 

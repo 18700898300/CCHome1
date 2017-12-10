@@ -19,14 +19,14 @@
     <meta property="qc:admins" content="2263606250655" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="apple-touch-icon-precomposed" href="https://static2.ele.me/apple-touch-icon.png?v=2" />
-    <link rel="shortcut icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-16x16.png" type="image/png" />
-    <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-16x16.png" type="image/png" sizes="16x16" />
-    <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-32x32.png" type="image/png" sizes="32x32" />
-    <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon.png" type="image/png" sizes="96x96" />
-    <link href="{{asset('/a/css/vendor.d724a8_2.css')}}" rel="stylesheet">
-    <link href="{{asset('/wf/home/css/main.0a7669.css')}}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{asset('a/image/favicon-16x16.png')}}" type="image/png" />
+    <link rel="icon" href="{{asset('a/image/favicon-16x16.png')}}" type="image/png" sizes="16x16" />
+    <link rel="icon" href="{{asset('a/image/favicon-32x32.png')}}" type="image/png" sizes="32x32" />
+    <link rel="icon" href="{{asset('a/image/favicon.png')}}" type="image/png" sizes="96x96" />
+    <link href="{{asset('a/css/vendor.d724a8_2.css')}}" rel="stylesheet">
+    <link href="{{asset('a/css/main.0a7669.css')}}" rel="stylesheet">
     <!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
-    <script src="{{asset('/wf/home/js/69e30c57868b46e7a0d2b4a6c711970a.js')}}" data-ref="API_CONFIG"></script>
+    <script src="{{asset('a/js/69e30c57868b46e7a0d2b4a6c711970a.js')}}" data-ref="API_CONFIG"></script>
     <script src="{{asset('/wf/home/js/perf.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{asset('/wf/home/js/vendor.8c3a5a.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{asset('/wf/home/js/main.a0cd82.js')}}" type="text/javascript" crossorigin="anonymous"></script>
@@ -55,7 +55,7 @@
                         <i class="topbar-nav-icon icon-mobile"></i> 手机应用
                         <div class="dropbox topbar-mobile-dropbox">
                             <span>扫一扫, 手机订餐更方便</span>
-                            <img class="topbar-nav-qrcode" src="{{asset('/wf/home/img/appqc.95e532.png')}}" alt="扫一扫下载饿了么手机 App">
+                            <img class="topbar-nav-qrcode" src="{{asset('a/image/appqc.95e532.png')}}" alt="扫一扫下载饿了么手机 App">
                         </div>
                     </div>
                     <div>
@@ -66,6 +66,19 @@
                             </span>
                             <span class="topbar-profilebox-wrapper ng-hide" ng-show="$root.user.username">
                                 <span class="topbar-profilebox-username ng-binding"></span>
+
+                                @if(empty($_SESSION['user']))
+                                <span>你好,
+					            <a  target="_blank" href="{{asset('home/login')}}">登录</a>
+					            </span>
+                                @else
+                                <span>
+							        您好,{{$_SESSION['user']->uname}}
+						        </span>
+                               @endif
+
+                            </span>
+
                                 <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span>
                                 <div class="dropbox topbar-profilebox-dropbox">
                                     <a class="icon-profile" href="/profile" hardjump="">个人中心</a>

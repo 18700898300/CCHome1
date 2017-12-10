@@ -5,7 +5,7 @@ use App\Http\Model\Order;
 use App\Http\Model\Order_detail;
 
 use App\Http\Model\User;
-use App\Http\Model\users_addr;
+use App\Http\Model\Users_addr;
 use App\Models\Home\Shop;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Crypt;
@@ -266,6 +266,8 @@ class OrderController extends Controller
 //      dd($syt['oid'].'-----'.$order['oid']);
         $syt = implode(',',$syt);
         $syt = Crypt::encrypt($syt);
+        Cart :: destroy();
+
         if($res)
         {   //重定向到收银台
             return redirect("/home/order/syt/".$syt);
@@ -300,7 +302,7 @@ class OrderController extends Controller
     public function ddsx(Request $request)
     {
         $oid = $request->except('_token');
-        $res =  Order::where('oid',$oid)->update(['status'=>0]);
+        $res =  Order::where('oid',$oid)->update(['status'=>5]);
         if($res)
         {
             return '1';

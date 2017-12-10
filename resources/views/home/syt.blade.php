@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-{{$syt[9]}}
 	<script src="{{asset('/a/js/jquery-1.8.3.min.js')}}"></script>
     <script src="{{asset('/layer/layer.js')}}"></script>
 <meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>饿了么收银台</title><link href="{{asset('/syt/app.bf5cec.css')}}" rel="stylesheet"><script src="about:blank" type="text/javascript"></script><script src="about:blank" type="text/javascript"></script></head><body><header id="header"><i class="eleme-icon logo"><h1 class="title">收银台</h1></i></header><main id="main"><main data-reactid=".0"><section class="container order" data-reactid=".0.0"><h3 class="text-muted" data-reactid=".0.0.0">订单详情</h3><div class="order-detail clearfix" data-reactid=".0.0.1"><div class="pull-left" data-reactid=".0.0.1.0"><p class="text-muted" data-reactid=".0.0.1.0.0">{{$syt[0]}}</p><p class="hidden" data-reactid=".0.0.1.0.1"><span class="text-muted text-ellipsis order-desc" data-reactid=".0.0.1.0.1.0">{{$syt[1]}} 先生 {{$syt[3]}} {{$syt[4]}} {{$syt[8]}}
@@ -12,7 +11,7 @@
 {{$syt[5]}}x{{$syt[6]}}
 </p><a class="text-link" data-reactid=".0.0.1.0.2.1"><span data-reactid=".0.0.1.0.2.1.0">收起详情</span><span class="triangle triangle-up" data-reactid=".0.0.1.0.2.1.1"></span></a></div></div><p class="pull-right" data-reactid=".0.0.1.1"><span data-reactid=".0.0.1.1.0"><span data-reactid=".0.0.1.1.0.0">支付金额：</span><strong class="text-lg text-highlight" data-reactid=".0.0.1.1.0.1"><span data-reactid=".0.0.1.1.0.1.0">¥</span><span data-reactid=".0.0.1.1.0.1.1">{{$syt[7]}}</span></strong></span></p></div></section><section class="container paymethods" data-reactid=".0.1"><header data-reactid=".0.1.0"><h3 data-reactid=".0.1.0.0">请选择支付方式</h3><p class="text-muted" data-reactid=".0.1.0.1"><span data-reactid=".0.1.0.1.0">剩余支付时间</span><span class="text-highlight" data-reactid=".0.1.0.1.1">
 	<span class="time-item">
-            <span><strong id="minute_show">00</strong>分</span>
+            <span><strong id="minute_show">01</strong>分</span>
             <span><strong id="second_show">00</strong>秒</span>
     </span>
 
@@ -25,6 +24,8 @@
         	var intDiff = 0;
             intDiff = parseInt(0);//倒计时总秒数量
             var timer1 = "";
+            var m = 0;
+			var s = 0;
             function timer(intDiff) {
                timer1 =  window.setInterval(function() {
                     var day = 0,
@@ -44,6 +45,43 @@
                     $('#minute_show').html(minute);
                     $('#second_show').html(second);
                     intDiff--;
+
+
+					
+					if(minute==00 && second==00){
+						$.get('/home/order/ddsx',{oid:oid},function(data){
+
+								if(data == 1){
+										 layer.open({
+										        type: 1
+										        ,title: false //不显示标题栏
+										        ,closeBtn: false
+										        ,area: '300px;'
+										        ,shade: 0.8
+										        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+										        ,btn: ['火速围观', '残忍拒绝']
+										        ,btnAlign: 'c'
+										        ,moveType: 1 //拖拽模式，0或者1
+										        ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">亲支付已超时,快去订单付款吧!</div>'
+										        ,success: function(layero){
+										          var btn = layero.find('.layui-layer-btn');
+										          btn.find('.layui-layer-btn0').attr({
+										            href: '{{url("/home/order/lists")}}'
+										            ,target: '_blank'
+										          });
+										        }
+										      });
+									}	 		
+							});
+					}
+
+
+
+
+
+
+
+
                 }, 1000);
             } 
 
@@ -69,59 +107,8 @@
 					  window.clearInterval(timer1);				
 					}
 			});
-
-
 		});
-
-		var m = 0;
-		var s = 0;
-		$('#minute_show').bind('DOMNodeInserted', function(e) {  
-			if($(e.target).html() == 00){
-				 m = 1;
-			}
-    		  
-		});
-		$('#second_show').bind('DOMNodeInserted', function(e) {  
-    		if($(e.target).html() == 00){
-    			 s = 1;
-    		}
-    		//console.log($(e.target).html());
-		});
-		
-		 
-		//如果时间为0的时候让弹一个提示框
-		// if(	m  == 0 && s ==0 ){
-		// 	$.get('/home/order/ddsx',{oid:oid},function(data){
-
-		// 		if(data == 1){
-		// 				 layer.open({
-		// 				        type: 1
-		// 				        ,title: false //不显示标题栏
-		// 				        ,closeBtn: false
-		// 				        ,area: '300px;'
-		// 				        ,shade: 0.8
-		// 				        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-		// 				        ,btn: ['火速围观', '残忍拒绝']
-		// 				        ,btnAlign: 'c'
-		// 				        ,moveType: 1 //拖拽模式，0或者1
-		// 				        ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">亲支付已超时,快去订单付款吧!</div>'
-		// 				        ,success: function(layero){
-		// 				          var btn = layero.find('.layui-layer-btn');
-		// 				          btn.find('.layui-layer-btn0').attr({
-		// 				            href: '{{url("/home/order/lists")}}'
-		// 				            ,target: '_blank'
-		// 				          });
-		// 				        }
-		// 				      });
-		// 			}	 		
-		// 	});
-		// }
-			
-
-
-
-
-		
+	
 	</script>
 <style>
 	#ids{
