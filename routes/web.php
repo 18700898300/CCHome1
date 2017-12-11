@@ -100,8 +100,8 @@ Route::post('/dochangepwd','PersonController@dochangepwd');
 Route::get('/address','PersonController@address');
 //执行添加地址
 Route::post('/person/insertsite','PersonController@insertsite');
-//执行修改地址
-Route::post('/person/insertsite','PersonController@insertsite');
+//显示修改地址
+Route::post('/person/editsite','PersonController@editsite');
 //安全中心
 Route::get('/safe','PersonController@safe');
 //购物车

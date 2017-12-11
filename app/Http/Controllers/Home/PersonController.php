@@ -71,7 +71,7 @@ class PersonController extends Controller
         $users = Session::get('user');
 
         $addr = Users_addr::orderBy('id','desc')->take(10)->where('uid',$users['uid'])->get();
-//        dd($addr[0]['name']);
+//        dd($addr[0]['id']);
         return view('Home.person.address',compact('users','area','addr'));
     }
     //执行添加地址
@@ -116,6 +116,18 @@ class PersonController extends Controller
             return redirect('/home/address');
         }
 
+    }
+    public function editsite(Request $request)
+    {
+      $id = $request->except('_token');
+
+//      获取当前要修改的地址
+        $addrs = Users_addr::find($id);
+//        return $addrs;
+//        //获取所有商圈
+        $areas = \DB::table('area')->get();
+        $data = ['addrs'=>$addrs,'areas'=>$areas];
+        return  $data;
     }
 
     //显示安全中心页面
