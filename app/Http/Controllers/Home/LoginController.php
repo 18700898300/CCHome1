@@ -21,6 +21,16 @@ use App\MSG\lib\Ucpaas;
  * */
 class LoginController extends Controller
 {
+    public function crypt()
+    {
+        $str = 123456;
+
+        $pwd = Crypt::encrypt($str);
+        dd($pwd);
+    }
+
+
+
     //密码登录的页面
     public function login()
     {
@@ -113,6 +123,7 @@ class LoginController extends Controller
         Session::put('user',$user);
         return redirect('home/index');
     }
+
 
 
     //手机号发送验证码登录

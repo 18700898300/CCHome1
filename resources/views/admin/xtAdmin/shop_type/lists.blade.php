@@ -85,7 +85,6 @@
     <!--搜索结果页面 列表 结束-->
 
     <script>
-
         //排序
         function changeOrder(obj,tid){
             //获取当前需要排序的记录的ID,cate_id
@@ -116,9 +115,10 @@
 //                $.get("请求服务器的路径","携带的参数", 获取执行成功后的额返回数据);
                 //admin/user/1
                 $.post("{{url('admin/xtAdmin/shop_type/delCate')}}/"+id,{"_token":"{{csrf_token()}}"},function(data){
-                    //alert(data);
+//                    alert(data);
+                    console.log(data);
 //                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
-                   //var res =  JSON.parse(data);
+//                   var res =  JSON.parse(data);
 //                    删除成功
                    if(data.status == 0){
                        //console.log("错误号"+res.error);
@@ -142,7 +142,7 @@
             });
         }
         //    提示信息淡出
-        $('.dh').fadeOut('slow');
+        $('.dh').fadeOut(3000);
 
     </script>
 @endsection

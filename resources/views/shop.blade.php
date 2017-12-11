@@ -915,7 +915,7 @@
 <script src=" {{asset('/a/js/textStatic.js')}}"></script>
 <script src=" {{asset('/a/js/textStatic.js')}}"></script>
 <script src=" {{asset('/a/js/textStatic.js')}}"></script>
-</body>
+
 <script src="{{asset('/a/js/jquery-1.8.3.min.js')}}"></script>
 
 <?php
@@ -957,4 +957,5 @@ $data = [
 //        )
 //    });
 </script>
+</body>
 </html>

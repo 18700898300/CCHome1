@@ -449,6 +449,7 @@
 
 
         })
+
         $('.remove').on('click',function(){
 //            alert(111);
                 var id = $(this).attr('id');
