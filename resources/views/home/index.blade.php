@@ -27,12 +27,13 @@
     <link href="{{asset('/wf/home/css/vendor.d724a8_2.css')}}" rel="stylesheet">
     <link href="{{asset('/wf/home/css/main.0a7669.css')}}" rel="stylesheet">
     <!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
+    <script type="text/javascript" src="{{asset('wf/admin/style/js/jquery.js')}}"></script>
     <script src="{{asset('/wf/home/js/69e30c57868b46e7a0d2b4a6c711970a.js')}}" data-ref="API_CONFIG"></script>
-    <script src="{{asset('/wf/home/js/perf.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+{{--    <script src="{{asset('/wf/home/js/perf.js')}}" type="text/javascript" crossorigin="anonymous"></script>--}}
     <script src="{{asset('/wf/home/js/vendor.8c3a5a.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{asset('/wf/home/js/main.a0cd82.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+
     <script src="{{asset('/layer/layer.js')}}"></script>
-    <script type="text/javascript" src="{{asset('wf/admin/style/js/jquery.js')}}"></script>
 </head>
 
 <body cute-title ng-class="{hidesidebar: layoutState && layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}">
@@ -63,13 +64,17 @@
                     </div>
                     <div topbar-profilebox="">
                         <div class="topbar-profilebox">
+
+
                             <span class="topbar-profilebox-avatar icon-profile" ng-show="!$root.user.username"></span>
                             <span class="" ng-show="!$root.user.username">
-<a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F" target="_blank" href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F">登录/注册</a>
-</span>
-                            <span class="topbar-profilebox-wrapper ng-hide" ng-show="$root.user.username">
-<span class="topbar-profilebox-username ng-binding"></span>
-                                <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span>
+                                <a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F" target="_blank" href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F">登录/注册</a>
+                            </span>
+
+
+                            <span class="topbar-profilebox-wrapper " ng-show="$root.user.username">
+                            <span class="topbar-profilebox-username ng-binding"></span>
+                                <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'">欢迎您,快出来吧</span>
                                 <div class="dropbox topbar-profilebox-dropbox">
                                     <a class="icon-profile" href="{{url('home/person')}}" hardjump="">个人中心</a>
                                     <a class="icon-star" href="/profile/favor" hardjump="">我的收藏</a>
@@ -77,7 +82,9 @@
                                     <a class="icon-setting" href="/profile/security" hardjump="">安全设置</a>
                                     <a class="icon-logout" href="JavaScript:" ng-click="logout()">退出登录</a>
                                 </div>
-                                </span>
+                            </span>
+
+
                         </div>
                     </div>
                 </nav>
@@ -137,7 +144,7 @@
         <span ng-transclude="">
             <i class="icon-arrow-right ng-scope"></i>
             <span class="ng-scope">服务中心</span>
-        </span>-->
+        </span> -->
 </div>
 </div>
 <div class="container ng-scope" ng-show="!recentBoughtOnly">
@@ -265,7 +272,7 @@
                 </div>
                 <div class="footer-mobile">
                     <a href="https://h.ele.me/landing" target="_blank">
-                        <img class="footer-mobile-icon" src="{{asset('/wf/home/img/appqc.95e532.png')}}'" alt="扫一扫下载饿了么手机 App">
+                        <img class="footer-mobile-icon" src="{{asset('/wf/home/img/appqc.95e532.png')}}" alt="扫一扫下载饿了么手机 App">
                     </a>
                     <div class="footer-mobile-content">
                         <h3>下载手机版</h3>

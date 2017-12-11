@@ -26,6 +26,8 @@
     <link rel="icon" href="https://static2.ele.me/eleme/desktop/media/img/favicon.png" type="image/png" sizes="96x96">
     <link href="{{asset('/wf/home/css/vendor.eb86f5.css')}}" rel="stylesheet">
     <link href="{{asset('/wf/home/css/main.301d40.css')}}" rel="stylesheet">
+    <link href="{{asset('/wf/home/tankuang.css')}}" rel="stylesheet">
+
     <!--[if lte IE 8]>
     <script>window.location.href = 'https://h.ele.me/activities/landing';</script>
     <![endif]-->
@@ -33,6 +35,8 @@
     <script src="{{asset('wf/home/js/perf.js')}}" type="text/javascript"></script>
     <script src="{{asset('/wf/home/js/vendor.6b3834.js')}}" type="text/javascript"></script>
     <script src="{{asset('/wf/home/js/222.js')}}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{asset('wf/admin/style/js/jquery.js')}}"></script>
+    <script src="{{asset('/layer/layer.js')}}"></script>
     <!--<base href="/">s-->
     <base href=".">
     <meta name="mobile-agent" content="format=html5;url=https://h5.ele.me/shop/#id=1195106">
@@ -321,9 +325,22 @@
                         <div class="shopmenu-food ng-isolate-scope" ng-class="{noimg: !food.image_path}" id="667240426" ng-repeat="food in category.foods" shop-menu-item="" food="food" shop="shopCache">
                             <!-- ngIf: food.image_path -->
                             <span class="col-1 ng-scope" ng-if="food.image_path">
-                    <a href="javascript:" ng-click="showInfo(food)">
+                    <a href="javascript:" onclick="info({{$v}})" ng-click="showInfo(food)">
                       <img ng-src="//fuss10.elemecdn.com/e/e8/cc3d941aa785d2f0c603fb08a0bfcjpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85" alt="碳烧鸡饭的图片" src="{{asset('/wf/home/elm/cc3d941aa785d2f0c603fb08a0bfcjpeg.jpeg')}}">
                     </a>
+                    <script>
+                        function info(food){
+                            layer.open({
+                                type: 1,
+                                title: false,
+                                area: ['700px', '360px'],
+                                shadeClose: true, //点击遮罩关闭
+                                content: '<div style="padding:20px;position:relative"><div style="float:left"><img style="width:300px;height:300px" src="{{asset('/wf/home/elm/cc3d941aa785d2f0c603fb08a0bfcjpeg.jpeg')}}"></div><div style="float:left"><h5>ewrewrw</h5></div></div>'
+                            })
+                        }
+
+                    </script>
+
                   </span>
                             <!-- end ngIf: food.image_path -->
                             <div class="col-2 shopmenu-food-main">
@@ -593,8 +610,6 @@
     </div>
 </footer>
 <script src="{{asset('/wf/home/elm/home')}}"></script>
-<script src="{{asset('/wf/home/js/textStatic.js')}}"></script>
-<script src="{{asset('/wf/home/js/textStatic.js')}}"></script>
 <script src="{{asset('/wf/home/js/textStatic.js')}}"></script>
 </body>
 

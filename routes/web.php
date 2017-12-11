@@ -5,6 +5,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 // 登录系统后台
 Route::get('admin/xtAdmin/login','Admin\xtAdmin\LoginController@login');
 //验证码
@@ -77,9 +78,9 @@ Route::get('errors/auth',function(){
 // CChome前台
 Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 //    进入前台首页
-    Route::get('index','IndexController@index');
+Route::get('index','IndexController@index');
 //    进入商家店铺
-    Route::get('shop/{id}','IndexController@shop');
+Route::get('shop/{id}','IndexController@shop');
 
 
 
