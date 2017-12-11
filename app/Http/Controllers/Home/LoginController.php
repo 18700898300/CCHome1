@@ -120,13 +120,13 @@ class LoginController extends Controller
         Session::put('user',$user);
         return redirect('home/index');
     }
-//public function crypt()
-//{-
-//
-//    $str = 123456;
-//    $name = Crypt::encrypt($str);
-//    dd($name);
-//}
+public function crypt()
+{
+
+    $str = 666666;
+    $name = Crypt::encrypt($str);
+    dd($name);
+}
 ////手机验证码
 //    public function telyzm()
 //    {

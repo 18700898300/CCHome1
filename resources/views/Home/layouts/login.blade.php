@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html data-dpr="1" style="font-size: 136.6px;" lang="zh-cmn-Hans">
 <head>
+    @yield('title')
     <meta charset="UTF-8" />
     <link rel="manifest" href="https://h5.ele.me/manifest.json" />
     <meta name="format-detection" content="telephone=no, email=no" />
@@ -21,6 +22,7 @@
     <link rel="preconnect" href="https://crayfish.elemecdn.com/" />
     <link rel="preload" href="https://crayfish.elemecdn.com/ubt.js@json/config" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3&ak=pPGRydBmCrtAwDteGOey3EgsZFGKXqBj"></script>
     <title>登录</title>
     <style>
         /* Code tidied up by ScrapBook */

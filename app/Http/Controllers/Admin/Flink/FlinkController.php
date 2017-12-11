@@ -27,13 +27,14 @@ class FlinkController extends Controller
     public  function upload(Request $request)
 {
 
-
+//    return 1111;
 //    $file = $request->file('fpic');
 //    dd($file);
         // 多文件上传????????????
         $file = $request->file('fpic');
-        //dd($file);
-//        $file =$file[0];
+//        return 111;
+//        return $file;
+        $file =$file[0];
 //        return $file[2];
 //        return $request;
 //        $arr=[];

@@ -108,8 +108,12 @@ Route::get('/index',function(){
     return view('index');
 });
 
-//商户注册
-Route::get('/admin/meregister','Admin\MerregController@meregister');
+
+
+
+//商户注册未写
+Route::get('/admin/meregistere','Admin\MerregController@meregistere');
+Route::get('/admin/meregisterm','Admin\MerregController@meregisterm');
 
 
 //商户登录
@@ -145,9 +149,12 @@ Route::group(['middleware'=>'islogin','prefix'=>'admin','namespace'=>'Admin'],fu
 
 });
 
-//用户评论
-Route::get('home/comment/index','home/CommentController@index');
-Route::post('comment/add','CommentController@add');
+
+
+//前台中间件
+// 登录后,前台用户评论  未写
+Route::get('home/comment/comment','Home\Comment\CommentController@index');
+Route::post('/comment/add','Home\Comment\CommentController@addComment');
 
 
 
@@ -166,10 +173,29 @@ Route::get('/code/captcha/{tmp}', 'Home\LoginController@captcha');
 Route::post('home/dologin','Home\LoginController@dologin');
 
 
+
+
+
+
 //商户的入驻申请
 Route::get('home/reg','Home\RegController@reg');
+Route::post('/home/reg/upload','Home\RegController@upload');
 
 Route::post('home/doreg','Home\RegController@doreg');
+Route::get('home/status','Home\RegController@status');
+//入驻申请状态查询
+Route::get('home/qstatus','home\RegController@qstatus');
+Route::post('home/doqstatus','home\RegController@doqstatus');
+
+
+//前台搜索查询店铺
+Route::get('home/home','Home\Home\HomeController@index');
+
+
+
+
+
+
 
 //前台的个人资料
 Route::get('home/person',function(){
@@ -183,7 +209,7 @@ Route::get('home/avatar',function(){
     return view('Home.avatar');
 });
 
-Route::post('home/avatar/upload','Home/PersonController@upload');
+Route::post('home/avatar/upload','Home\PersonController@upload');
 
 //设置密码
 Route::get('home/setpwd','Home\PersonController@setpwd');

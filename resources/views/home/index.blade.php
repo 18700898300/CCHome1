@@ -139,6 +139,7 @@
 <div class="container ng-scope" ng-show="!recentBoughtOnly">
     <div class="excavator container">
         <div class="excavator-filter ng-scope">
+
             <span>商家分类:</span>
             <a class="excavator-filter-item ng-binding ng-scope active" href="javascript:">全部商家</a>
             <a class="excavator-filter-item ng-binding ng-scope" href="javascript:">美食</a>
@@ -273,6 +274,10 @@
             </div>
         </footer>
         <script src="{{asset('/wf/home/js/6936dbf3e7d94cffa954bcbcf2b79f38.js')}}"></script>
+        <script>
+            $('#info').fadeOut(2000);
+
+        </script>
 </body>
 
 </html>

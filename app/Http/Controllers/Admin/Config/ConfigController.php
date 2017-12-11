@@ -48,9 +48,11 @@ class ConfigController extends Controller
 //        根据conf_id[]数组获取要修改的网站记录,然后从conf_content的同下标中取出次网站配置需要修改成的值
 //        dd($input);
 //        dd($input['conf_id']);
+//        dd($input['conf_content']);
             foreach($input['conf_id'] as $k=>$v){
 //                找到一条需要修改的网站配置记录
                 $conf = Config::find($v);
+//                return $input['conf_content'][$k];
                 $conf->update(['conf_content'=>$input['conf_content'][$k]]);
             }
                 $this::PutRedis();
