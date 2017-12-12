@@ -57,6 +57,12 @@
 
 				</ul>
 			</li>
+			<li>
+				<h3><i class="fa fa-fw fa-clipboard"></i>商户入驻审核模块</h3>
+				<ul class="sub_menu">
+					<li><a href="{{url('admin/xtAdmin/verify')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>审核</a></li>
+				</ul>
+			</li>
             <li>
             	<h3><i class="fa fa-fw fa-cog"></i>系统设置</h3>
                 <ul class="sub_menu">

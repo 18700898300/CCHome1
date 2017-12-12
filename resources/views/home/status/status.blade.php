@@ -87,7 +87,7 @@
     <div class="alert alert-danger" style="margin:0 auto;">
         <ul>
             @if(session('msg'))
-                <li style="color:black;font-size: 30px;" id = "info">申请已经提交成功,请牢记并根据唯一的申请件编号<span style="color:red;">{{session('msg')}}</span>查询审核状态.</li>
+                <li style="color:black;font-size: 30px;" id = "info">申请已经提交成功,请牢记并根据唯一的申请件编号<span style="color:red;">{{session('msg')}}</span>查询审核状态,同时请保持联系电话畅通,我处会在5个工作日左右致电核实,谢谢配合!!</li>
             @endif
         </ul>
     </div>

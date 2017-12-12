@@ -16,4 +16,7 @@ class Shop extends Model
     {
         return $this->hasMany('App\Models\Home\Food','did','sid');
     }
+    public function cate(){
+        return $this->belongsTo('App\Models\Admin\Shop_type','tid','tid');
+    }
 }

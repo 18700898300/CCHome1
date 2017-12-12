@@ -93,6 +93,9 @@
         <th class="tc">法人身份证号</th>
         <th class="tc">公司名称</th>
         <th class="tc">审核状态</th>
+        @if($shop->status==3)
+        <th class="tc">原因</th>
+            @endif
     </tr>
         <tr>
             <td class="tc">{{$shop->number}}</td>
@@ -106,7 +109,10 @@
                 <td class="tc">审核通过</td>
             @elseif($shop->status==3)
                 <td class="tc">审核不通过</td>
+                <td class="tc"  id="rea">{{$shop->reason}}</td>
             @endif
+
+
         </tr>
   </table>
 </body>

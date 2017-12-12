@@ -34,7 +34,7 @@ class FlinkController extends Controller
         $file = $request->file('fpic');
 //        return 111;
 //        return $file;
-        $file =$file[0];
+//        $file =$file[0];
 //        return $file[2];
 //        return $request;
 //        $arr=[];

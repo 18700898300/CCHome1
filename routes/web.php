@@ -11,11 +11,19 @@ Route::get('admin/xtAdmin/login','Admin\xtAdmin\LoginController@login');
 Route::post('admin/xtAdmin/dologin','Admin\xtAdmin\LoginController@doLogin');
 
 // 系统后台
-Route::group(['middleware'=>['adminIslogin','HasRole'],'prefix'=>'admin/xtAdmin','namespace'=>'Admin\xtAdmin'],function(){
+Route::group(['middleware'=>['adminIslogin'],'prefix'=>'admin/xtAdmin','namespace'=>'Admin\xtAdmin'],function(){
     //进入系统后台首页
     Route::get('index','IndexController@index');
     Route::get('info','IndexController@info');
     Route::get('logout','IndexController@logout');
+
+    //商户入驻申请审核
+    Route::get('verify','VerifyController@index');
+    Route::get('verify/result/{sid}','VerifyController@result');
+    Route::post('verify/update/{sid}','VerifyController@update');
+
+
+
 
 //    管理员模块
     Route::resource('adminUser','Admin_userController');
@@ -190,6 +198,7 @@ Route::post('home/doqstatus','home\RegController@doqstatus');
 
 //前台搜索查询店铺
 Route::get('home/home','Home\Home\HomeController@index');
+Route::post('/home/query','Home\Home\HomeController@query');
 
 
 

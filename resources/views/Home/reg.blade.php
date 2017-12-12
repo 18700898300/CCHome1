@@ -175,7 +175,7 @@
             <div class="control-group" >
                 <label class="control-label" for="inputPassword">公司地址</label>
                 <div class="controls" >
-                    <input id="text_" type="text" placeholder="请输入详细公司地址" style="width:850px;height:50px;" onchange="searchByStationName()"/>
+                    <input id="text_" type="text" name="address" placeholder="请输入详细公司地址" style="width:850px;height:50px;" onchange="searchByStationName()"/>
                     <input id="result_"  name="position" type="hidden" /><br>
                     <div id="container"
                          style="position: absolute;
