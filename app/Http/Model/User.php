@@ -10,4 +10,9 @@ class User extends Model
    public $primaryKey = 'uid';
    public $guarded = [];
    public $timestamps = false;
+
+    public function users_addr()
+    {
+        return $this->hasMany('App\Http\Model\users_addr','uid','uid');
+    }
 }

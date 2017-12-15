@@ -10,4 +10,10 @@ class MerUser extends Model
     public $primaryKey = 'bid';
     public $guarded = [];
     public $timestamps = false;
+
+//    查询shop模型
+    public function shop()
+    {
+        return $this->hasOne('App\Models\Home\Shop','bid','bid');
+    }
 }

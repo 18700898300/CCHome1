@@ -38,13 +38,26 @@
     <!--结果集标题与导航组件 结束-->
 
     <div class="result_wrap">
-        <form id="food" action="{{url('/admin/food')}}" method="post">
+        <form id="food" action="{{url('/admin/food')}}" method="post" enctype="multipart/form-data">
             <table class="add_tab">
                 {{csrf_field()}}
                 <tbody>
                 <tr>
+                    <th width="120"><i class="require">*</i>菜品分类：</th>
+                    <td>
+
+                        <select name="lid">
+
+                            @foreach($labels as $k=>$v)
+                                <option value="{{$v->lid}}">{{$v->name}}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <th width="120"><i class="require">*</i>菜品名称：</th>
                     <td>
+                        <input type="hidden" name="sid" value="{{$sid}}">
                         <input type="text" name="fname">
                         <span><i class="fa fa-exclamation-circle yellow"></i>菜品名称必须填写</span>
                     </td>
@@ -60,8 +73,9 @@
                 <tr>
                     <th><i class="require">*</i>菜品图片：</th>
                     <td>
-                        <input id="file_upload" type="file" name="fpic" multiple><br>
-                        <img src="" id="img1" alt="" style="width:80px;height:80px">
+                        <input id="file_upload" type="file" name="pic" multiple><br>
+                        <img src="" id="img1" alt="" style="width:80px;height:80px"><br>
+                        <input type="hidden" name="fpic" id="art_thumb" >
 
                         <script type="text/javascript">
                             $(function () {
@@ -99,6 +113,7 @@
                                     contentType: false,
                                     processData: false,
                                     success: function(data) {
+                                        console.log(data);
                                         $('#img1').attr('src','/uploads/'+data);
 //                                            $('#img1').attr('src','http://p09v2gc7p.bkt.clouddn.com/uploads/'+data);
 //                                            $('#img1').attr('src','http://project193.oss-cn-beijing.aliyuncs.com/'+data);

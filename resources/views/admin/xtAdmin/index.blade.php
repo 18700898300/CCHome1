@@ -15,7 +15,7 @@
 		<div class="top_right">
 			<ul>
 				<li>管理员：{{session('user')->aname}}</li>
-				<li><a href="{{url('admin/xtAdmin/password/edit/')}}/{{session('user')->id}}" target="main">修改密码</a></li>
+				<li><a href="{{url('admin/xtAdmin/password/edit/')}}/{{session('user')['id']}}" target="main">修改密码</a></li>
 				<li><a href="{{url('admin/xtAdmin/logout')}}">退出</a></li>
 			</ul>
 		</div>
@@ -70,7 +70,7 @@
                     <li><a href="http://www.yeahzan.com/fa/facss.html" target="main"><i class="fa fa-fw fa-font"></i>图标调用</a></li>
                     <li><a href="http://hemin.cn/jq/cheatsheet.html" target="main"><i class="fa fa-fw fa-chain"></i>Jquery手册</a></li>
                     <li><a href="http://tool.c7sky.com/webcolor/" target="main"><i class="fa fa-fw fa-tachometer"></i>配色板</a></li>
-                    <li><a href="element.html" target="main"><i class="fa fa-fw fa-tags"></i>其他组件</a></li>
+                    <li><a href="#" target="main"><i class="fa fa-fw fa-tags"></i>其他组件</a></li>
                 </ul>
             </li>
         </ul>

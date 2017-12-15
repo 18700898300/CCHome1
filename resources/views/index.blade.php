@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+y<!DOCTYPE html>
 <html perf-error="desktop/home/" ng-app="eleme" class="ng-scope">
 <head>
     <style type="text/css">
@@ -32,14 +32,14 @@
 
     <link rel="apple-touch-icon-precomposed" href="https://static2.ele.me/apple-touch-icon.png?v=2">
 
-    <link rel="shortcut icon" href="{{asset('images/')}}favicon-16x16.png" type="image/png">
-    <link rel="icon" href="{{'/images/'}}favicon-16x16.png" type="image/png" sizes="16x16">
-    <link rel="icon" href="{{'/images/'}}favicon-32x32.png" type="image/png" sizes="32x32">
-    <link rel="icon" href="{{'/images/'}}favicon.png" type="image/png" sizes="96x96">
+    <link rel="shortcut icon" href="{{asset('a/images/')}}favicon-16x16.png" type="image/png">
+    <link rel="icon" href="{{asset('a/images/favicon-16x16.png')}}" type="image/png" sizes="16x16">
+    <link rel="icon" href="{{asset('a/images/favicon-32x32.png')}}" type="image/png" sizes="32x32">
+    <link rel="icon" href="{{asset('a/images/favicon.png')}}" type="image/png" sizes="96x96">
 
-    <link href="{{asset('css/')}}/vendor.162d72.css" rel="stylesheet">
+    <link href="{{asset('a/css/vendor.162d72.css')}}" rel="stylesheet">
 
-    <link href="{{asset('css/')}}/home.be652d.css" rel="stylesheet">
+    <link href="{{asset('a/css/home.be652d.css')}}" rel="stylesheet">
 
 
     <!--[if lte IE 8]>
@@ -97,7 +97,7 @@
             </div>
             <div map-footer="" class="mapfooter">
                 <div class="mapfooter-app">
-                    <div class="mapfooter-app-image"><img src="{{asset('images')}}/appqc.95e532.png" alt="扫码下载 APP"> <span>扫码下载 APP</span>
+                    <div class="mapfooter-app-image"><img src="{{asset('a/images/appqc.95e532.png')}}" alt="扫码下载 APP"> <span>扫码下载 APP</span>
                     </div>
                     <div class="mapfooter-app-text"><p>新用户首次下单</p><strong class="color-stress">最高立减30元</strong>
                         <p>立即下载APP，享更多优惠吧！</p></div>
@@ -116,7 +116,7 @@
                 </div>
                 <div class="footer-police container"><a href="http://www.zx110.org/picp/?sn=310100103568" rel="nofollow"
                                                         target="_blank"><img alt="已通过沪公网备案，备案号 310100103568"
-                                                                             src="{{asset('images')}}/picp_bg.e373b3.jpg" height="30"></a>
+                                                                             src="{{asset('a/images/picp_bg.e373b3.jpg')}}" height="30"></a>
                 </div>
             </div>
         </div>

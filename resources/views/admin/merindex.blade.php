@@ -25,29 +25,51 @@
 <!--左侧导航 开始-->
 <div class="menu_box">
     <ul>
-            <li>
-                    <h3><i class="fa fa-fw fa-clipboard"></i>常用操作</h3>
-                    <h3><i class="fa fa-fw fa-clipboard"></i>友情链接管理</h3>
+        <li>
+                <h3><i class="fa fa-fw fa-clipboard"></i>常用操作</h3>
+                <h3><i class="fa fa-fw fa-clipboard"></i>友情链接管理</h3>
 
-                    <ul class="sub_menu">
-                        <li><a href="{{url('admin/flink/create')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>添加友情链接</a></li>
-                        <li><a href="{{url('admin/flink')}}" target="main"><i class="fa fa-fw fa-list-alt"></i>友情链接列表</a></li>
-                    </ul>
-                    <ul class="sub_menu">
+                <ul class="sub_menu">
+                    <li><a href="{{url('admin/flink/create')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>添加友情链接</a></li>
+                    <li><a href="{{url('admin/flink')}}" target="main"><i class="fa fa-fw fa-list-alt"></i>友情链接列表</a></li>
+                </ul>
+                <ul class="sub_menu">
                     <li><a href="{{url('admin/flinkt/create')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>添加类别</a></li>
                     <li><a href="{{url('admin/flinkt')}}" target="main"><i class="fa fa-fw fa-list-alt"></i>类别列表</a></li>
+                </ul>
+        </li>
+        <li>
+                <h3><i class="fa fa-fw fa-clipboard"></i>评论管理</h3>
+
+                <ul class="sub_menu">
+                <li><a href="{{url('admin/comment')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>浏览评论列表</a></li>
+                </ul>
+        </li>
 
 
 
-                 </ul>
-            </li>
-                <li>
-                        <h3><i class="fa fa-fw fa-clipboard"></i>评论管理</h3>
 
-                        <ul class="sub_menu">
-                        <li><a href="{{url('admin/comment')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>浏览评论列表</a></li>
-                        </ul>
-                </li>
+        <li>
+            <h3><i class="fa fa-fw fa-clipboard"></i>分类管理</h3>
+            <ul class="sub_menu">
+                <li><a href="{{url('admin/foodlabel/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加分类</a></li>
+                <li><a href="{{url('admin/foodlabel')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>分类列表</a></li>
+
+            </ul>
+        </li>
+        <li>
+            <h3><i class="fa fa-fw fa-clipboard"></i>菜品管理</h3>
+            <ul class="sub_menu">
+                <li><a href="{{url('admin/food/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加菜品</a></li>
+                <li><a href="{{url('admin/food')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>菜品列表</a></li>
+
+            </ul>
+        </li>
+
+
+
+
+
         <li>
             <h3><i class="fa fa-fw fa-cog"></i>系统设置</h3>
             <ul class="sub_menu">

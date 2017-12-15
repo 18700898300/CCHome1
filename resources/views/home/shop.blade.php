@@ -4,7 +4,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
+    <style type="text/css"></style>
     <meta name="renderer" content="webkit">
     <title ng-bind="SEO.title" class="ng-binding">记得回来点单哦！ - 饿了么</title>
     <meta name="format-detection" content="telephone=no, email=no">
@@ -26,7 +26,6 @@
     <link rel="icon" href="https://static2.ele.me/eleme/desktop/media/img/favicon.png" type="image/png" sizes="96x96">
     <link href="{{asset('/wf/home/css/vendor.eb86f5.css')}}" rel="stylesheet">
     <link href="{{asset('/wf/home/css/main.301d40.css')}}" rel="stylesheet">
-    <link href="{{asset('/wf/home/tankuang.css')}}" rel="stylesheet">
 
     <!--[if lte IE 8]>
     <script>window.location.href = 'https://h.ele.me/activities/landing';</script>
@@ -44,7 +43,7 @@
     <meta name="keywords" content="田老师红烧肉（怀柔青春路店）外卖，田老师红烧肉（怀柔青春路店）菜单，田老师红烧肉（怀柔青春路店）电话">
 </head>
 
-<body cute-title="" ng-class="{hidesidebar: layoutState &amp;&amp; layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}" class="hidesidebar" lim:visitorcapacity="1" style="position: relative;">
+<body cute-title="" ng-class="{hidesidebar: layoutState &amp;&amp; layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}" class="hidesidebar"  style="position: relative;">
 
 <div ng-switch="state.type" state="layoutState" class="ng-isolate-scope">
     <!-- ngSwitchWhen: checkout -->
@@ -57,8 +56,8 @@
                         <span>饿了么</span></a>
                 </h1>
                 <a name="top"></a>
-                <a href="https://www.ele.me/" hardjump="" class="topbar-item topbar-homepage" ng-class="{&#39;focus&#39;: $root.locationpath[0] === &#39;place&#39;}">首页</a>
-                <a href="https://www.ele.me/profile/order" hardjump="" class="topbar-item" ng-class="{&#39;focus&#39;: $root.locationpath[1] === &#39;order&#39;}">我的订单</a>
+                <a href="{{url('home/index')}}" hardjump="" class="topbar-item topbar-homepage" ng-class="{&#39;focus&#39;: $root.locationpath[0] === &#39;place&#39;}">首页</a>
+                <a href="{{url('')}}" hardjump="" class="topbar-item" ng-class="{&#39;focus&#39;: $root.locationpath[1] === &#39;order&#39;}">我的订单</a>
                 <a href="{{url('home/reg')}}" target="_blank" class="topbar-item cooperation">加盟合作</a>
                 <nav class="topbar-nav">
                     <a href="https://www.ele.me/support/center" hardjump="" class="topbar-nav-link" target="_blank">
@@ -68,24 +67,26 @@
                         <i class="topbar-nav-icon icon-mobile"></i>手机应用
                         <div class="dropbox topbar-mobile-dropbox">
                             <span>扫一扫, 手机订餐更方便</span>
-                            {{--<img src="{{asset('/wf/home/elm/appqc.95e532.png')}}" class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div>--}}
+                            <img class="topbar-nav-qrcode" src="{{asset('a/image/appqc.95e532.png')}}" alt="扫一扫下载饿了么手机 App">
+                        </div>
                     </div>
-                    </div>
-                    <div topbar-profilebox="">
-                        <div class="topbar-profilebox">
+
+                        <div topbar-profilebox="">
+                            <div class="topbar-profilebox">
                             @if(!0)
-                            <!-- ngIf: $root.user.avatar && $root.topbarType !==' checkout' -->
-                            <span class="topbar-profilebox-avatar icon-profile" ng-show="!$root.user.username"></span>
-                            <span ng-show="!$root.user.username" class="">
-                    <a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fshop%2F1195106" target="_blank" href="{{url('home/login2')}}">登录/注册</a></span>
-                            @else
-                            <span class="topbar-profilebox-wrapper" ng-show="$root.user.username">
+                                <!-- ngIf: $root.user.avatar && $root.topbarType !==' checkout' -->
+                                    <span class="topbar-profilebox-avatar icon-profile" ng-show="!$root.user.username"></span>
+                                    <span ng-show="!$root.user.username" class="">
+                    <a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fshop%2F1195106" target="_blank" href="{{url('home/login')}}">登录/注册</a></span>
+                                @else
+                                    <span class="topbar-profilebox-wrapper" ng-show="$root.user.username">
+
                     <!-- ngIf: $root.topbarType===' checkout' -->
                     <span class="">wwwwwww</span>
-                                <!-- ngIf: $root.topbarType===' checkout' -->
-                                <!-- ngIf: $root.topbarType !==' checkout' -->
+                                        <!-- ngIf: $root.topbarType===' checkout' -->
+                                        <!-- ngIf: $root.topbarType !==' checkout' -->
                     <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== &#39;checkout&#39;"></span>
-                                <!-- end ngIf: $root.topbarType !==' checkout' -->
+                                        <!-- end ngIf: $root.topbarType !==' checkout' -->
                     <div class="dropbox topbar-profilebox-dropbox">
                       <a class="icon-profile" href="{{url('home/person')}}" hardjump="">个人中心</a>
                       <a class="icon-star" href="https://www.ele.me/profile/favor" hardjump="">我的收藏</a>
@@ -93,10 +94,11 @@
                       <a class="icon-setting" href="https://www.ele.me/profile/security" hardjump="">安全设置</a>
                       <a class="icon-logout" href="{{url('')}}" ng-click="logout()">退出登录</a></div>
                   </span>
-                         @endif
+                                @endif
+                            </div>
                         </div>
-                    </div>
                 </nav>
+
             </div>
 
         </header>
@@ -260,16 +262,20 @@
         <!-- ngIf: shopAction===' menu' -->
 
         <div ng-if="shopAction === &#39;menu&#39;" shop-menu="" shop-cache="shopCache" filter-data="shop.filter" display-type="shop.displayType" class="shopmenu ng-isolate-scope" perf-click="desktop/201">
-            <div class="loading ng-binding ng-isolate-scope ng-hide" loading="" ng-show="loading">
-                <!-- ngIf: type==='profile' -->
-                <img ng-if="type===&#39;profile&#39;" src="{{asset('/wf/home/elm/profile-loading.4984fa.gif')}}" alt="正在加载" class="ng-scope">
+
                 <!-- end ngIf: type==='profile' -->
-                <!-- ngIf: type==='normal' -->正在载入数据...</div>
+                <!-- ngIf: type==='normal' --></div>
             <div ng-show="!loading &amp;&amp; !searchEnv" class="shopmenu-nav ng-isolate-scope" sticky="" sticky-class="sticky" sticky-body-class="shopmenu-nav-sticky" sticky-fn="shopNavSticky">
                 <!-- ngRepeat: category in categorys -->
                 <a href="javascript:" ng-repeat="category in categorys" ng-click="scrollToCategory(category)" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope">热销榜</a>
                 <!-- end ngRepeat: category in categorys -->
-                <a href="javascript:" ng-repeat="category in categorys" ng-click="scrollToCategory(category)" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope">盖饭</a>
+
+
+                @foreach($labels as $kk=>$vv)
+                <a href="#{{$vv->name}}" ng-repeat="category in categorys" ng-onclick="scrollTo()" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope">{{$vv->name}}</a>
+                @endforeach
+
+
                 <!-- end ngRepeat: category in categorys --></div>
             <div ng-show="!loading" class="shopmenu-main grid" ng-class="{grid: displayType === &#39;grid&#39;, list: displayType === &#39;list&#39;}">
                 <!-- ngIf: filterData===' default' && !searchEnv -->
@@ -303,7 +309,7 @@
                       <!-- ngIf: !menuFood.hasSpec -->
                       <div ng-if="!menuFood.hasSpec" class="ng-scope">
                         <!-- ngIf: !cartItem.quantity && menuFood.stock -->
-                        <button class="shop-cartbutton ng-binding ng-scope" ng-if="!cartItem.quantity &amp;&amp; menuFood.stock" ng-click="cartItem.add($event)">加入购物车</button>
+                       <a href="{{url('/home/addcart/')}}"> <button class="shop-cartbutton ng-binding ng-scope" ng-if="!cartItem.quantity &amp;&amp; menuFood.stock" ng-click="cartItem.add($event)">加入购物车 </button></a>
                           <!-- end ngIf: !cartItem.quantity && menuFood.stock -->
                           <!-- ngIf: !menuFood.stock -->
                           <!-- ngIf: cartItem.quantity> 0 || cartItem.quantity === '' --></div>
@@ -313,29 +319,41 @@
                         </div>
                         <!-- end ngRepeat: food in category.foods --></div>
                     <!-- end ngRepeat: category in categorys -->
-                    <div class="shopmenu-list clearfix ng-scope" ng-repeat="category in categorys">
-                        <h3 class="shopmenu-title ng-binding">盖饭 66
+
+
+                    @foreach($labels as $ll=>$mm)
+                        <a name="{{$mm->name}}"></a>
+                    <div  class="shopmenu-list clearfix ng-scope" ng-repeat="category in categorys">
+                        <h3 class="shopmenu-title ng-binding">{{$mm->name}}
                             <span class="shopmenu-des ng-binding"></span></h3>
                         <!-- ngRepeat: food in category.foods -->
 
+                        @foreach($foods as $k=>$v)
+                            @if($v->lid == $mm['lid'])
 
 
-                    @foreach($foods as $k=>$v)
+
+                            <form action="{{url('/home/addcart')}}" method="post">
+                        {{csrf_field()}}
+                            <input type="hidden" name = 'fid' value="{{$v->fid}}">
+                            <input type="hidden" name = 'did' value="{{$v->did}}">
+                            <input type="hidden" name ='sprice' value ="{{$shop->sprice}}">
                         <!-- end ngRepeat: food in category.foods -->
                         <div class="shopmenu-food ng-isolate-scope" ng-class="{noimg: !food.image_path}" id="667240426" ng-repeat="food in category.foods" shop-menu-item="" food="food" shop="shopCache">
                             <!-- ngIf: food.image_path -->
                             <span class="col-1 ng-scope" ng-if="food.image_path">
                     <a href="javascript:" onclick="info({{$v}})" ng-click="showInfo(food)">
-                      <img ng-src="//fuss10.elemecdn.com/e/e8/cc3d941aa785d2f0c603fb08a0bfcjpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85" alt="碳烧鸡饭的图片" src="{{asset('/wf/home/elm/cc3d941aa785d2f0c603fb08a0bfcjpeg.jpeg')}}">
+                      <img ng-src="//fuss10.elemecdn.com/e/e8/cc3d941aa785d2f0c603fb08a0bfcjpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85" alt="碳烧鸡饭的图片" src="{{asset($v->fpic)}}">
                     </a>
                     <script>
+
                         function info(food){
                             layer.open({
                                 type: 1,
                                 title: false,
                                 area: ['700px', '360px'],
                                 shadeClose: true, //点击遮罩关闭
-                                content: '<div style="padding:20px;position:relative"><div style="float:left"><img style="width:300px;height:300px" src="{{asset('/wf/home/elm/cc3d941aa785d2f0c603fb08a0bfcjpeg.jpeg')}}"></div><div style="float:left"><h5>ewrewrw</h5></div></div>'
+                                content: '<div style="padding:20px;position:relative"><div style="float:left"><img style="width:300px;height:300px" src="{{asset($v->fpic)}}"></div><div style="float:left"><h5>ewrewrw</h5></div></div>'
                             })
                         }
 
@@ -353,6 +371,7 @@
                                 <span class="color-mute ng-binding">(6)商品评价</span>
                                 <span class="color-mute ng-binding">月售{{$v->sum}}份</span></p>
                             </div>
+
                             <span class="col-3 shopmenu-food-price color-stress ng-binding">{{$v->price}}
                     <small class="ng-binding"></small></span>
                             <span class="col-4">
@@ -366,58 +385,25 @@
                           <!-- ngIf: cartItem.quantity> 0 || cartItem.quantity === '' --></div>
                         <!-- end ngIf: !menuFood.hasSpec -->
                         <!-- ngIf: menuFood.hasSpec --></div>
+
                   </span>
                         </div>
+                            </form>
+
+
+
+
+
+
+                  @endif
                 @endforeach
-
-
-
-                        <!-- end ngRepeat: food in category.foods --></div>
+                    </div>
+            @endforeach
                     <!-- end ngRepeat: category in categorys --></div>
+
                 <!-- end ngIf: filterData===' default' && !searchEnv -->
                 <!-- ngIf: filterData !==' default' || searchEnv -->
-                <div shop-cart="" cart-link="cartLink" ng-hide="shopCache.id == 656683" class="ng-isolate-scope">
-                    <div class="shop-cart">
-                        <div class="shop-cartbasket" id="shopbasket" style="top: -44px; height: auto;">
-                            <div shop-groupswitcher="" cart="shopCart" class="ng-isolate-scope">
-                                <!-- ngIf: shopCart.vm.groups.length> 1 -->
-                                <div class="shop-grouphead single" ng-class="{ single: shopCart.vm.groups.length === 1 }">
-                                    <!-- ngIf: shopCart.vm.groups.length===1 -->
-                                    <a href="javascript:" class="icon-cart-add ng-scope" ng-if="shopCart.vm.groups.length === 1" ng-click="addGroup()" tooltip="添加购物车"></a>
-                                    <!-- end ngIf: shopCart.vm.groups.length===1 -->
-                                    <!-- ngIf: showGuide && shopCart.vm.groups.length===1 -->
-                                    <div class="shop-grouphead-row">
-                                        <!-- ngIf: shopCart.vm.groups.length> 1 -->购物车
-                                        <a href="javascript:" ng-click="shopCart.clearGroup(shopCart.currentGroupIndex)">[清空]</a></div>
-                                </div>
-                            </div>
-                            <!-- ngIf: !shopCart.vm.groups[shopCart.currentGroupIndex].length -->
-                            <div class="shop-cartbasket-empty ng-scope" ng-if="!shopCart.vm.groups[shopCart.currentGroupIndex].length">
-                                <div class="icon-cart"></div>
-                                <p>购物车是空的，赶紧选购吧</p>
-                            </div>
-                            <!-- end ngIf: !shopCart.vm.groups[shopCart.currentGroupIndex].length -->
-                            <!-- ngRepeat: item in shopCart.vm.groups[shopCart.currentGroupIndex] -->
-                            <!-- ngIf: shopCart.packingFee --></div>
-                        <div class="shop-cartfooter" ng-click="shopCart.toggleCart()">
-                  <span class="icon-cart shop-carticon">
-                    <!-- ngIf: shopCart.vm.quantity> 0 --></span>
-                            <!-- ngIf: shopCart.vm.quantity> 0 -->
-                            <!-- ngIf: shopCart.vm.extras.length && !shopCart.vm.button.disabled -->
-                            <div class="shop-cartfooter-text extras ng-binding" ng-bind-html="shopCart.vm.picewiseText">配送费¥5</div>
-                            <button class="shop-cartfooter-checkout ng-binding disabled" ng-class="{disabled: shopCart.vm.button.name !== &#39;CAN_ORDER&#39;}" ng-disabled="shopCart.vm.button.disabled" ng-bind="shopCart.vm.button.text" ng-click="checkout($event)" disabled="disabled">购物车是空的</button></div>
-                        <div class="shop-carthelper-opener" ng-class="{show: shopCart.cartHelper.show}" ng-click="showCartHelper()"></div>
-                        <div class="shop-carthelper ng-isolate-scope" id="shophelper" shop-cart-helper="" group="shopCart.cartHelper.group" cart="shopCart">
-                            <div class="shopcarhelper-title clearfix">
-                                <span>凑一凑</span>
-                                <em>轻松凑满起送价</em>
-                                <a href="javascript:" ng-click="closeCartHelper()">[ 关闭 ]</a></div>
-                            <div class="shopcarthelper-container ui-scrollbar-light">
-                                <!-- ngRepeat: item in group track by $index --></div>
-                        </div>
-                        <div class="shop-flyitem"></div>
-                    </div>
-                </div>
+
                 <div class="dialog" role="dialog" dialog="ITEMINFO" style="display: none;">
                     <div class="dialog-close icon-close"></div>
                     <div class="dialog-content" ng-transclude="">
@@ -499,6 +485,8 @@
         <a href="{{$shop->sid}}#top" class="sidetools-item icon-arrow-up" title="回到顶部" tooltip="回到顶部" tooltip-placement="left" ng-click="backToTop()"></a>
     </div>
 </div>
+</div>
+
 <footer class="footer" role="contentinfo">
     <div class="container clearfix">
         <div class="footer-link">
@@ -536,62 +524,8 @@
         </div>
         <div class="footer-mobile">
             <a href="https://h.ele.me/landing" target="_blank">
-                {{--<img src="{{asset('/wf/home/elm/appqc.95e532.png')}}" class="footer-mobile-icon" alt="扫一扫下载饿了么手机 App"></a>--}}
-            <div class="footer-mobile-content">
-                <h3>下载手机版</h3>
-                <p>扫一扫,手机订餐方便</p>
-            </div>
-        </div>
-        <div class="footer-copyright serif">
-            <h5 class="owner">所有方：上海拉扎斯信息科技有限公司</h5>
-            <p>增值电信业务许可证 :
-                <a href="http://www.shca.gov.cn/" target="_blank">沪B2-20150033</a>|
-                <a href="http://www.miibeian.gov.cn/" target="_blank">沪ICP备 09007032</a>|
-                <a href="http://www.sgs.gov.cn/lz/licenseLink.do?method=licenceView&amp;entyId=20120305173227823" target="_blank">上海工商行政管理</a>Copyright ©2008-2017 ele.me, All Rights Reserved.</p></div>
-        <div class="footer-police container">
-            <a href="http://www.zx110.org/picp/?sn=310100103568" rel="nofollow" target="_blank">
-                <img alt="已通过沪公网备案，备案号 310100103568" src="{{asset('/wf/home/elm/picp_bg.e373b3.jpg')}}" height="30"></a>
-        </div>
-    </div>
-</footer>
-<footer class="footer" role="contentinfo">
-    <div class="container clearfix">
-        <div class="footer-link">
-            <h3 class="footer-link-title">用户帮助</h3>
-            <a class="footer-link-item" href="https://www.ele.me/support/center" target="_blank">服务中心</a>
-            <a class="footer-link-item" href="https://www.ele.me/support/question/default" target="_blank">常见问题</a>
-            <a class="footer-link-item" online-service="" href="javascript:" style="visibility: visible;">在线客服</a></div>
-        <div class="footer-link">
-            <h3 class="footer-link-title">商务合作</h3>
-            <a class="footer-link-item" href="https://kaidian.ele.me/" target="_blank">我要开店</a>
-            <a class="footer-link-item" href="https://www.ele.me/support/about/jiameng" target="_blank">加盟指南</a>
-            <a class="footer-link-item" href="https://www.ele.me/support/about/contact" target="_blank">市场合作</a>
-            <a class="footer-link-item" href="http://openapi.eleme.io/" target="_blank">开放平台</a></div>
-        <div class="footer-link">
-            <h3 class="footer-link-title">关于我们</h3>
-            <a class="footer-link-item" href="https://www.ele.me/support/about" target="_blank">饿了么介绍</a>
-            <a class="footer-link-item" href="http://jobs.ele.me/" target="_blank">加入我们</a>
-            <a class="footer-link-item" href="https://www.ele.me/support/about/contact" target="_blank">联系我们</a>
-            <a class="footer-link-item" href="https://www.ele.me/support/rules/default" target="_blank">规则中心</a></div>
-        <div class="footer-contect">
-            <div class="footer-contect-item">24小时客服热线 :
-                <a class="inherit" href="tel:10105757">10105757</a></div>
-            <div class="footer-contect-item">意见反馈 :
-                <a class="inherit" href="mailto:feedback@ele.me">feedback@ele.me</a></div>
-            <div class="footer-contect-item">关注我们 :
-                <div href="JavaScript:" class="icon-wechat" ubt-click="402">
-                    <div class="dropbox dropbox-bottom footer-contect-dropbox" ubt-visit="402">
-                        <img src="{{asset('/wf/home/elm/wexinqc100@2x.393ade.png')}}" alt="微信号: elemeorder">
-                        <p>微信号: elemeorder</p>
-                        <p>饿了么网上订餐</p>
-                    </div>
-                </div>
-                <a href="http://e.weibo.com/elemeorder" class="icon-weibo" target="_blank"></a>
-            </div>
-        </div>
-        <div class="footer-mobile">
-            <a href="https://h.ele.me/landing" target="_blank">
-{{--                <img src="{{asset('/wf/home/elm/appqc.95e532.png')}}" class="footer-mobile-icon" alt="扫一扫下载饿了么手机 App"></a>--}}
+                {{--<img src="{{asset('/wf/home/elm/appqc.95e532.png')}}" class="footer-mobile-icon" alt="扫一扫下载饿了么手机 App">--}}
+            </a>
             <div class="footer-mobile-content">
                 <h3>下载手机版</h3>
                 <p>扫一扫,手机订餐方便</p>
@@ -611,6 +545,7 @@
 </footer>
 <script src="{{asset('/wf/home/elm/home')}}"></script>
 <script src="{{asset('/wf/home/js/textStatic.js')}}"></script>
+
 </body>
 
 </html>

@@ -24,7 +24,7 @@ class HasRole
 
 //        2.获取当前管理员所拥有的权限
 //        获取当前管理员
-        $id = session('user')->id;
+        $id = session('user')['id'];
         $user = AdminUser::find($id);
 
 //        2.1 获取当前管理员拥有的角色

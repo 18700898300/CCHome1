@@ -90,6 +90,7 @@ class LoginController extends Controller
 
 //        4.登录成功，将用户信息保存到session中，用于判断用户是否登录以及获取登录用户信息
         Session::put('user',$user);
+//        dd($user);
         return redirect('admin/xtAdmin/index');
     }
 
