@@ -43,9 +43,16 @@ class CartController extends Controller
        $user = \Session::get('user');
 //      dd($user);
         //总额
+//        dd($cart);
+
+
         $total= Cart::subtotal();
         //购物车商品的数量
         $count = Cart::count();
+
+        if($count !=0){
+
+
 
 
             foreach($cart as $v)
@@ -54,8 +61,10 @@ class CartController extends Controller
             }
             $shop = Shop::find($did);
 
-        return view('/home/cart', ['cart'=> $cart,'total'=>$total,'count'=>$count,'shop'=>$shop]);
-
+             return view('/home/cart', ['cart'=> $cart,'total'=>$total,'count'=>$count,'shop'=>$shop]);
+        }else{
+            return  view('/home/index');
+        }
 
 
     }

@@ -99,6 +99,8 @@ Route::get('/crypt','Home\LoginController@crypt');
 Route::group(['middleware'=>['homeIslogin'],'prefix'=>'home','namespace'=>'Home'],function(){
 //退出登录
 Route::get('quit','IndexController@quit');
+//个人中心
+    Route::get('/percenter','PersonController@percenter');
 //前台的个人资料
 Route::get('/person','PersonController@index');
 Route::post('/person/edit','PersonController@edit');
@@ -121,6 +123,8 @@ Route::get('/address','PersonController@address');
 Route::post('/person/insertsite','PersonController@insertsite');
 //显示修改地址
 Route::post('/person/editsite','PersonController@editsite');
+//执行修改
+Route::post('/person/updatesite','PersonController@updatesite');
 //安全中心
 Route::get('/safe','PersonController@safe');
 //购物车
@@ -140,7 +144,7 @@ Route::get('/cart/removes','CartController@removes');
 //显示确认订单页
 Route::get('/order/index','OrderController@index');
 //移除订单某种菜品
-Route::get('/order/remove','OrederController@remove');
+Route::get('/order/remove','OrderController@remove');
 //显示添加地址弹出层
 Route::get('/order/addsite','OrderController@addsite');
 //添加地址插入数据库
@@ -164,6 +168,7 @@ Route::get('/order/js','OrderController@js');
 //检测超出时间后修改订单状态 (支付超时,订单已取消)
 Route::get('/order/ddsx','OrderController@ddsx');
 
+
 });
 
 
@@ -186,24 +191,34 @@ Route::get('/admin/crypt','Admin\MerchantController@crypt');
 //商户后台
 //进入商户后台首页的路由组
 //注册好中间件之后,直接用别名islogin就可以
-Route::group(['middleware'=>'islogin','prefix'=>'admin','namespace'=>'Admin'],function(){
+Route::group(['middleware'=>'islogin','islogin','prefix'=>'admin','namespace'=>'shAdmin'],function(){
     Route::get('merindex','MerController@merindex');
-    Route::get('info','MerController@info');
+//    Route::get('info','MerController@info');
+    //新订单详情
 
-    //友情链接类别管理
-    Route::resource('flinkt','Flinkt\FlinktController');
-//    排序,必须有路由,不是资源路由,因自己定义方法,否则报错方法不允许
-    Route::post('flinkt/changeOrder','Flinkt\FlinktController@changeOrder');
 
-    //    友情链接管理
-    Route::post('flink/{id}','Flink\FlinkController@update');
-    Route::resource('flink','Flink\FlinkController');
-    Route::post('upload','Flink\FlinkController@upload');//控制器的位置写对,不可忘加Flink
-    //网站配置
-    Route::resource('config','Config\ConfigController');
-    Route::post('config/contentchange','Config\ConfigController@ContentChange');
-    //后台评论管理
-    Route::get('comment','Comment\CommentController@index');
+//    //友情链接类别管理
+//    Route::resource('flinkt','Flinkt\FlinktController');
+////    排序,必须有路由,不是资源路由,因自己定义方法,否则报错方法不允许
+//    Route::post('flinkt/changeOrder','Flinkt\FlinktController@changeOrder');
+//
+//    //    友情链接管理
+//    Route::post('flink/{id}','Flink\FlinkController@update');
+//    Route::resource('flink','Flink\FlinkController');
+//    Route::post('upload','Flink\FlinkController@upload');//控制器的位置写对,不可忘加Flink
+//    //网站配置
+//    Route::resource('config','Config\ConfigController');
+//    Route::post('config/contentchange','Config\ConfigController@ContentChange');
+//    //后台评论管理
+//    Route::get('comment','Comment\CommentController@index');
+//新订单页面
+Route::get('shadmin/neworder/{id?}','orederController@NewOrder');
+//预订单页面
+Route::get('/shadmin/yuneworder/{id?}','orederController@info');
+//接单
+Route::get('/shadmin/order/jd/{id}','orederController@jd');
+
+
 
 });
 

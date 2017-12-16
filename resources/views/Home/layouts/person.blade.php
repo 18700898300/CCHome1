@@ -131,7 +131,7 @@
             <div search-input=""></div>
         </div>
         <ul class="profile-sidebar" role="navigation" profile-sidebar="">
-            <li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle" ng-class="{ active: pageName === 'profile' }"><i class="icon-line-home"></i><a href="https://www.ele.me/profile">个人中心</a></h2></li>
+            <li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle" ng-class="{ active: pageName === 'profile' }"><i class="icon-line-home"></i><a href="{{url('home/percenter')}}">个人中心</a></h2></li>
             <li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i class="icon-line-order"></i>我的订单</h2>
                 <ul>
                     <li ng-class="{ active: pageName === 'order' }"><a href="https://www.ele.me/profile/order">近三个月订单</a></li>

@@ -944,6 +944,7 @@ $data = [
 </table>
 <script>
 
+
 //    $('.btn').on('click',function() {
 //
 //        var id = $(this).attr('id');

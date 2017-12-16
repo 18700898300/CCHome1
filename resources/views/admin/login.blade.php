@@ -1,5 +1,14 @@
-@extends('layouts.admin')
-@section('body')
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{asset('/admin/assets')}}/style/css/ch-ui.admin.css">
+    <link rel="stylesheet" href="{{asset('/admin/assets')}}/style/font/css/font-awesome.min.css">
+</head>
 <body style="background:#F3F3F4;">
 <div class="login_box">
     <h1>CCHome</h1>
@@ -13,11 +22,11 @@
                 <div class="alert alert-danger">
                     <ul>
                         @if(is_object($errors))
-                        @foreach ($errors->all() as $error)
-                            <li style="color:red">{{ $error }}</li>
-                        @endforeach
+                            @foreach ($errors->all() as $error)
+                                <li style="color:red">{{ $error }}</li>
+                            @endforeach
                         @else
-                        <li style="color:red;">{{$errors}}</li>
+                            <li style="color:red;">{{$errors}}</li>
                         @endif
 
                     </ul>
@@ -36,7 +45,7 @@
                 <li>
                     <input type="text" class="code" name="code"/>
                     <span><i class="fa fa-check-square-o"></i></span>
-{{--                    <img src="{{url('admin/yzm')}}" alt="点我换图" onclick = "this.src='{{url("admin/yzm")}}?'+Math.random()">--}}
+                    {{--                    <img src="{{url('admin/yzm')}}" alt="点我换图" onclick = "this.src='{{url("admin/yzm")}}?'+Math.random()">--}}
                     <img src="{{url('admin/yzm')}}" onclick="this.src='{{url("admin/yzm")}}?'+Math.random()" alt=""/>
                 </li>
                 <li>
@@ -47,5 +56,7 @@
         <p><a href="#">返回首页</a> &copy; 2017 Powered by <a href="http://www.cchome.com" target="_blank">http://www.cchome.com</a></p>
     </div>
 </div>
-@endsection
+
 </body>
+
+</html>

@@ -71,7 +71,7 @@ class PersonController extends Controller
         $users = Session::get('user');
 
         $addr = Users_addr::orderBy('id','desc')->take(10)->where('uid',$users['uid'])->get();
-//        dd($addr[0]['id']);
+//
         return view('Home.person.address',compact('users','area','addr'));
     }
     //执行添加地址
@@ -108,7 +108,12 @@ class PersonController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+        $uid = session('user.uid');
+        $input['uid'] = $uid;
+
+//        dd($input);
         $res  = \DB::table('users_addrs')->insert($input);
+//        dd($res);
         if($res)
         {
             return redirect('/home/address');
@@ -130,6 +135,21 @@ class PersonController extends Controller
         return  $data;
     }
 
+    public function updatesite(Request $request)
+    {
+        $addr = $request->except('_token');
+//
+//        dd($addr);
+        $res  = Users_addr::find($addr['id'])->update($addr);
+
+
+        if($res)
+        {
+            return redirect('/home/address');
+        }else{
+            return redirect('/home/address');
+        }
+    }
     //显示安全中心页面
     public function safe()
     {

@@ -126,7 +126,7 @@ class OrderController extends Controller
 
     public function updatesite(Request $request)
     {
-//        dd(111);
+//       dd(111);
         $input = $request->except('_token');
 //       dd($input);
         $rule = [
@@ -183,7 +183,10 @@ class OrderController extends Controller
      * 确认下单,把数据加入数据库
      */
     public function insert(Request $request)
-    {   $order = [];
+    {   
+//        $data = $request->all();
+//        dd($data);
+        $order = [];
         $orderinfo= [];
         $syt = [];
         $f =[];
@@ -203,7 +206,7 @@ class OrderController extends Controller
         //订单留言
         $umsg = $input['umsg'];
         //订单id
-       $order['oid'] = md5(mt_rand(000000000, 99999999));
+       $order['oid'] = mt_rand(00000000, 99999999);
        //订单总额
        $order['ormb'] = $total;
        //菜品总数
@@ -218,16 +221,17 @@ class OrderController extends Controller
         //收货电话
         $order['phone'] = $addr[0]['phone'];
         //订单状态
-        $order['status'] = 0; //0代表下单未结算 //1 结算未收货  //2订单成功  //3订单已取消
+        $order['status'] = 0;
         //订单留言
         $order['umsg'] = $umsg;
         //下单时间
         $order['otime'] = time();
+//        dd($cart);
         foreach($cart as $k => $v)
         {   //获取订单号
             $orderinfo['oid'] = $order['oid'];
             //获取菜品id
-            $orderinfo['fid'] = $v['id'];
+            $orderinfo['fname'] = $v['name'];
             //获取菜品数量
             $orderinfo['bcnt'] = $v['qty'];
             //获取菜品单价
@@ -241,6 +245,7 @@ class OrderController extends Controller
             //获取菜品数量
             $f['qty'] = $v['qty'];
             //添加到订单详情表
+
           $res =  Order_detail::create($orderinfo);
         }
      //运费价格
@@ -248,9 +253,14 @@ class OrderController extends Controller
         //订单总额
         $order['cprice'] = $total + $sprice;
         //添加到订单主表
-        $res =  Order::create($order);
+//        dd($order);
+        $order['sid'] = $orderinfo['sid'];
+//        dd($order['sid']);
+        $r =  Order::create($order);
+
         //查询商家店铺
         $sid = Shop::find($orderinfo['sid']);
+
         //得到商家店铺名称
         $syt['sname'] = $sid['name'];
         //收货人
@@ -276,8 +286,8 @@ class OrderController extends Controller
         $syt = implode(',',$syt);
         $syt = Crypt::encrypt($syt);
 
-
-        if($res)
+//            dd($res);
+        if($r&&$res)
         {   //重定向到收银台
             return redirect("/home/order/syt/".$syt);
         }else{
