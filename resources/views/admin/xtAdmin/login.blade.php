@@ -6,7 +6,6 @@
     <div class="login_box">
         <h1>Blog</h1>
         <h2>欢迎使用CCHome系统管理平台</h2>
-
         <div class="form">
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
@@ -27,17 +26,12 @@
                 <ul>
                     <li>
                         {{csrf_field()}}
-                        <input type="text" placeholder="请输入管理员名称" name="aname" value="{{old('aname')}}" class="text"/>
+                        <input type="text" name="aname" value="{{old('aname')}}" class="text"/>
                         <span><i class="fa fa-user"></i></span>
                     </li>
                     <li>
-                        <input type="password" placeholder="请输入密码" name="password" value="{{old('password')}}" class="text"/>
+                        <input type="password" name="password" value="{{old('password')}}" class="text"/>
                         <span><i class="fa fa-lock"></i></span>
-                    </li>
-                    <li>
-                        <input type="text" placeholder="请输入验证码" class="code" value="{{old('code')}}" name="code"/>
-                        <span><i class="fa fa-check-square-o"></i></span>
-                        <img src="{{url('admin/xtAdmin/code')}}" onclick="this.src='{{url('admin/xtAdmin/code')}}?'+Math.random()" alt="">
                     </li>
 
                     <li>
@@ -45,11 +39,10 @@
                     </li>
                 </ul>
             </form>
-
-            <p><a href="{{url('admin/xtAdmin/register')}}">立即申请</a> &copy; 2016 Powered by <a href="http://www.itxdl.cn" target="_blank">http://www.itxdl.cn</a></p>
+            <p><a href="#">返回首页</a> &copy; 2016 Powered by <a href="http://www.itxdl.cn" target="_blank">http://www.itxdl.cn</a></p>
         </div>
     </div>
     <script>
-        $('.dh').fadeOut(3000);
+        $('.dh').fadeOut('slow');
     </script>
 @endsection

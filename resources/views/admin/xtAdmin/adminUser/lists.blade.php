@@ -51,8 +51,8 @@
                     <tr>
                         <th class="tc" width="5%">ID</th>
                         <th class="tc">管理员名称</th>
-                        <th class="tc">权限</th>
-                        <th >操作</th>
+                        <th class="tc">密码</th>
+                        <th class="tc">操作</th>
                     </tr>
 
 
@@ -61,14 +61,12 @@
                         <td class="tc">{{$v->id}}</td>
                         <td class="tc">{{$v->aname}}</td>
 
-                        <td class="tc">@foreach($v->role as $m=>$n)
-                                            {{$n->name}}<br>
-                                           @endforeach
-                        </td>
+                        <td class="tc">{{$v->password}}</td>
 
                         <td class="tc">
                             <a href="{{url('admin/xtAdmin/adminUser/auth')}}/{{$v->id}}">授权</a>
-                            <a href="javascript:;" onclick="delUser({{$v->id}})">删除</a>
+                            <a href="{{url('admin/xtAdmin/adminUser/'.$v->id.'/edit')}}">修改</a>
+                            <a href="javascript:;" onclick="delCate({{$v->id}})">删除</a>
                         </td>
                     </tr>
 
@@ -106,9 +104,8 @@
             })
 
         }
-
-//        删除
-        function delUser(id) {
+        
+        function delCate(id) {
 
             //询问框
             layer.confirm('您确认删除吗？', {
@@ -117,7 +114,7 @@
 //                如果用户发出删除请求，应该使用ajax向服务器发送删除请求
 //                $.get("请求服务器的路径","携带的参数", 获取执行成功后的额返回数据);
                 //admin/user/1
-                $.post("{{url('admin/xtAdmin/adminUser')}}/"+id,{"_token":"{{csrf_token()}}","_method":"delete"},function(data){
+                $.post("{{url('admin/xtAdmin/shop_type/delCate')}}/"+id,{"_token":"{{csrf_token()}}"},function(data){
                     //alert(data);
 //                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
                    //var res =  JSON.parse(data);
@@ -144,7 +141,7 @@
             });
         }
         //    提示信息淡出
-        $('.dh').fadeOut(3000);
+        $('.dh').fadeOut('slow');
 
     </script>
 @endsection

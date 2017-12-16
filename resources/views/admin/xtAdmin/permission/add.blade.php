@@ -44,19 +44,6 @@
                 <tbody>
 
                 <tr>
-                    <th><i class="require">*</i>模块名称：</th>
-                    <td>
-                        <select name="modu">
-                            <option value="0">后台首页</option>
-                            <option value="1">设置管理员</option>
-                            <option value="2">分类管理</option>
-                            <option value="3">角色管理</option>
-                            <option value="4">权限管理</option>
-                        </select>
-                        <span><i class="fa fa-exclamation-circle yellow"></i>权限名称必须填写</span>
-                    </td>
-                </tr>
-                <tr>
                     <th><i class="require">*</i>权限名称：</th>
                     <td>
                         <input type="text" name="name" value="{{old('name')}}">
@@ -84,7 +71,7 @@
     </div>
     <script>
         //    提示信息淡出
-        $('.dh').fadeOut(3000);
+        $('.dh').fadeOut('slow');
     </script>
 @endsection
 

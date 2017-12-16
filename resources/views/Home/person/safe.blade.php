@@ -36,7 +36,7 @@
                     <span class="child security-type-icon"><i ng-class="item.status ? 'security-type-icon-ok icon-dot-check' : 'security-type-icon-warn icon-dot-warning'" class="security-type-icon-ok icon-dot-check"></i></span>
                     <span class="child security-type-name ng-binding" ng-class="item.status || 'security-type-name-weak'" ng-bind="item.name">手机验证</span>
                     <div class="child security-type-tip">
-                        <p ng-bind="item.text.text" class="ng-binding">已绑定手机 {{$users->phone}}</p>
+                        <p ng-bind="item.text.text" class="ng-binding">已绑定手机 {{$users['phone']}}</p>
                         <!-- ngIf: item.text.textMore -->
                     </div>
                     <span class="child security-type-linkcon"><a class="security-type-link ng-binding btn-link" target="" ng-href="/profile/security/changemobile/" ng-class="item.status ? 'btn-link' : 'btn-stress'" ng-bind="item.text.link" href="{{url('home/changephone')}}">更改手机</a></span>
@@ -51,7 +51,7 @@
                         <p class="security-type-tip-more ng-binding ng-scope" ng-if="item.text.textMore" ng-bind-html="item.text.textMore | toTrusted">验证后可用户快速找回密码，接受账户提醒邮件。</p>
                         <!-- end ngIf: item.text.textMore -->
                     </div>
-                    <span class="child security-type-linkcon"><a class="security-type-link ng-binding btn-stress" target="" ng-href="/profile/security/bindemail" ng-class="item.status ? 'btn-link' : 'btn-stress'" ng-bind="item.text.link" href="https://www.ele.me/profile/security/bindemail">立即绑定</a></span>
+                    <span class="child security-type-linkcon"><a class="security-type-link ng-binding btn-stress" target="" ng-href="/profile/security/bindemail" ng-class="item.status ? 'btn-link' : 'btn-stress'" ng-bind="item.text.link" href="{{url('home/bdemail')}}">立即绑定</a></span>
                 </div>
                 <!-- end ngRepeat: item in securityType -->
 

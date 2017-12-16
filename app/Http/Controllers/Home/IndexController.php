@@ -39,8 +39,12 @@ class IndexController extends Controller
     }
 
     //退出登录
-    public function quit()
+    public function quit(Request $request)
     {
-        return redirect('home/login');
+//        dd(111);
+        $request->session()->forget('user');
+//        location.href = location.href;
+//        header('refresh:1;');
+       return redirect('home/login');
     }
 }

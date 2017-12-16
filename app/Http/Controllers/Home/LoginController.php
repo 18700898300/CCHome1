@@ -21,26 +21,16 @@ use App\MSG\lib\Ucpaas;
  * */
 class LoginController extends Controller
 {
-    public function crypt()
-    {
-        $str = 123456;
-
-        $pwd = Crypt::encrypt($str);
-        dd($pwd);
-    }
-
-
-
     //密码登录的页面
     public function login()
     {
+//        dd(session('user'));
+//      /  dd(session('user')[0]->uname);
+//        dd(session()->forget('user'));
+        //dd(session('user'));
         return view('home.login.login');
     }
-    //手机号验证页
-//    public function login2()
-//    {
-//        return view('home.login.login2');
-//    }
+
 	//验证码
     public function yzm()
     {
@@ -90,7 +80,7 @@ class LoginController extends Controller
             'uname.regex' => '用户名必须汉字字母下划线',
             'uname.between' => '用户名必须在5到20位之间',
             'password.required' => '密码必须输入',
-            'password.between' => '密码必须在5到20位之间'
+            'password.between' => '密码必须在3到20位之间'
         ];
 
         $validator = Validator::make($input, $rule, $mess);
@@ -119,11 +109,13 @@ class LoginController extends Controller
         if( Crypt::decrypt($user->password) != trim($input['password']) ){
             return redirect('home/login')->with('errors','密码不正确')->withInput();
         }
+//       $user = $user->toArray();
+//        dd($user);
 
         Session::put('user',$user);
+        //dd( Session::get('user'));
         return redirect('home/index');
     }
-
 
 
     //手机号发送验证码登录
@@ -151,7 +143,7 @@ class LoginController extends Controller
         $templateId = "238242";
         $param= mt_rand(1000,9999);
       //发送验证码成功后，将验证码存入session中
-        session('phone',$param);
+         Session::flash('phone',$param);
        return $ucpass->templateSMS($appId,$to,$templateId,$param);
     }
 
@@ -159,26 +151,63 @@ class LoginController extends Controller
     public function dologin2(Request $request)
     {
         //1.获取用户提交的数据
-        $input = $request->except('_token','code');
+        $input = $request->except('_token');
+//        dd($input);
+        //对验证码进行表单验证
+        $rule = [
+            "code" => 'required'
+        ];
+        $mess = [
+            'code.required' => '验证码不能为空'
+        ];
 
+        $validator = Validator::make($input, $rule, $mess);
+        //如果表单验证失败,
+        if ($validator->fails()) {
+            return redirect('home/login2')->withErrors($validator)->withInput();
+        }
+
+
+//        2 验证验证码
+        if($input['code'] != session('phone')){
+            return redirect('home/login2')->withErrors('验证码错误')->withInput();
+        }
+        unset($input['code']);
         //3.向用户表添加注册用户
         $phone = $input['phone'];
         $name = mt_rand(1000000,9999999);
+        $pic = '/a/image/1.jpg';
+//        dd($input);
+        //从数据库中获取手机号
         $aa =  \DB::table('users')->where('phone',$phone)->get();
-        $aa = $aa[0]->phone;
-       if($aa !=$phone){
-           //如果没有就将传过来的手机号保存在数据库users表中
-           $res = \DB::table('users')->insert(['phone'=>$phone,'uname'=>$name]);
-           if($res)
-           {
-               //保存成功就跳转到前台首页
-               return redirect('home/index');
-           }else{
-               //保存失败就跳回短信登录页
-               return redirect('home/login2');
-           }
-       }else{
-           return redirect('home/index');
-       }
+        $aa=$aa->toArray();
+
+        if($aa == []){
+            //如果注册的手机号没有与数据库中重复,就将注册的手机号添加到数据库中
+            $res = \DB::table('users')->insert(['phone'=>$phone,'uname'=>$name,'avatar'=>$pic]);
+
+            if($res)
+            {
+                $user = User::where('phone',$phone)->first();
+
+//                $user = $user->toArray();
+                Session::put('user',$user);
+
+                //保存成功就跳转到前台首页
+                return redirect('home/index');
+            }else{
+                //保存失败就跳回短信登录页
+                return redirect('home/login2');
+            }
+        }else{
+            $user = User::where('phone',$phone)->first();
+//            $user = $user->toArray();
+            Session::put('user',$user);
+            //保存成功就跳转到前台首页
+//           dd(Session::get('user'));
+            return redirect('home/index');
+        }
+
+
     }
 }

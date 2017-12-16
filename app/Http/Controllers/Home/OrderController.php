@@ -168,16 +168,7 @@ class OrderController extends Controller
         }
     }
 
-    public function delsite(Request $request){
-       $id = $request->except('_token');
-//       return($id['id']);
-       $res =  Users_addr::find($id['id'])->delete();
-        if($res){
-            return 1;
-        }else{
-            return 0;
-        }
-    }
+
 
     /**
      * 确认下单,把数据加入数据库
@@ -275,7 +266,7 @@ class OrderController extends Controller
 //      dd($syt['oid'].'-----'.$order['oid']);
         $syt = implode(',',$syt);
         $syt = Crypt::encrypt($syt);
-
+        Cart :: destroy();
 
         if($res)
         {   //重定向到收银台
@@ -299,10 +290,8 @@ class OrderController extends Controller
     {
         $oid = $request->except('_token');
        $res =  Order::where('oid',$oid)->update(['status'=>1]);
-
        if($res)
        {
-           Cart :: destroy();
            return '1';
        }else{
            return '0';
@@ -316,7 +305,6 @@ class OrderController extends Controller
         $res =  Order::where('oid',$oid)->update(['status'=>5]);
         if($res)
         {
-            Cart :: destroy();
             return '1';
         }else{
             return '0';

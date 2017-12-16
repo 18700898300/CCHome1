@@ -21,7 +21,7 @@
 <h3 ng-if="pageTitleVisible" class="profile-paneltitle ng-scope"><span ng-bind="pageTitle" class="ng-binding">设置密码</span> <span class="subtitle ng-binding" ng-bind-html="pageSubtitle | toTrusted"></span></h3>
 <!-- end ngIf: pageTitleVisible -->
 <div class="profile-panelcontent" ng-transclude="">
-    <form action="{{url('home/dosetpwd')}}" method="post" class="changepwd ng-scope ng-pristine ng-valid">
+    <form action="{{url('home/dochangepwd')}}" method="post" class="changepwd ng-scope ng-pristine ng-valid">
         {{csrf_field()}}
         <p class="changepwd-tip">饿了么提示你：使用大小写字母、数字与标点符号的组合，可以大幅提升帐号安全！</p>
         <!-- ngIf: !firstSet -->

@@ -7,7 +7,6 @@ use App\Http\Model\Food;
 use App\Http\Controllers\Controller;
 use App\Models\Home\Shop;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 
@@ -40,8 +39,7 @@ class CartController extends Controller
     {
         //全部商品信息
         $cart =  Cart::content();
-       $user = \Session::get('user');
-//      dd($user);
+
         //总额
         $total= Cart::subtotal();
         //购物车商品的数量
