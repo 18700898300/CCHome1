@@ -5,10 +5,14 @@ namespace App\Http\Controllers\Home\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Home\Shop;
+use Illuminate\Support\Facades\Redis;
 class HomeController extends Controller
 {
     public function index(){
-        return view('home/home/index');
+        $conf = Redis::get('conf');
+        $conf = unserialize($conf);
+//        dd($conf);
+        return view('home/home/index',compact('conf'));
     }
 
     public function query(Request $request){
@@ -28,7 +32,7 @@ class HomeController extends Controller
            ->orWhere(function($query)use($datas){
                $query->orWhere('name','like','%'.$datas.'%');
            })->where(function($query)use($datas){
-               $query->where('status',2);
+               $query->where('vstatus',2);
            })->first();
 //       dd($data);
         return json_encode($data);//必须转换为json格式的字符串

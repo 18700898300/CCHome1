@@ -11,6 +11,6 @@ class MerUser extends Model
     public $guarded = [];
     public $timestamps = false;
     public  function shop(){
-        return $this->hasOne('App\Models\Home\Shop','bid','bid');
+        return $this->hasMany('App\Models\Home\Shop','bid','bid');
     }
 }

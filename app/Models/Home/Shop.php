@@ -19,4 +19,7 @@ class Shop extends Model
     public function cate(){
         return $this->belongsTo('App\Models\Admin\Shop_type','tid','tid');
     }
+    public function flink(){
+        return  $this->hasMany('App\Http\Model\Flink\Flink','sid','sid');
+    }
 }

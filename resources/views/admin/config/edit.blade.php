@@ -104,6 +104,7 @@
                             });
                             function uploadImage() {
                                 // 判断是否有选择上传文件
+//                                alert(111);
                                 var imgPath = $("#fpic").val();
                                 if (imgPath == "") {
                                     alert("请选择上传图片！");
@@ -123,13 +124,14 @@
                                 formData.append('_token',"{{csrf_token()}}");
                                 $.ajax({
                                     type: "POST",
-                                    url: "/admin/upload",
+                                    url: "/admin/xtAdmin/upload",
                                     data: formData,
                                     async: true,
                                     cache: false,
                                     contentType: false,
                                     processData: false,
                                     success: function(data) {
+                                        console.log(data);
 //                                            $('#img1').attr('src','/uploads/'+data);
                                         $('#img1').attr('src','http://p0bvp893u.bkt.clouddn.com/uploads/'+data);
 //                                        $('#img1').attr('src','http://ccchome.oss-cn-beijing.aliyuncs.com/'+data);

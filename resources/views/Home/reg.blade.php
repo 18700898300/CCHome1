@@ -133,7 +133,7 @@
             <div class="control-group">
                 <label class="control-label" for="inputPassword">法人身份证号</label>
                 <div class="controls">
-                    <input type="text" name = "card" style="width:850px;height:50px;" id="inputPassword" placeholder="请输入法人身份证号码,即注册时的身份证号">
+                    <input type="text" name = "card" style="width:850px;height:50px;" value = "{{old('card')}}" id="inputPassword" placeholder="请输入法人身份证号码,即注册时的身份证号">
                 </div>
             </div>
 
@@ -156,27 +156,27 @@
             <div class="control-group">
                 <label class="control-label" for="inputEmail">电子邮箱</label>
                 <div class="controls">
-                    <input type="text" name="email" style="width:850px;height:50px;" id="inputEmail" placeholder="请输入电子邮箱">
+                    <input type="text" name="email" value = "{{old('email')}}" style="width:850px;height:50px;" id="inputEmail" placeholder="请输入电子邮箱">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="inputPassword">商户详情</label>
                 <div class="controls">
-                    <input type="text" name="description" style="width:850px;height:50px;" id="inputPassword" placeholder="请输入主营业务信息">
+                    <input type="text" name="description" value = "{{old('description')}}" style="width:850px;height:50px;" id="inputPassword" placeholder="请输入主营业务信息">
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="inputPassword">营业时间</label>
                 <div class="controls">
-                    <input type="text" style="width:850px;height:50px;" id="inputPassword" name = 'time' placeholder="请输入每天的固定营业时间">
+                    <input type="text" style="width:850px;height:50px;" value = "{{old('time')}}" id="inputPassword" name = 'time' placeholder="请输入每天的固定营业时间">
                 </div>
             </div>
             <div class="control-group" >
                 <label class="control-label" for="inputPassword">公司地址</label>
                 <div class="controls" >
-                    <input id="text_" type="text" name="address" placeholder="请输入详细公司地址" style="width:850px;height:50px;" onchange="searchByStationName()"/>
-                    <input id="result_"  name="position" type="hidden" /><br>
+                    <input id="text_" type="text" name="address" value = "{{old('address ')}}" placeholder="请输入详细公司地址" style="width:850px;height:50px;" onchange="searchByStationName()"/>
+                    <input id="result_"  name="position" type="hidden" value = "{{old('position')}}" /><br>
                     <div id="container"
                          style="position: absolute;
                 /*margin-top:30px;*/
@@ -192,19 +192,19 @@
             <div class="control-group">
                 <label class="control-label" for="inputPassword">配送时长</label>
                 <div class="controls">
-                    <input type="text" name = "statime" style="width:850px;height:50px;" id="inputPassword" placeholder="请输入配送时间,单位:分钟">
+                    <input type="text" name = "statime" value = "{{old('statime')}}" style="width:850px;height:50px;" id="inputPassword" placeholder="请输入配送时间,单位:分钟">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="inputPassword">起送价</label>
                 <div class="controls">
-                    <input type="text" style="width:850px;height:50px;" id="inputPassword"  name = 'staprice' placeholder="请输入起送价格,单位:元">
+                    <input type="text" style="width:850px;height:50px;"  value = "{{old('staprice')}}" id="inputPassword"  name = 'staprice' placeholder="请输入起送价格,单位:元">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="inputPassword">配送费</label>
                 <div class="controls">
-                    <input type="text"  name = "sprice" style="width:850px;height:50px;" id="inputPassword" placeholder="请输入固定配送费用,单位元">
+                    <input type="text"  name = "sprice" value = "{{old('sprice')}}" style="width:850px;height:50px;" id="inputPassword" placeholder="请输入固定配送费用,单位元">
                 </div>
             </div>
 

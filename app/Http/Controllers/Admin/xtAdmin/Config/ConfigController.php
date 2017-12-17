@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redis;
-
+use Illuminate\Support\Facades\Storage;
 
 class ConfigController extends Controller
 {
@@ -217,6 +217,7 @@ class ConfigController extends Controller
 //        dd($input);
         $res = Config::where('conf_id',$id)->update($input);
         if($res){
+            $this::PutRedis();
             return  redirect('/admin/xtAdmin/config')->with('msg','修改成功');
         }else{
             return back();
@@ -241,5 +242,50 @@ class ConfigController extends Controller
             $data['msg']='删除失败，请重试！';
             return $data;
         };
+    }
+
+    public  function upload(Request $request)
+    {
+
+//    return 1111;
+//    $file = $request->file('fpic');
+//
+        // 多文件上传????????????
+//        return $request->input();
+        $file = $request->file('fpic');
+
+//        return $file;
+//        return 111;
+//        return $file;
+//        $file =$file[0];
+//        return $file[2];
+//        return $request;
+//        $arr=[];
+//        foreach($file as $k=>$file){
+//            return $file;
+        if($file->isValid()){
+            //获取文件上传对象后的后缀名
+            $ext = $file->getClientOriginalExtension();
+            //生成一个唯一的文件名,保证所有的文件不重名
+            $newfile=time().rand(1000,9999).uniqid().'.'.$ext;
+            //设置上传文件的目录
+//            $dirpath  = public_path().'/uploads/'; //获取public目录的绝对路径并拼接新的上传文件路径
+//            将文件移动到本地服务器的指定位置,并以新文件名命名
+//            $file->move(移动到的目录,新文件名);
+//            $file->move($dirpath,$newfile);
+            //将文件移动到七牛云,并以新文件名命名
+
+            $disk = Storage::disk('qiniu')->writeStream('uploads/'.$newfile, fopen($file->getRealPath(), 'r'));
+            //将文件移动到阿里云并以新文件名命名
+
+//                OSS::upload($newfile,$file->getRealPath());
+//                 $arr[]=$file;
+//
+
+        }
+//        }
+        return $newfile;
+//        return $arr;
+
     }
 }

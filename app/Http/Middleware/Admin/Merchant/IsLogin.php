@@ -19,12 +19,17 @@ class IsLogin
 //        dd(1111);
         //用户登录就放行,若没有登录就拦截返回到登录页面
        $buser =  Session::get('meruser');
-//        dd($buser);
-        $user = MerUser::with('shop')->where('phone',$buser['phone'])->get();
+//           dd($buser);
+       if($buser == null){
+           return redirect('admin/mlogin')->with('errors','请先登录......');
+       }
+//         dd($buser);
+//        dd($buser['bid']);
+        $user = MerUser::with('shop')->where('bid',$buser['bid'])->get();
 //        dd($user);
-        $vstatus = $user[0]->shop['vstatus'];
-//        dd($status);
-        if(Session::get('meruser') && $vstatus == 2){
+        $vstatus = $user[0]->shop[0]['vstatus'];
+//        dd($vstatus);
+        if($vstatus == 2){
             return $next($request);
         }else{
             return redirect('home/qstatus')->with('errors','请先查询您的审核状态...');

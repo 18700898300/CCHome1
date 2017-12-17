@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin\Flink;
 
 use App\Http\Model\Flink\Flink;
 use App\Http\Model\Flinkt\Flinkt;
+use App\Http\Model\MerUser;
 use App\Services\OSS;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -29,9 +31,12 @@ class FlinkController extends Controller
 
 //    return 1111;
 //    $file = $request->file('fpic');
-//    dd($file);
+//
         // 多文件上传????????????
+//        return $request->input();
         $file = $request->file('fpic');
+
+//        return $file;
 //        return 111;
 //        return $file;
 //        $file =$file[0];
@@ -85,6 +90,7 @@ class FlinkController extends Controller
     {
 //        dd(99999);
         $fltype = Flinkt::get();
+
         $flinkts = (new Flinkt)->tree();//二级列表显示
 //        dd($flinkts);
         return view('admin/flink/create',compact('fltype','flinkts'));
@@ -101,7 +107,7 @@ class FlinkController extends Controller
 //        dd(111);
 //        dd($request->input());
             $input = $request->except('_token','fpic');
-//            dd($input);查看排除的字段fpic
+//            dd($input);//查看排除的字段fpic
             //表单验证
             $rule =[
                 'fname'=>'required',
@@ -121,6 +127,11 @@ class FlinkController extends Controller
                     ->withErrors($validator)
                     ->withInput();//让页面输入的用户名保持在输入框
             }
+        $meruser = Session::get('meruser');
+//        dd($meruser);
+        $shop = Meruser::with('shop')->where('bid',$meruser['bid'])->get();
+        $input['sid']=$shop[0]->shop[0]['sid'];
+//        dd($input);
             //添加到数据库
         $res = Flink::create($input);
             if($res){

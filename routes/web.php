@@ -32,6 +32,7 @@ Route::group(['middleware'=>['adminIslogin'],'prefix'=>'admin/xtAdmin','namespac
 //    网站配置
     Route::resource('config','Config\ConfigController');
     Route::post('config/contentchange','Config\ConfigController@ContentChange');
+    Route::post('upload','Config\ConfigController@upload');
 
 
 
@@ -236,9 +237,9 @@ Route::group(['middleware'=>'islogin','prefix'=>'admin','namespace'=>'Admin'],fu
     Route::post('flink/{id}','Flink\FlinkController@update');
     Route::resource('flink','Flink\FlinkController');
     Route::post('upload','Flink\FlinkController@upload');//控制器的位置写对,不可忘加Flink
-    //网站配置
-    Route::resource('config','Config\ConfigController');
-    Route::post('config/contentchange','Config\ConfigController@ContentChange');
+    //网站配置转至系统后台
+//    Route::resource('config','Config\ConfigController');
+//    Route::post('config/contentchange','Config\ConfigController@ContentChange');
     //后台评论管理
     Route::get('comment','Comment\CommentController@index');
 

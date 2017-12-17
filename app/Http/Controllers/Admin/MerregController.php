@@ -65,8 +65,10 @@ class MerregController extends Controller
         $meruser['phone'] = $input['phone'];
         $meruser['bpassword'] = Crypt::encrypt($input['bpassword']);
         $res = MerUser::create($meruser);
+
         if($res){
-            Session::put('meruser',$meruser);
+            Session::put('meruser',$res);
+//            此处必须用$res，若用$meruser，session中无bid；
             return redirect('home/reg')->with('msg','注册成功');
         }else{
             return('admin/meregisterm')->with('msg','注册失败，请重试！');
