@@ -41,6 +41,14 @@ class IndexController extends Controller
     //退出登录
     public function quit()
     {
-        return redirect('home/login');
+
+      $res =  session()->forget('user');
+        if($res)
+        {
+            return redirect('home/login');
+        }else{
+            return back();
+        }
+
     }
 }

@@ -6,7 +6,6 @@ use App\Models\Admin\Permission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use DB;
 
 /*
  * 系统后台 权限模块
@@ -88,16 +87,13 @@ class PermissionController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * 修改权限
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-//        根据ID找到要修改的权限
-        $perm = Permission::find($id);
-//        dd($perm);
-        return view('admin/xtAdmin/permission/edit',compact('perm'));
+        //
     }
 
     /**
@@ -109,39 +105,7 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        1. 接收提交的数据
-        $input = $request->except('_token','_method');
-//        dd($input);
-//        2. 表单验证
-        $rule = [
-            'name'=>'required|between:2,10',
-            "description"=>'required|between:0,200'
-        ];
-
-        $mess = [
-            'name.required'=>'权限名称必须输入',
-            'name.between'=>'权限名称必须在2到10位之间',
-            'description.required'=>'权限描述必须输入',
-            'description.between'=>'权限描述必须在0到200字之间',
-        ];
-
-        $validator =  Validator::make($input,$rule,$mess);
-        //如果表单验证失败 passes()
-        if ($validator->fails()) {
-            return redirect('admin/xtAdmin/permission/create')
-                ->withErrors($validator)
-                ->withInput();
-        }
-//        3. 执行修改
-        $res = Permission::find($id)->update($input);
-
-//        4. 判断是否成功
-        if($res){
-            return redirect('admin/xtAdmin/permission')->with('msg','修改成功');
-        }else{
-            return redirect('admin/xtAdmin/permission'.$id.'/edit')->with('msg','修改失败');
-        }
-
+        //
     }
 
     /**
@@ -152,32 +116,6 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        $perm = Permission::find($id);
-
-//        开启事务
-        DB::beginTransaction();
-        try{
-//            执行删除
-            $res = $perm->delete();
-        }catch(Exception $e){
-            DB::rollBack();
-        }
-        DB::commit();
-
-
-//        判断是否删除
-        if($res){
-            $data =[
-                'status'=> 0,
-                'msg'=>'删除成功'
-            ];
-        }else{
-            $data =[
-                'status'=> 1,
-                'msg'=>'删除失败'
-            ];
-        }
-
-        return $data;
+        //
     }
 }

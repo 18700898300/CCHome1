@@ -92,6 +92,7 @@ class orederController extends Controller
         $data['beginToday'] =$end;
         $data['endToday'] =time();
         //获取商户的id
+
         $sid=$meruser->shop[0]['sid'];
         //通过订单主表去排序查找订单详情,
         $order = Order::orderBy('otime','desc')->with('order_detail')->where('sid','=',$sid)

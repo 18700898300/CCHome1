@@ -6,7 +6,7 @@
 	<!--头部 开始-->
 	<div class="top_box">
 		<div class="top_left">
-			<div class="logo">CCHome后台管理</div>
+			<div class="logo">后台管理模板</div>
 			<ul>
 				<li><a href="{{url('admin/xtAdmin/index')}}" class="active">首页</a></li>
 				<li><a href="#">管理页</a></li>
@@ -15,7 +15,7 @@
 		<div class="top_right">
 			<ul>
 				<li>管理员：{{session('user')->aname}}</li>
-				<li><a href="{{url('admin/xtAdmin/password/edit/')}}/{{session('user')->id}}" target="main">修改密码</a></li>
+				<li><a href="pass.html" target="main">修改密码</a></li>
 				<li><a href="{{url('admin/xtAdmin/logout')}}">退出</a></li>
 			</ul>
 		</div>
@@ -26,15 +26,29 @@
 	<div class="menu_box">
 		<ul>
             <li>
-            	<h3><i class="fa fa-fw fa-clipboard"></i>设置管理员</h3>
+            	<h3><i class="fa fa-fw fa-clipboard"></i>管理员模块</h3>
                 <ul class="sub_menu">
-                    <li><a href="{{url('admin/xtAdmin/ask')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>管理员申请</a></li>
+                    <li><a href="{{url('admin/xtAdmin/adminUser/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加管理员</a></li>
                     <li><a href="{{url('admin/xtAdmin/adminUser')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>管理员列表</a></li>
 
                 </ul>
             </li>
 			<li>
-				<h3><i class="fa fa-fw fa-clipboard"></i>分类管理</h3>
+				<h3><i class="fa fa-fw fa-clipboard"></i>个人用户模块</h3>
+				<ul class="sub_menu">
+					<li><a href="{{url('admin/xtAdmin/person/lists')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>个人用户列表</a></li>
+
+				</ul>
+			</li>
+			<li>
+				<h3><i class="fa fa-fw fa-clipboard"></i>商户模块</h3>
+				<ul class="sub_menu">
+					<li><a href="{{url('admin/xtAdmin/boss/lists')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>商户列表</a></li>
+
+				</ul>
+			</li>
+			<li>
+				<h3><i class="fa fa-fw fa-clipboard"></i>分类模块</h3>
 				<ul class="sub_menu">
 					<li><a href="{{url('admin/xtAdmin/shop_type/add')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加分类</a></li>
 					<li><a href="{{url('admin/xtAdmin/shop_type/lists')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>分类列表</a></li>
@@ -42,7 +56,7 @@
 				</ul>
 			</li>
 			<li>
-				<h3><i class="fa fa-fw fa-clipboard"></i>角色管理</h3>
+				<h3><i class="fa fa-fw fa-clipboard"></i>角色模块</h3>
 				<ul class="sub_menu">
 					<li><a href="{{url('admin/xtAdmin/role/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加角色</a></li>
 					<li><a href="{{url('admin/xtAdmin/role')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>角色列表</a></li>
@@ -50,10 +64,17 @@
 				</ul>
 			</li>
 			<li>
-				<h3><i class="fa fa-fw fa-clipboard"></i>权限管理</h3>
+				<h3><i class="fa fa-fw fa-clipboard"></i>权限模块</h3>
 				<ul class="sub_menu">
 					<li><a href="{{url('admin/xtAdmin/permission/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加权限</a></li>
 					<li><a href="{{url('admin/xtAdmin/permission')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>权限列表</a></li>
+
+				</ul>
+			</li>
+			<li>
+				<h3><i class="fa fa-fw fa-clipboard"></i>订单模块</h3>
+				<ul class="sub_menu">
+					<li><a href="{{url('admin/xtAdmin/orderlist')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>订单浏览</a></li>
 
 				</ul>
 			</li>
@@ -88,5 +109,4 @@
 		CopyRight © 2015. Powered By <a href="http://www.itxdl.cn">http://www.itxdl.cn</a>.
 	</div>
 	<!--底部 结束-->
-
 @endsection

@@ -143,103 +143,36 @@ class RoleController extends Controller
     }
 
     /**
-     * 修改角色
      * Show the form for editing the specified resource.
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-//        通过ID找到要修改的角色
-        $role = Role::find($id);
-//        dd($role);
-        return view('admin/xtAdmin/role/edit',compact('role'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
-     * 执行修改角色
+     *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-//        1. 获得表单提交的数据
-        $input = $request->except('_token','_method');
-//        dd($input);
-
-//        2. 表单验证
-        $rule = [
-            'name'=>'required|between:2,10',
-            "description"=>'required|between:0,200'
-        ];
-
-
-        $mess = [
-            'name.required'=>'角色名称必须输入',
-            'name.between'=>'角色名称必须在2到10位之间',
-            'description.required'=>'角色描述必须输入',
-            'description.between'=>'角色描述必须在0到200字之间',
-        ];
-
-        $validator =  Validator::make($input,$rule,$mess);
-        //如果表单验证失败 passes()
-        if ($validator->fails()) {
-            return redirect('admin/xtAdmin/role/'.$id.'/edit')
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-//        3. 执行修改
-        $res = Role::find($id)->update($input);
-
-//        4. 判断是否成功
-        if ($res) {
-            return redirect('admin/xtAdmin/role')->with('msg','修改成功');
-        } else {
-            return redirect('admin/xtAdmin/role/'.$id.'/edit')->with('msg','修改失败');
-        }
+        //
     }
 
     /**
      * Remove the specified resource from storage.
-     * 删除角色
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $role = Role::find($id);
-
-//        开启事务
-        DB::beginTransaction();
-        try{
-//            删除管理员中的此角色
-            DB::table('adminuser_role')->where('rid',$id)->delete();
-//            删除此角色拥有的权限
-            DB::table('role_permission')->where('rid',$id)->delete();
-//            执行删除
-            $res = $role->delete();
-        }catch(Exception $e){
-            DB::rollBack();
-        }
-        DB::commit();
-
-
-//        判断是否删除
-        if($res){
-            $data =[
-                'status'=> 0,
-                'msg'=>'删除成功'
-            ];
-        }else{
-            $data =[
-                'status'=> 1,
-                'msg'=>'删除失败'
-            ];
-        }
-
-        return $data;
+        //
     }
 }

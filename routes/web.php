@@ -7,41 +7,36 @@ Route::get('/', function () {
 
 // 登录系统后台
 Route::get('admin/xtAdmin/login','Admin\xtAdmin\LoginController@login');
-//验证码
-Route::get('admin/xtAdmin/code','Admin\xtAdmin\LoginController@code');
 //验证登录
 Route::post('admin/xtAdmin/dologin','Admin\xtAdmin\LoginController@doLogin');
-// 系统后台管理员申请
-Route::get('admin/xtAdmin/register','Admin\xtAdmin\RegisterController@register');
-//验证申请
-Route::post('admin/xtAdmin/doregister','Admin\xtAdmin\RegisterController@doregister');
 
 // 系统后台
 Route::group(['middleware'=>['adminIslogin'],'prefix'=>'admin/xtAdmin','namespace'=>'Admin\xtAdmin'],function(){
     //进入系统后台首页
-    Route::get('index','IndexController@index');
-    Route::get('info','IndexController@info');
-//    退出登录
-    Route::get('logout','IndexController@logout');
-
-//    修改密码
-    Route::get('password/edit/{id}','PasswordController@edit');
-//    执行修改
-    Route::post('password/update','PasswordController@update');
+Route::get('index','IndexController@index');
+Route::get('info','IndexController@info');
+Route::get('logout','IndexController@logout');
 
 //    管理员模块
-    Route::resource('adminUser ','Admin_userController');
-    Route::resource('adminUser','Admin_userController');
-//    管理员申请列表
-    Route::get('ask','Admin_userController@ask');
-//    删除申请表中的申请记录
-    Route::post('delask/{id}','Admin_userController@delask');
-    Route::get('delasks/{id}','Admin_userController@delasks');
-
+Route::resource('adminUser ','Admin_userController');
 //    授权管理员
-    Route::get('adminUser/auth/{id}','Admin_userController@auth');
+ Route::get('adminUser/auth/{id}','Admin_userController@auth');
 //    执行管理员授权
-    Route::post('adminUser/doauth','Admin_userController@doauth');
+Route::post('adminUser/doauth','Admin_userController@doauth');
+
+// 个人用户模块
+//显示个人用户列表
+Route::get('person/lists','PersonController@lists');
+//用户删除
+Route::post('person/del/{id}','PersonController@del');
+
+
+//商户模块
+//显示商户列表
+Route::get('boss/lists','BossController@lists');
+//商户删除
+Route::post('boss/del/{id}','BossController@del');
+
 
 //    商户分类模块
 //    添加分类
@@ -57,7 +52,7 @@ Route::group(['middleware'=>['adminIslogin'],'prefix'=>'admin/xtAdmin','namespac
 //    执行修改
     Route::post('/shop_type/update','Shop_typeController@update');
 //    删除分类
-    Route::post('/shop_type/delCate/{id}','Shop_typeController@del');
+    Route::post('/shop_type/delCate/{id}','Shop_typeController@delete');
 
 //    角色模块
     Route::resource('role','RoleController');
@@ -68,6 +63,9 @@ Route::group(['middleware'=>['adminIslogin'],'prefix'=>'admin/xtAdmin','namespac
 
 //    权限模块
     Route::resource('permission','PermissionController');
+//  订单模块
+    Route::get('orderlist','OrderController@orderlist');
+
 });
 // 如果管理员没有权限则执行这个路由
 Route::get('errors/auth',function(){
@@ -76,7 +74,7 @@ Route::get('errors/auth',function(){
 
 //前台登录
 //短信登录页面
-Route::get('home/login','Home\LoginController@login');
+Route::get('/home/login','Home\LoginController@login');
 //验证码
 Route::get('home/yzm','Home\LoginController@yzm');
 //验证码生成
@@ -93,29 +91,44 @@ Route::post('home/dologin2','Home\LoginController@dologin2');
 Route::get('home/index','Home\IndexController@index');
 //进入商家店铺
 Route::get('home/shop/{id}','Home\IndexController@shop');
-Route::get('/crypt','Home\LoginController@crypt');
+
 
 // CChome前台
 Route::group(['middleware'=>['homeIslogin'],'prefix'=>'home','namespace'=>'Home'],function(){
 //退出登录
 Route::get('quit','IndexController@quit');
 //个人中心
-    Route::get('/percenter','PersonController@percenter');
+Route::get('/percenter','PersonController@percenter');
 //前台的个人资料
 Route::get('/person','PersonController@index');
 Route::post('/person/edit','PersonController@edit');
+//前台订单展示
+Route::get('/person/3order','PersonController@order');
+//前台订单详情
+Route::get('/person/orderinfo/{id}','PersonController@orderinfo');
+//收货
+Route::get('/person/shouhuo/{id}','PersonController@shouhuo');
 //显示编辑头像
 Route::get('/avatar','PersonController@avatar');
+//执行头像编辑
 Route::post('/avatar/upload','PersonController@upload');
+//将上传的头像保存到数据库中
+Route::post('/avatar/doupload','PersonController@doupload');
+
 //更改手机号
 //显示更改手机号的页面
 Route::get('/changephone','PersonController@changephone');
+Route::post('/sendcode','PersonController@sendcode');
+Route::post('/dochangephone','PersonController@dochangephone');
 //设置密码
 Route::get('/setpwd','PersonController@setpwd');
 Route::post('/dosetpwd','PersonController@dosetpwd');
+
 //修改密码
 Route::get('/changepwd','PersonController@changepwd');
 Route::post('/dochangepwd','PersonController@dochangepwd');
+
+
 //地址管理
 //显示地址
 Route::get('/address','PersonController@address');
@@ -125,8 +138,21 @@ Route::post('/person/insertsite','PersonController@insertsite');
 Route::post('/person/editsite','PersonController@editsite');
 //执行修改
 Route::post('/person/updatesite','PersonController@updatesite');
+//执行地址删除
+Route::post('/person/del','PersonController@del');
+
 //安全中心
 Route::get('/safe','PersonController@safe');
+
+//邮箱绑定
+//显示绑定邮箱的页面
+Route::get('/bdemail','PersonController@bdemail');
+//执行邮箱绑定
+Route::post('/dobdemail','PersonController@dobdemail');
+//邮件注册激活路由
+Route::get('/active','RegisterController@active');
+
+
 //购物车
 //把菜品添加到购物车
 Route::post('/addcart/','CartController@addcart');
@@ -153,8 +179,6 @@ Route::post('/order/insertsite','OrderController@insertsite');
 Route::get('/order/indexsite','OrderController@indexsite');
 //修改地址页
 Route::get('/order/editsite','OrderController@editsite');
-//删除地址
-Route::post('/order/delsite','OrderController@delsite');
 //修改执行方法
 Route::post('/order/updatesite','OrderController@updatesite');
 //执行确认下单
@@ -170,7 +194,6 @@ Route::get('/order/ddsx','OrderController@ddsx');
 
 
 });
-
 
 //商家后台, 菜品标签模块
 Route::resource('admin/foodlabel','Admin\shAdmin\FoodLabelController');
@@ -223,11 +246,19 @@ Route::get('/shadmin/order/jd/{id}','orederController@jd');
 });
 
 //用户评论
-//Route::get('home/comment/index','home\CommentController@index');
-//Route::post('comment/add','CommentController@add');
+Route::get('home/comment/index','home/CommentController@index');
+Route::post('comment/add','CommentController@add');
+
+
+
+
+
+
+
 
 //商户的入驻申请
 Route::get('home/reg','Home\RegController@reg');
 
 Route::post('home/doreg','Home\RegController@doreg');
+
 

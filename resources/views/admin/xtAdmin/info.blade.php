@@ -4,7 +4,6 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="{{asset('/wf/admin/style/css/ch-ui.admin.css')}}">
 	<link rel="stylesheet" href="{{asset('/wf/admin/style/font/css/font-awesome.min.css')}}">
-    <script type="text/javascript" src="{{asset('wf/admin/style/js/jquery.js')}}"></script>
 </head>
 <body>
 
@@ -13,14 +12,6 @@
             <h3>系统基本信息</h3>
         </div>
         <div class="result_content">
-            <div class="alert alert-danger">
-                <ul>
-                    @if(session('msg'))
-                        <li class="dh" style="color:red">{{session('msg')}}</li>
-                    @endif
-                </ul>
-
-            </div>
             <ul>
                 <li>
                     <label>操作系统</label><span>WINNT</span>
@@ -65,10 +56,6 @@
         </div>
     </div>
 	<!--结果集列表组件 结束-->
-    <script>
-        //    提示信息淡出
-        $('.dh').fadeOut(3000);
-    </script>
 
 </body>
 </html>

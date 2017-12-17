@@ -15,7 +15,21 @@
 <!-- ngIf: pageTitleVisible -->
 <h3 ng-if="pageTitleVisible" class="profile-paneltitle ng-scope"><span ng-bind="pageTitle" class="ng-binding">地址管理</span> <span class="subtitle ng-binding" ng-bind-html="pageSubtitle | toTrusted"></span></h3>
 <!-- end ngIf: pageTitleVisible -->
-<div class="profile-panelcontent" ng-transclude="">
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @if(is_object($errors))
+                    @foreach ($errors->all() as $error)
+                        <li style="color:red">{{ $error }}</li>
+                    @endforeach
+                @else
+                    <li style="color:red">{{ $errors }}</li>
+                @endif
+            </ul>
+        </div>
+    @endif
+
+    <div class="profile-panelcontent" ng-transclude="">
 
     <div class="loading ng-binding ng-isolate-scope ng-hide" loading="" content="正在载入地址..." ng-show="addressLoading">
         <!-- ngIf: type==='profile' -->
@@ -24,13 +38,12 @@
         <!-- ngIf: type==='normal' -->正在载入地址...
     </div>
     <div class="desktop-addresslist clearfix ng-scope" ng-hide="addressLoading">
+        @if (!$addr=='')
         @foreach($addr as $k => $v)
-
         <div class="desktop-addressblock ng-scope" ng-repeat="address in userAddresses">
             <div class="desktop-addressblock-buttons">
                 <button class="desktop-addressblock-button edit" id="{{$v['id']}}" ng-click="editAddress(address)">修改</button>
-                <button class="desktop-addressblock-button del" id="{{$v['id']}}" ng-click="showMask = true">删除</button>
-            </div>
+                <button class="desktop-addressblock-button del" id="{{$v['id']}}" ng-click="showMask = true">删除</button></div>
             <div class="desktop-addressblock-name ng-binding">{{$v['name']}}
                 @if($v['sex']  == 1)
                 <span class="ng-binding">先生</span>
@@ -42,6 +55,7 @@
             <div class="desktop-addressblock-removebuttons ng-hide" ng-show="showMask"><p>确定删除收货地址?</p><button class="confirmdelete" ng-click="removeAddress(address)">确定</button> <button class="canceldelete" ng-click="showMask = false">取消</button></div>
         </div>
         @endforeach
+        @endif
         <div>
         <button id="btn" class="desktop-addressblock desktop-addressblock-addblock" ng-click="addAddress()"><i class="icon-plus" ><b></b></i>添加新地址</button>
         </div>
@@ -63,18 +77,14 @@
 
         });
 
+
             $('.edit').on('click',function () {
                 var id = $(this).attr('id');
 //             console.log(id);
-                 $.post('/home/person/editsite',{'_token':'{{csrf_token()}}','id':id},function(data){
+                $.post('/home/person/editsite',{'_token':'{{csrf_token()}}','id':id},function(data){
 
-//                     console.log(data);
-                     var name =  data.addrs[0].name;
-                     var sex =  data.addrs[0].sex;
-                     var id =  data.addrs[0].id;
-                     var addr =  data.addrs[0].addr;
-                     var phone =  data.addrs[0].phone;
-                     console.log(id);
+
+
                     layer.open({
                         type: 1,
                         skin: 'layui-layer-rim', //加上边框
@@ -87,25 +97,14 @@
 
             });
 
-
-
-
-
-
-
-
-
-
-
-
-
             $('.del').on('click',function(){
                 var id = $(this).attr('id');
+//                alert(id);
                 var thiss = $(this);
                 layer.confirm('您确定要删除吗？', {
                     btn: ['删除','取消'] //按钮
                     }, function(){
-                        $.post('/home/order/delsite',{'_token':'{{csrf_token()}}','id':id},function(data){
+                        $.post('/home/person/del',{'_token':'{{csrf_token()}}','id':id},function(data){
                             if(data == 1)
                             {
                                 thiss.parent().parent().remove();
@@ -115,20 +114,14 @@
                      layer.msg('删除成功', {icon: 1});
                 });
 
-
-
-
-                {{--$.post('/home/order/delsite',{'_token':'{{csrf_token()}}','id':id},function(data){--}}
-                   {{--if(data == 1)--}}
-                   {{--{--}}
-                     {{--thiss.parent().parent().remove();--}}
-                   {{--}--}}
-                {{--})--}}
             })
 
 
 
+
+
         function qx() {
+//        alert(111);
             layer.closeAll();
         }
 

@@ -56,6 +56,6 @@
 
     <script>
         //    提示信息淡出
-        $('.dh').fadeOut(3000);
+        $('.dh').fadeOut('slow');
     </script>
 @endsection

@@ -48,10 +48,10 @@
      <div ng-switch-default="" topbar-default="" state="state" class="ng-scope ng-isolate-scope">
         <header class="topbar" role="navigation" ng-class="{shoptopbar: state.type === 'shop'}">
             <div class="container clearfix">
-                <h1><a href="https://www.ele.me/" hardjump="" class="topbar-logo icon-logo"><span>曹操到家</span></a></h1>
-                <a href="https://www.ele.me/" hardjump="" class="topbar-item topbar-homepage" ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a>
-                <a href="https://www.ele.me/profile/order" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a>
-                <a href="https://h5.ele.me/service/cooperation/" target="_blank" class="topbar-item cooperation">加盟合作</a>
+                <h1><a href="{{url('home/index')}}" hardjump="" class="topbar-logo "><img src="{{url('')}}" alt=""><span>曹操到家</span></a></h1>
+                <a href="{{url('home/index')}}" hardjump="" class="topbar-item topbar-homepage" ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a>
+                <a href="{{url('home/person/3order')}}" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a>
+                <a href="#" target="_blank" class="topbar-item cooperation">加盟合作</a>
                 <nav class="topbar-nav">
                     <a ng-href="//h5.ele.me/service/agreement/#HEAEDER_SHOW=1" hardjump="" class="topbar-nav-link" target="_blank" href="https://h5.ele.me/service/agreement/#HEAEDER_SHOW=1">规则中心</a>
                     <div class="topbar-nav-link">
@@ -60,23 +60,23 @@
                             <span>扫一扫, 手机订餐更方便</span>
                             <img src="{{asset('a/image/appqc.95e532.png')}}" class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App" />
                         </div>
-                    </div>
-                    <div topbar-profilebox="">
+                     </div>
+                   <div topbar-profilebox="">
                         <div class="topbar-profilebox">
                             <!-- ngIf: $root.user.avatar && $root.topbarType !== 'checkout' -->
                             <span class="topbar-profilebox-avatar icon-profile ng-hide" ng-show="!$root.user.username"></span>
-                            <span ng-show="!$root.user.username" class="ng-hide"><a ng-href="//h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fprofile%2F" target="_blank" href="https://h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fprofile%2F">登录/注册</a></span>
+                            <span ng-show="!$root.user.username" class="ng-hide"><a ng-href="{{url('home/login2')}}" target="_blank" href="{{url('home/login2')}}">登录/注册</a></span>
                             <span class="topbar-profilebox-wrapper" ng-show="$root.user.username">
-          <!-- ngIf: $root.topbarType === 'checkout' --> <span class="topbar-profilebox-username ng-binding">{{$users->uname}}</span>
+          <!-- ngIf: $root.topbarType === 'checkout' --> <span class="topbar-profilebox-username ng-binding">{{session('user.uname')}}</span>
                                 <!-- ngIf: $root.topbarType === 'checkout' -->
                                 <!-- ngIf: $root.topbarType !== 'checkout' --><span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span>
                                 <!-- end ngIf: $root.topbarType !== 'checkout' -->
           <div class="dropbox topbar-profilebox-dropbox">
-           <a class="icon-profile" href="https://www.ele.me/profile" hardjump="">个人中心</a>
-           <a class="icon-star" href="https://www.ele.me/profile/favor" hardjump="">我的收藏</a>
-           <a class="icon-location" href="https://www.ele.me/profile/address" hardjump="">我的地址</a>
-           <a class="icon-setting" href="https://www.ele.me/profile/security" hardjump="">安全设置</a>
-           <a class="icon-logout" ng-click="logout()">退出登录</a>
+           <a class="icon-profile" href="{{url('home/percenter')}}" hardjump="">个人中心</a>
+           <a class="icon-star" href="{{url('home/collect')}}" hardjump="">我的收藏</a>
+           <a class="icon-location" href="{{url('home/address')}}" hardjump="">我的地址</a>
+           <a class="icon-setting" href="{{url('home/safe')}}" hardjump="">安全设置</a>
+           <a class="icon-logout"   href="{{url('home/tuichu/')}}">退出登录</a>
           </div></span>
                         </div>
                     </div>
@@ -134,7 +134,7 @@
             <li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle" ng-class="{ active: pageName === 'profile' }"><i class="icon-line-home"></i><a href="{{url('home/percenter')}}">个人中心</a></h2></li>
             <li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i class="icon-line-order"></i>我的订单</h2>
                 <ul>
-                    <li ng-class="{ active: pageName === 'order' }"><a href="https://www.ele.me/profile/order">近三个月订单</a></li>
+                    <li ng-class="{ active: pageName === 'order' }"><a href="{{url('/home/person/3order')}}">近三个月订单</a></li>
                     <li ng-class="{ active: pageName === 'order-unrated' }"><a href="https://www.ele.me/profile/order/unrated">待评价订单
                     <!-- ngIf: unratedNumber --></a></li>
                     <li ng-class="{ active: pageName === 'order-refunding' }"><a href="https://www.ele.me/profile/order/refund">退单记录</a></li>
@@ -212,5 +212,9 @@
         </div>
     </div>
 </footer>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
