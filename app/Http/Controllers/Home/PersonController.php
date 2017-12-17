@@ -125,7 +125,9 @@ class PersonController extends Controller
    {
         //获取在表单中修改后的内容
         $input = $request->except('_token');
-       //对修改的表单中的uname进行验证
+//        dd($input);
+       //对修改的
+       //表单中的uname进行验证
        $rule = [
            'uname'=>'required|regex:/^[\x{4e00}-\x{9fa5}A-Za-z0-9_]+$/u|between:5,20'
        ];
@@ -567,16 +569,15 @@ class PersonController extends Controller
     public function dobdemail(Request $request)
     {
         $users = Session::get('user');
-//     return $users;
+//    dd ($users);
         //接收从客户端传过来的绑定的邮箱数据
         $input = $request->except('_token');
 //        return $input;
         // 3. 向用户表中添加注册记录
         $input['email'] = $input['email'];
-
-
         $input['is_active'] = 1;
         $input['token'] = md5(mt_rand(000000,999999));
+        $input['code'] = mt_rand(111111,999999);
 //        dd($input);
         //添加成功后，返回刚才添加的那条用户记录
         $res =  User::find($users->uid)->update($input);
@@ -590,22 +591,14 @@ class PersonController extends Controller
 //        参数一： 对方收到的邮件模板
 //        参数二：邮件模板中需要的变量
 //        参数三：关于邮件注册的变量，如发件人，主题、收件人等信息
-            $code = mt_rand(1111,9999);
-            //将邮箱验证码$code存储到session中
-            Session::flush('codes', $code);
 
-            $res['codes'] = $code;
-
-//            return $res['codes'];
-            Mail::send('home.person.active', ['user' => $res,], function ($m) use ($res) {
+            Mail::send('home.person.active', ['user' => $res], function ($m) use ($res) {
                 //$m->from('hello@app.com', 'Your Application');
 
-                $m->to($res->email, $res->uname,$res->codes)->subject('blog邮箱激活!');
+                $m->to($res->email, $res->uname ,$res->code)->subject('blog邮箱激活!');
             });
 
-
-            return  $input['email'];
-
+            return ('home/yzemail');
         }else{
             return back();
         }
@@ -624,6 +617,22 @@ class PersonController extends Controller
 
     }
 
+
+    public function yzemail(Request $request)
+    {
+        $uid = Session::get('user.uid');
+//        $users = $users->toArray();
+        $users = User::find($uid);
+        $code = $users['code'];
+//        dd($code);
+        $codes = $request->except('_token','email');
+//        dd($codes['code'].'-----'.$code);
+       if($code == $codes['code'] ){
+                return redirect('home/person')->with('绑定成功');
+       }else {
+            return redirect('home/bdemail')->with('errors','绑定失败')->withInput();
+       }
+    }
 
 
 }

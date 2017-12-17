@@ -13,10 +13,12 @@ class MerController extends Controller
     {
 //        今日总订单数/
        $bid = \Session::get('meruser');
+//        dd($bid);
 //       dd($bid['bid']);
         $meruser=MerUser::with('shop')->find($bid['bid']);
+
+
         $sid=$meruser->shop[0]['sid'];
-//        dd($sid);
         //昨天最后一秒
         $beginToday=mktime(0,0,0,date('m'),date('d'),date('Y'));
 //        今天最后一秒
