@@ -92,13 +92,17 @@
                         <td>{{$v->email}}</td>
                         <td><img src="{{$v->avatar}}" style="width:50px;"></td>
                         <td>
-                            @if('{{$v->status == 0}}')
+
                             <a href="javascript:;">禁用</a>
-                            @else
+
                             <a href="javascript:;">启用</a>
-                            @endif
+
                         </td>
                         <td>
+                            <a href="javascript:;">禁用</a>
+
+                            <a href="javascript:;">启用</a>
+
                             <a onclick="userDel({{$v->uid}})" href="javascript:;">删除</a>
                         </td>
 

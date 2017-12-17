@@ -30,8 +30,12 @@
                 <!-- ngIf: !user.is_mobile_valid --></p>
             <p class="profileinfo-item"><span class="profileinfo-label">我的邮箱</span>
                 <!-- ngIf: user.is_email_valid -->
+                @if(empty($users['email']))
                 <!-- ngIf: !user.is_email_valid --><span ng-if="!user.is_email_valid" class="ng-scope"><span class="profileinfo-value unbind">未绑定</span> <a class="profileinfo-link unbind" href="{{asset('home/bdemail')}}">[立即绑定]</a></span>
-                <!-- end ngIf: !user.is_email_valid --></p>
+                @else
+                        <span ng-if="!user.is_email_valid" class="ng-scope"><span class="profileinfo-value unbind">{{$users['email']}}</span> <a class="profileinfo-link unbind" >[已绑定]</a></span>
+                            @endif
+                            <!-- end ngIf: !user.is_email_valid --></p>
 
 
 

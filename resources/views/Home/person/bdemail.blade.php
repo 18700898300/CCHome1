@@ -8,7 +8,7 @@
     <!-- ngIf: !success -->
     <div ng-if="!success" class="ng-scope">
         <div security-verify-form="" link="formLink" class="ng-isolate-scope">
-            <form class="security-service ng-pristine ng-valid" action="{{url('home/dobdemail')}}" method="post">
+            <form class="security-service ng-pristine ng-valid" action="{{url('home/yzemail')}}" method="post">
                 {{csrf_field()}}
                 <!-- ngIf: link.serviceText -->
                 <p class="service-text ng-binding ng-scope" ng-if="link.serviceText" ng-bind="link.serviceText">饿了么提示您：为了保障你的账户安全，请及时绑定邮箱！</p>
@@ -38,7 +38,7 @@
                 </div>
                 <!-- end ngIf: link.verify.type === 'email' -->
                 <div class="form-group">
-                    <button onclick="check()" type="submit" class="btn-primary btn-lg security-submit ng-binding" ng-bind="link.submitText">验证邮箱</button>
+                    <button type="submit" class="btn-primary btn-lg security-submit ng-binding" ng-bind="link.submitText">验证邮箱</button>
                 </div>
             </form>
         </div>
@@ -92,6 +92,8 @@
                         },
 //
                     });
+
+                    layer.close();
                 } else {
                     alert("抱歉!未找到对应的邮箱登录地址，请自己登录邮箱查看邮件！");
                 }
@@ -152,6 +154,8 @@
                 }
             };
         }
+
+
 
 
     </script>

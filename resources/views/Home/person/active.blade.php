@@ -8,6 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-        <p>尊敬的{{$user['uname']}},感谢您注册我们的blog，请登录您的邮箱绑定 ，并在24小时内绑定您的登录账号, 你的验证码是{{session('codes')}}快去绑定吧!!!</p>
+        <p>尊敬的{{$user['uname']}},感谢您注册我们的blog，请登录您的邮箱绑定 ，并在24小时内绑定您的登录账号, 你的验证码是{{$user['code']}}快去绑定吧!!!</p>
 </body>
 </html>

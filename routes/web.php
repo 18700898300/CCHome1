@@ -138,7 +138,9 @@ Route::get('/bdemail','PersonController@bdemail');
 //执行邮箱绑定
 Route::post('/dobdemail','PersonController@dobdemail');
 //邮件注册激活路由
-Route::get('/active','RegisterController@active');
+Route::get('/active','PersonController@active');
+//验证邮箱
+Route::post('/yzemail','PersonController@yzemail');
 
 
 //购物车
