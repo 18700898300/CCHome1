@@ -90,6 +90,10 @@ class MerchantController extends Controller
 
 //        4.登录成功将用户信息存入session
         Session::put('meruser',$meruser);
+
+        $id = session('meruser')['bid'];
+        $shop = MerUser::find($id)->shop;
+        session('meruser')['sid'] = $shop['sid'];
         return redirect('admin/merindex');
 
 

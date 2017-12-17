@@ -38,9 +38,10 @@
     <!--结果集标题与导航组件 结束-->
 
     <div class="result_wrap">
-        <form id="food" action="{{url('/admin/food')}}" method="post" enctype="multipart/form-data">
+        <form id="food" action="{{url('/admin/food')}}/{{$food->fid}}" method="post" enctype="multipart/form-data">
             <table class="add_tab">
                 {{csrf_field()}}
+                {{method_field('put')}}
                 <tbody>
                 <tr>
                     <th width="120"><i class="require">*</i>菜品分类：</th>
@@ -49,23 +50,27 @@
                         <select name="lid">
 
                             @foreach($labels as $k=>$v)
-                                <option value="{{$v->lid}}">{{$v->name}}</option>
+                                @if($food->lid == $v->lid)
+                                <option selected value="{{$v->lid}}">{{$v->name}}</option>
+                                @endif
+                                <option  value="{{$v->lid}}">{{$v->name}}</option>
                             @endforeach
                         </select>
                     </td>
                 </tr>
+                <input type="hidden" name="sum" value="{{$food->sum}}">
                 <tr>
                     <th width="120"><i class="require">*</i>菜品名称：</th>
                     <td>
                         <input type="hidden" name="sid" value="{{$sid}}">
-                        <input type="text" name="fname">
+                        <input type="text" name="fname" value="{{$food->fname}}">
                         <span><i class="fa fa-exclamation-circle yellow"></i>菜品名称必须填写</span>
                     </td>
                 </tr>
                 <tr>
                     <th><i class="require">*</i>菜品价格：</th>
                     <td>
-                        <input type="text" name="price">
+                        <input type="text" name="price" value="{{$food->price}}">
                     </td>
                 </tr>
 
@@ -74,8 +79,8 @@
                     <th><i class="require">*</i>菜品图片：</th>
                     <td>
                         <input id="file_upload" type="file" name="pic" multiple><br>
-                        <img src="" id="img1" alt="" style="width:80px;height:80px"><br>
-                        <input type="hidden" name="fpic" id="art_thumb" >
+                        <img src="{{$food->fpic}}" id="img1" alt="" style="width:80px;height:80px"><br>
+                        <input type="hidden" name="fpic" id="art_thumb" value="{{$food->fpic}}">
 
                         <script type="text/javascript">
                             $(function () {
@@ -99,11 +104,12 @@
                                     return;
                                 }
 //                                取得表单所有信息
-                                var formData = new FormData($('#food')[0]);
+//                                var formData = new FormData($('#food')[0]);
 //                                取得表单某个信息
-                                {{--var formData = new FormData();--}}
-                                {{--formData.append('file_upload', $('#file_upload')[0].files[0]);--}}
-                                {{--formData.append('_token',"{{csrf_token()}}");--}}
+                                var formData = new FormData();
+//                                pic ,代表变量名,在控制器中接收
+                                formData.append('pic', $('#file_upload')[0].files[0]);
+                                formData.append('_token',"{{csrf_token()}}");
                                 $.ajax({
                                     type: "POST",
                                     url: "/admin/food/upload",
@@ -115,8 +121,7 @@
                                     success: function(data) {
                                         console.log(data);
                                         $('#img1').attr('src','/uploads/'+data);
-//                                            $('#img1').attr('src','http://p09v2gc7p.bkt.clouddn.com/uploads/'+data);
-//                                            $('#img1').attr('src','http://project193.oss-cn-beijing.aliyuncs.com/'+data);
+//                                            console.log(data);
                                         $('#img1').show();
                                         $('#art_thumb').val('/uploads/'+data);
                                     },
@@ -131,15 +136,20 @@
                 <tr>
                     <th><i class="require">*</i>菜品状态：</th>
                     <td>
+                        @if($food->status == 1)
                         <input type="radio" name="status" checked value="1">在售
                         <input type="radio" name="status" value="2">售空
+                        @else
+                            <input type="radio" name="status" value="1">在售
+                            <input type="radio" checked name="status" value="2">售空
+                        @endif
                     </td>
                 </tr>
 
                 <tr>
                     <th><i class="require">*</i>菜品描述：</th>
                     <td>
-                        <textarea name="description"></textarea>
+                        <textarea name="description">{{$food->description}}</textarea>
                         <span><i class="fa fa-exclamation-circle yellow"></i>200字以内</span>
                     </td>
                 </tr>

@@ -5,20 +5,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 // 登录系统后台
 Route::get('admin/xtAdmin/login','Admin\xtAdmin\LoginController@login');
 //验证登录
 Route::post('admin/xtAdmin/dologin','Admin\xtAdmin\LoginController@doLogin');
 
 // 系统后台
-Route::group(['middleware'=>['adminIslogin'],'prefix'=>'admin/xtAdmin','namespace'=>'Admin\xtAdmin'],function(){
+Route::group(['middleware'=>['adminIslogin','HasRole'],'prefix'=>'admin/xtAdmin','namespace'=>'Admin\xtAdmin'],function(){
     //进入系统后台首页
 Route::get('index','IndexController@index');
 Route::get('info','IndexController@info');
 Route::get('logout','IndexController@logout');
 
 //    管理员模块
-Route::resource('adminUser ','Admin_userController');
+
+    Route::resource('adminUser','Admin_userController');
+//    管理员申请列表
+    Route::get('ask','Admin_userController@ask');
+//    删除申请表中的申请记录
+    Route::post('delask/{id}','Admin_userController@delask');
+    Route::get('delasks/{id}','Admin_userController@delasks');
+
+
 //    授权管理员
  Route::get('adminUser/auth/{id}','Admin_userController@auth');
 //    执行管理员授权
@@ -94,6 +103,17 @@ Route::get('home/shop/{id}','Home\IndexController@shop');
 
 
 // CChome前台
+
+Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
+//    进入前台首页
+    Route::get('index', 'IndexController@index');
+//    点击一级分类显示二级分类
+    Route::post('index/type/{id}','IndexController@type');
+//    进入商家店铺
+    Route::get('shop/{id}', 'IndexController@shop');
+});
+
+
 Route::group(['middleware'=>['homeIslogin'],'prefix'=>'home','namespace'=>'Home'],function(){
 //退出登录
 Route::get('quit','IndexController@quit');
@@ -195,11 +215,6 @@ Route::get('/order/ddsx','OrderController@ddsx');
 
 });
 
-//商家后台, 菜品标签模块
-Route::resource('admin/foodlabel','Admin\shAdmin\FoodLabelController');
-//商家后台, 菜品管理模块
-Route::resource('admin/food','Admin\shAdmin\FoodController');
-Route::post('admin/food/upload','Admin\shAdmin\FoodController@upload');
 
 
 //商户注册
@@ -243,22 +258,22 @@ Route::get('/shadmin/order/jd/{id}','orederController@jd');
 
 
 
-});
 
 //用户评论
 Route::get('home/comment/index','home/CommentController@index');
 Route::post('comment/add','CommentController@add');
 
 
-
-
-
-
+//商家后台, 菜品标签模块
+Route::resource('foodlabel','shAdmin\FoodLabelController');
+//商家后台, 菜品管理模块
+Route::resource('food','shAdmin\FoodController');
+//执行菜品图片上传
+Route::post('food/upload','shAdmin\FoodController@upload');
+});
 
 
 //商户的入驻申请
 Route::get('home/reg','Home\RegController@reg');
 
 Route::post('home/doreg','Home\RegController@doreg');
-
-

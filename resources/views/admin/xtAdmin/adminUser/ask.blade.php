@@ -1,12 +1,12 @@
 @extends('admin.xtAdmin.common')
 @section('title')
-    <title>商户菜品浏览页面</title>
+    <title>后台管理员申请页面</title>
 @endsection
 @section('body')
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">菜品管理</a> &raquo; 查看菜品
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">设置管理员</a> &raquo; 管理员申请
     </div>
     <!--面包屑导航 结束-->
 
@@ -49,40 +49,30 @@
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th class="tc" width="5%">分类</th>
-                        <th class="tc" >菜品名字</th>
-                        <th class="tc">菜品价格</th>
-                        <th class="tc" >菜品照片</th>
-                        <th class="tc" >菜品状态</th>
-                        <th class="tc" >菜品描述</th>
-                        <th>操作</th>
+                        <th class="tc" width="5%">ID</th>
+                        <th class="tc">申请人名称</th>
+                        <th class="tc">联系电话</th>
+                        <th class="tc">申请时间</th>
+                        <th >操作</th>
                     </tr>
 
-                @foreach($arr as $k=>$v)
-                        @foreach($v->food as $m=>$n)
+
+                @foreach($asks as $k=>$v)
                     <tr>
-                        <td>{{$v->name}}</td>
+                        <td class="tc">{{$v->id}}</td>
+                        <td class="tc">{{$v->aname}}</td>
 
-                        <td class="tc">{{$n->fname}}</td>
-                        <td class="tc">{{$n->price}}</td>
-                        <td class="tc"><img style="width:80px;height:80px" src="{{asset($n->fpic)}}"></td>
+                        <td class="tc">{{$v->phone}}</td>
+                        <td class="tc">{{date('Y-m-d H:i:s',$v->time)}}</td>
+
                         <td class="tc">
-                            @if($n->status == 1)
-                                在售
-                            @else
-                                售空
-                            @endif
-                        </td>
-                        <td class="tc">{{$n->description}}</td>
-
-
-                        <td>
-                            <a href="{{url('admin/food/'.$n->fid.'/edit')}}">修改</a>
-                            <a href="javascript:;" onclick="delFood({{$n->fid}})">删除</a>
+                            <a href="javascript:;" onclick="creUser({{$v}})">通过</a>
+                            <a href="{{url('admin/xtAdmin/delasks')}}/{{$v->id}}">拒绝</a>
                         </td>
                     </tr>
+
+
                     @endforeach
-                @endforeach
 
                 </table>
 
@@ -96,36 +86,39 @@
 
     <script>
 
-
-        
-        function delFood(id) {
-
+        //添加管理员
+        function creUser(user) {
             //询问框
-            layer.confirm('您确认删除吗？', {
+            layer.confirm('您确认通过吗？', {
                 btn: ['确认','取消'] //按钮
             }, function(){
 //                如果用户发出删除请求，应该使用ajax向服务器发送删除请求
 //                $.get("请求服务器的路径","携带的参数", 获取执行成功后的额返回数据);
                 //admin/user/1
-                $.post("{{url('admin/food')}}/"+id,{"_token":"{{csrf_token()}}","_method":"delete"},function(data){
-                    //alert(data);
+                var id = user['id'];
+                $.post("{{url('admin/xtAdmin/adminUser')}}",{"_token":"{{csrf_token()}}","user":user},function(data){
+//                    console.log(data);
 //                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
-                   //var res =  JSON.parse(data);
-//                    删除成功
-                   if(data.status == 0){
-                       //console.log("错误号"+res.error);
-                       //console.log("错误信息"+res.msg);
-                       layer.msg(data.msg, {icon: 6});
+//                    var res =  JSON.parse(data);
+                    if(data.status == 0){
+
+                        layer.msg(data.msg, {icon: 6});
 //                       location.href = location.href;
-                       var t=setTimeout("location.href = location.href;",1000);
-                   }else{
-                       layer.msg(data.msg, {icon: 5});
 
-                       var t=setTimeout("location.href = location.href;",1000);
-                       //location.href = location.href;
-                   }
+                    }else{
+                        layer.msg(data.msg, {icon: 5});
 
+                        var t=setTimeout("location.href = location.href;",1000);
+                        //location.href = location.href;
+                    }
 
+                });
+
+                $.post("{{url('admin/xtAdmin/delask')}}/"+id,{"_token":"{{csrf_token()}}"},function(data){
+//                    console.log(data);
+//                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
+//                    var res =  JSON.parse(data);
+                    var t=setTimeout("location.href = location.href;",1000);
                 });
 
 
@@ -133,6 +126,9 @@
 
             });
         }
+
+
+
         //    提示信息淡出
         $('.dh').fadeOut(3000);
 

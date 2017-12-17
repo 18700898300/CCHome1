@@ -27,6 +27,7 @@ class IndexController extends Controller
     public function logout()
     {
         session()->flush();
+//        dd(session('user'));
 
         return redirect('admin/xtAdmin/login');
     }

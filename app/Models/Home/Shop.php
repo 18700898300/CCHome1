@@ -12,8 +12,15 @@ class Shop extends Model
     public $guarded = [];
     public $timestamps = false;
 
+
+//    关联Food_label 模型,获得当前商户菜品的所有标签
+    public function food_label()
+    {
+        return $this->hasMany('App\Models\Home\Food_label','sid','sid');
+    }
+
     public function food()
     {
-        return $this->hasMany('App\Models\Home\Food','did','sid');
+        return $this->hasMany('App\Models\Home\Food','sid','sid');
     }
 }

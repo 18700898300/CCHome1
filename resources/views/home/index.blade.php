@@ -28,11 +28,15 @@
 
 
     <!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
+
     <script src="{{asset('a/js/69e30c57868b46e7a0d2b4a6c711970a.js')}}" data-ref="API_CONFIG"></script>
     <script src="{{asset('a/js/perf.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{asset('a/js/vendor.8c3a5a.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{asset('a/js/main.a0cd82.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{asset('/wf/admin/style/js/jquery.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+
+    <script src="{{asset('/layer/layer.js')}}"></script>
+
 </head>
 
 <body cute-title ng-class="{hidesidebar: layoutState && layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}">
@@ -57,6 +61,7 @@
                     </div>
                     <div >
                         <div class="topbar-profilebox">
+
                             <!-- ngIf: $root.user.avatar && $root.topbarType !== 'checkout' -->
                             <span class="topbar-profilebox-avatar icon-profile " ng-show="!$root.user.username"></span>
                             @if(empty(session('user')))
@@ -90,6 +95,7 @@
 
 
                             </script>
+
                         </div>
                     </div>
 
@@ -104,7 +110,7 @@
         <div class="toolbar-tabs-middle">
             <a class="toolbar-btn icon-order toolbar-close" href="/profile/order" hardjump="" tooltip="我的订单" tooltip-placement="left" ubt-click="toolbar_order"></a>
             <div class="toolbar-separator"></div>
-            <a class="toolbar-cartbtn icon-cart toolbar-open" href="JavaScript:" template="cart" ng-class="{'focus': (activeTemplate === 'cart' && isSidebarOpen), 'toolbar-cartbtn-shownum': foodCount.count}" ubt-click="390">购物车</a>
+            <a class="toolbar-cartbtn icon-cart toolbar-open" href="{{url('home/cart')}}" template="cart" ng-class="{'focus': (activeTemplate === 'cart' && isSidebarOpen), 'toolbar-cartbtn-shownum': foodCount.count}" ubt-click="390">购物车</a>
             <div class="toolbar-separator"></div>
             <a class="toolbar-btn icon-notice toolbar-open modal-hide" href="JavaScript:" template="message" ng-class="{'focus': (activeTemplate === 'message' && isSidebarOpen), 'toolbar-open': user, 'modal-hide': user}" tooltip="我的信息" tooltip-placement="left" ubt-click="392"></a>
         </div>
@@ -148,69 +154,103 @@
         <span ng-transclude="">
             <i class="icon-arrow-right ng-scope"></i>
             <span class="ng-scope">服务中心</span>
-        </span>-->
+        </span> -->
 </div>
 
 <div class="container ng-scope" ng-show="!recentBoughtOnly">
     <div class="excavator container">
         <div class="excavator-filter ng-scope">
             <span>商家分类:</span>
-            <a class="excavator-filter-item ng-binding ng-scope active" href="javascript:">全部商家</a>
-            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:">美食</a>
-            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:">快餐便当</a>
-            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">特色菜系</a>
-            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">异国料理</a>
-            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">小吃夜宵</a>
-            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">甜品饮品</a>
-            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">果蔬生鲜</a>
-            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">商店超市</a>
-            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">早餐</a>
-            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">正餐优选</a>
-            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">下午茶</a>
-            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">夜宵</a>
-            <a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">鲜花蛋糕</a>
-            <div class="excavator-filter-subbox ng-hide" ng-show="subCategories"></div>
+            <a onclick="sho(0)" class="excavator-filter-item ng-binding ng-scope active" href="javascript:">全部商家</a>
+        @foreach($cates as $m=>$n)
+        @if($n->pid==0)
+            <a onclick="sho({{$n['tid']}})" id="{{$n['tid']}}"  class="excavator-filter-item ng-binding ng-scope" href="javascript:;">{{$n->tname}}</a>
+        @endif
+
+        @endforeach
+
+        <div id="fenlei"></div>
+
         </div>
     </div>
+
+
+    <div class="alert alert-danger">
+        <ul>
+            @if(session('msg'))
+                <li class="dh" style="color:red">{{session('msg')}}</li>
+            @endif
+        </ul>
+    </div>
+    <script>
+        //    提示信息淡出
+        $('.dh').fadeOut(2000);
+
+
+        function sho(id) {
+            $('.excavator-filter-item').attr('class','excavator-filter-item ng-binding ng-scope ');
+
+            $.ajax({
+                type:'post',
+                data:{'_token':'{{csrf_token()}}'},
+                url:'/home/index/type/'+id,
+                success:function(data){
+//                    console.log(data[1][0][0]['name']);
+                    $('#fenlei').html(data[0]);
+                    $('#shop').html(data[1]);
+                    $('#'+id).attr('class','excavator-filter-item ng-binding ng-scope active');
+                }
+            });
+
+
+        }
+
+
+    </script>
     <div class="place-rstbox clearfix">
-        <div class="clearfix"  style="height: 800px;">
-            <a class="rstblock" href="{{url('home/shop')}}" data-rst-id="152185819" data-bidding="" target="_blank">
-                <div class="rstblock-logo">
-                    <img class="rstblock-logo-icon" src="//fuss10.elemecdn.com/8/05/dff0f9f103bd59af10cf0ef3b6accpng.png?imageMogr2/thumbnail/70x70" alt="麻小外卖（上地店）" width="70" height="70">
-                    <span>36 分钟</span>
-                </div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">麻小外卖（上地店）</div>
-                    <div class="starrating icon-star">
-                        <span class="icon-star" style="width:86%;"></span>
-                    </div>
-                    <span class="rstblock-monthsales">月售175单</span>
-                    <div class="rstblock-cost">配送费¥20</div>
-                    <div class="rstblock-activity"></div>
-                </div>
-            </a>
+        <div id="shop" class="clearfix"  style="height: 800px;">
+
 
             @foreach($shops as $k=>$v)
-            <a class="rstblock-closed rstblock" href="{{url('/home/shop')}}/{{$v->sid}}" data-rst-id="2218439" data-bidding="" target="_blank">
-                <div class="rstblock-logo">
-                    <img class="rstblock-logo-icon" src="//fuss10.elemecdn.com/c/1b/a7bb9dc920528d23e790b1a15bedajpeg.jpeg?imageMogr2/thumbnail/70x70" alt="麻辣香锅" width="70" height="70">
-                    <span class="rstblock-left-timeout">{{$v->statime}} 分钟</span>
-                </div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">{{$v->name}}</div>
-                    <div class="starrating icon-star">
-                        <span class="icon-star" style="width:90%;"></span>
-                    </div>
-                    <span class="rstblock-monthsales">月售2520单</span>
-                    <div class="rstblock-cost">配送费¥{{$v->sprice}}</div>
-                    <div class="rstblock-relaxing">商家休息,暂不接单</div>
-                </div>
-            </a>
+                @if($v->status==1)
+                    <a class=" rstblock" href="{{url('/home/shop')}}/{{$v->sid}}" data-rst-id="2218439" data-bidding="" target="_blank">
+                        <div class="rstblock-logo">
+                            <img class="rstblock-logo-icon" src="{{asset($v->avatar)}}" alt="麻辣香锅" width="70" height="70">
+                            <span class="rstblock-left-timeout">{{$v->statime}} 分钟</span>
+                        </div>
+                        <div class="rstblock-content">
+                            <div class="rstblock-title">{{$v->name}}</div>
+                            <div class="starrating icon-star">
+                                <span class="icon-star" style="width:90%;"></span>
+                            </div>
+                            <span class="rstblock-monthsales">月售999单</span>
+                            <div class="rstblock-cost">配送费¥{{$v->sprice}}</div>
+                            <div class="rstblock-activity"></div>
+                        </div>
+                    </a>
+                @else
+                    <a class="rstblock-closed rstblock" href="{{url('/home/shop')}}/{{$v->sid}}" data-rst-id="2218439" data-bidding="" target="_blank">
+                        <div class="rstblock-logo">
+                            <img class="rstblock-logo-icon" src="{{asset($v->avatar)}}" alt="麻辣香锅" width="70" height="70">
+                            <span class="rstblock-left-timeout">{{$v->statime}} 分钟</span>
+                        </div>
+                        <div class="rstblock-content">
+                            <div class="rstblock-title">{{$v->name}}</div>
+                            <div class="starrating icon-star">
+                                <span class="icon-star" style="width:90%;"></span>
+                            </div>
+                            <span class="rstblock-monthsales">月售2520单</span>
+                            <div class="rstblock-cost">配送费¥{{$v->sprice}}</div>
+                            <div class="rstblock-relaxing">商家休息,暂不接单</div>
+                        </div>
+                    </a>
+
+                @endif
             @endforeach
         </div>
-        <div class="loading ng-binding ng-isolate-scope ng-hide" ng-show="" loading="" content="正在载入更多商家..." type="normal">
-            <img class="normal ng-scope" ng-if="" src="" alt="正在加载"> 正在载入更多商家...
-        </div>
+        {{--<div class="loading ng-binding ng-isolate-scope ng-hide" ng-show="" loading="" content="正在载入更多商家..." type="normal">--}}
+            {{--<img class="normal ng-scope" ng-if="" src="" alt="正在加载"> 正在载入更多商家...--}}
+        {{--</div>--}}
         <div id="fetchMoreRst" class="">点击加载更多商家...</div>
         <div class="place-rstbox-nodata ng-hide" ng-show="">
             <img class="nodata" src="" alt="找不到商家" width="100">
@@ -287,9 +327,12 @@
                 </div>
             </div>
         </footer>
+
         <script src="{{asset('a/js/6936dbf3e7d94cffa954bcbcf2b79f38.js')}}"></script>
+
     </div>
 </div>
 </body>
+
 
 </html>

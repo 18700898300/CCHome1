@@ -1,12 +1,12 @@
 @extends('admin.xtAdmin.common')
 @section('title')
-    <title>商户菜品浏览页面</title>
+    <title>后台用户添加页面</title>
 @endsection
 @section('body')
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">菜品管理</a> &raquo; 查看菜品
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">分类管理</a> &raquo; 查看分类
     </div>
     <!--面包屑导航 结束-->
 
@@ -49,40 +49,27 @@
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th class="tc" width="5%">分类</th>
-                        <th class="tc" >菜品名字</th>
-                        <th class="tc">菜品价格</th>
-                        <th class="tc" >菜品照片</th>
-                        <th class="tc" >菜品状态</th>
-                        <th class="tc" >菜品描述</th>
+                        <th class="tc" width="5%">ID</th>
+                        <th class="tc">分类名称</th>
                         <th>操作</th>
                     </tr>
 
-                @foreach($arr as $k=>$v)
-                        @foreach($v->food as $m=>$n)
+
+                @foreach($labels as $k=>$v)
                     <tr>
-                        <td>{{$v->name}}</td>
 
-                        <td class="tc">{{$n->fname}}</td>
-                        <td class="tc">{{$n->price}}</td>
-                        <td class="tc"><img style="width:80px;height:80px" src="{{asset($n->fpic)}}"></td>
-                        <td class="tc">
-                            @if($n->status == 1)
-                                在售
-                            @else
-                                售空
-                            @endif
-                        </td>
-                        <td class="tc">{{$n->description}}</td>
+                        <td class="tc">{{$v->lid}}</td>
 
+                        <td class="tc">{{$v->name}}</td>
 
                         <td>
-                            <a href="{{url('admin/food/'.$n->fid.'/edit')}}">修改</a>
-                            <a href="javascript:;" onclick="delFood({{$n->fid}})">删除</a>
+                            <a href="{{url('admin/foodlabel/'.$v->lid.'/edit')}}">修改</a>
+                            <a href="javascript:;" onclick="delCate({{$v->lid}})">删除</a>
                         </td>
                     </tr>
+
+
                     @endforeach
-                @endforeach
 
                 </table>
 
@@ -96,9 +83,8 @@
 
     <script>
 
-
         
-        function delFood(id) {
+        function delCate(id) {
 
             //询问框
             layer.confirm('您确认删除吗？', {
@@ -107,10 +93,11 @@
 //                如果用户发出删除请求，应该使用ajax向服务器发送删除请求
 //                $.get("请求服务器的路径","携带的参数", 获取执行成功后的额返回数据);
                 //admin/user/1
-                $.post("{{url('admin/food')}}/"+id,{"_token":"{{csrf_token()}}","_method":"delete"},function(data){
-                    //alert(data);
+                $.post("{{url('admin/foodlabel')}}/"+id,{"_token":"{{csrf_token()}}","_method":"delete"},function(data){
+//                    alert(data);
+                    console.log(data);
 //                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
-                   //var res =  JSON.parse(data);
+//                   var res =  JSON.parse(data);
 //                    删除成功
                    if(data.status == 0){
                        //console.log("错误号"+res.error);

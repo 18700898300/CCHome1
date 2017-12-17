@@ -161,6 +161,37 @@ class Admin_userController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+//        找到要删除的记录
+        $user = AdminUser::find($id);
+
+//        开启事务
+        DB::beginTransaction();
+        try{
+//            删除管理员拥有的角色
+            DB::table('adminuser_role')->where('id',$id)->delete();
+//            执行删除
+            $res = $user->delete();
+        }catch(Exception $e){
+            DB::rollBack();
+        }
+        DB::commit();
+
+        $data = [];
+//        判断是否删除
+        if($res){
+            $data =[
+                'status'=> 0,
+                'msg'=>'删除成功'
+            ];
+        }else{
+            $data =[
+                'status'=> 1,
+                'msg'=>'删除失败'
+            ];
+        }
+
+        return $data;
+
     }
 }
