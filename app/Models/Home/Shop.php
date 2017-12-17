@@ -12,10 +12,11 @@ class Shop extends Model
     public $guarded = [];
     public $timestamps = false;
 
-    public function food()
-    {
-        return $this->hasMany('App\Models\Home\Food','fid','sid');
-    }
+
+//    public function food()
+//    {
+//        return $this->hasMany('App\Models\Home\Food','fid','sid');
+//    }
     public function cate(){
         return $this->belongsTo('App\Models\Admin\Shop_type','tid','tid');
     }
