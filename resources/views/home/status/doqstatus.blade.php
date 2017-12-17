@@ -93,7 +93,7 @@
         <th class="tc">法人身份证号</th>
         <th class="tc">公司名称</th>
         <th class="tc">审核状态</th>
-        @if($shop->status==3)
+        @if($shop->vstatus==3)
         <th class="tc">原因</th>
             @endif
     </tr>
@@ -101,13 +101,13 @@
             <td class="tc">{{$shop->number}}</td>
             <td class="tc">{{$shop->card}}</td>
             <td class="tc">{{$shop->name}}</td>
-            @if($shop->status==0)
+            @if($shop->vstatus==0)
             <td class="tc">待审核</td>
-                @elseif($shop->status==1)
+                @elseif($shop->vstatus==1)
                 <td class="tc">审核中</td>
-                @elseif($shop->status==2)
+                @elseif($shop->vstatus==2)
                 <td class="tc">审核通过</td>
-            @elseif($shop->status==3)
+            @elseif($shop->vstatus==3)
                 <td class="tc">审核不通过</td>
                 <td class="tc"  id="rea">{{$shop->reason}}</td>
             @endif

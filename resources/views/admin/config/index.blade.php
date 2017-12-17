@@ -21,7 +21,7 @@
     <!--结果页快捷搜索框 结束-->
 
     <!--搜索结果页面 列表 开始-->
-    <form action="{{url('admin/config/contentchange')}}" method="post">
+    <form action="{{url('admin/xtAdmin/config/contentchange')}}"  method="post">
         <div class="result_wrap">
             <!--快捷导航 开始-->
 
@@ -44,7 +44,7 @@
                 <table class="list_tab">
 
                     <tr>
-                        <th class="tc" width="5%">排序</th>
+                        {{--<th class="tc" width="5%">排序</th>--}}
                         <th class="tc" width="5%">ID</th>
                         <th class="tc">标题</th>
                         <th class="tc">名称</th>
@@ -55,9 +55,9 @@
                     </tr>
                     @foreach($config as $k=>$v)
                         <tr>
-                            <td class="tc">
-                                <input type="text" onchange="changeOrder(this,{{$v->conf_id}})" value="{{$v->conf_order}}">
-                            </td>
+                            {{--<td class="tc">--}}
+                                {{--<input type="text" onchange="changeOrder(this,{{$v->conf_id}})" value="{{$v->conf_order}}">--}}
+                            {{--</td>--}}
 
                             <td class="tc">{{$v->conf_id}}</td>
                             <td class="tc">{{$v->conf_title}}</td>
@@ -69,7 +69,7 @@
                             <td class="tc">{{$v->field_type}}</td>
                             <td class="tc">{{$v->field_value}}</td>
                             <td class="tc">
-                                <a href="{{url('admin/config/'.$v->conf_id.'/edit')}}" class="tc">修改</a>
+                                <a href="{{url('admin/xtAdmin/config/'.$v->conf_id.'/edit')}}" class="tc">修改</a>
                                 <a href="javascript:;" onclick="delConfig({{$v->conf_id}})" class="tc">删除</a>
                             </td>
                         </tr>
@@ -119,7 +119,7 @@
             },function(){
                 //如果用户发出删除请求,使用ajax想服务器发送删除请求,$.post('请求服务器的路径','携带的参数',获取执行成功后的返回数据)
 //        admin/flinkt/1
-                $.post("{{url('admin/flinkt')}}/"+id,{"_method":'delete','_token':"{{csrf_token()}}"},function(data){
+                $.post("{{url('admin/xtAdmin/config')}}/"+id,{"_method":'delete','_token':"{{csrf_token()}}"},function(data){
                     console.log(data);
 //                data是json格式的字符串，在js中如何将一个json字符串变成json对象
 //                //var res =  JSON.parse(data);

@@ -56,26 +56,26 @@
                 <table class="list_tab">
 
                     <tr>
-                        <th class="tc">ID</th>
+                        {{--<th class="tc">ID</th>--}}
                         <th class="tc">友情链接名称</th>
                         <th class="tc">友情链接网址</th>
-                        <th class="tc">友情链接图片存储路径</th>
+                        <th class="tc">友情链接图片</th>
                         <th class="tc">友情链接状态</th>
                         <th class="tc">友情链接类别</th>
                         <th class="tc">操作</th>
                     </tr>
                     @foreach($flink as $k=>$v)
                         <tr>
-                            <td class="tc">{{$v->id}}</td>
+{{--                            <td class="tc">{{$v->id}}</td>--}}
                             <td class="tc">{{$v->fname}}</td>
                             <td class="tc">{{$v->fpath}}</td>
-                            <td class="tc">{{$v->ffpic}}</td>
+                            <td class="tc"><img src="{{$v->ffpic}}" style="width:80px;height:80px"/></td>
                             <td class="tc">{{$v->fstatus}}</td>
                             <td class="tc">{{$v->flinkt['fltype_name']}}</td>
                             {{--<td class="tc">{{}}</td>--}}
                             <td class="tc">
                                 <a href="{{url('admin/flink/'.$v->id.'/edit')}}" class="tc">修改</a>
-                                <a href="javascript:;" onclick="delFlinkt({{$v->fltid}})" class="tc">删除</a>
+                                <a href="javascript:;" onclick="delFlink({{$v->id}})" class="tc">删除</a>
                             </td>
                         </tr>
                     @endforeach
@@ -95,31 +95,31 @@
         </div>
     </form>
     <script>
-        function changeOrder(obj,fltid){
-            var flt_order = $(obj).val();
-//        console.log(flt_order);
-            $.post("{{url('admin/flinkt/changeOrder')}}",{'_token':"{{csrf_token()}}",'fltid':fltid,'flt_order':flt_order},function(data){
-                console.log(data);//测试是否有值传过来
-//            dd(data);语法不支持
-                if(data['status']=='ok'){
-                    layer.msg(data.msg,{icon:6});
-//                location.href = location.href;
-                    var t=setTimeout("location.href = location.href;",2000);
-//
-                }else{
-                    layer.msg(data.msg,{icon:5});
-//                location.href = location.href;
-                    var t=setTimeout("location.href = location.href;",2000);
-                }
-            })
-        }
-        function delFlinkt(id){
+        {{--function changeOrder(obj,fltid){--}}
+            {{--var flt_order = $(obj).val();--}}
+{{--//        console.log(flt_order);--}}
+            {{--$.post("{{url('admin/flinkt/changeOrder')}}",{'_token':"{{csrf_token()}}",'fltid':fltid,'flt_order':flt_order},function(data){--}}
+                {{--console.log(data);//测试是否有值传过来--}}
+{{--//            dd(data);语法不支持--}}
+                {{--if(data['status']=='ok'){--}}
+                    {{--layer.msg(data.msg,{icon:6});--}}
+{{--//                location.href = location.href;--}}
+                    {{--var t=setTimeout("location.href = location.href;",2000);--}}
+{{--//--}}
+                {{--}else{--}}
+                    {{--layer.msg(data.msg,{icon:5});--}}
+{{--//                location.href = location.href;--}}
+                    {{--var t=setTimeout("location.href = location.href;",2000);--}}
+                {{--}--}}
+            {{--})--}}
+        {{--}--}}
+        function delFlink(id){
             layer.confirm('您确认删除吗?',{
                 btn:['确认','取消']//按钮
             },function(){
                 //如果用户发出删除请求,使用ajax想服务器发送删除请求,$.post('请求服务器的路径','携带的参数',获取执行成功后的返回数据)
 //        admin/flinkt/1
-                $.post("{{url('admin/flinkt')}}/"+id,{"_method":'delete','_token':"{{csrf_token()}}"},function(data){
+                $.post("{{url('admin/flink')}}/"+id,{"_method":'delete','_token':"{{csrf_token()}}"},function(data){
                     console.log(data);
 //                data是json格式的字符串，在js中如何将一个json字符串变成json对象
 //                //var res =  JSON.parse(data);

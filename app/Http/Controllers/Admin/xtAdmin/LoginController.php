@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
+require_once app_path().'\Org\code\Code.class.php';
+use App\Org\code\Code;
+
 use App\Http\Controllers\Controller;
 
 
@@ -26,6 +29,14 @@ class LoginController extends Controller
         return view('admin/xtAdmin/login');
     }
 
+    /*
+     *  生成验证码
+     */
+    public function code()
+    {
+        $code = new Code();
+        $code->make();
+    }
 
     /**
      * 处理登录逻辑
@@ -39,16 +50,16 @@ class LoginController extends Controller
 //        2.对数据进行后台表单验证
 //        验证规则
         $rule = [
-            'aname'=>'required|regex:/^[\x{4e00}-\x{9fa5}A-Za-z0-9_]+$/u|between:5,20',
-            "password"=>'required|between:2,20'
+            'aname'=>'required|regex:/^[\x{4e00}-\x{9fa5}A-Za-z0-9_]+$/u|between:2,20',
+            "password"=>'required|between:2,11'
         ];
 
         $mess = [
             'aname.required'=>'管理员名称必须输入',
             'aname.regex'=>'管理员名称必须汉字字母下划线',
-            'aname.between'=>'管理员名称必须在5到20位之间',
+            'aname.between'=>'管理员名称必须在2到20位之间',
             'password.required'=>'密码必须输入',
-            'password.between'=>'密码必须在2到20位之间'
+            'password.between'=>'密码必须在2到11位之间'
         ];
 
         $validator =  Validator::make($input,$rule,$mess);
@@ -60,6 +71,9 @@ class LoginController extends Controller
         }
 //        3.登录逻辑
 //          3.0 验证验证码是否正确
+        if(strtolower($input['code']) != strtolower(Session::get('code'))){
+            return redirect('admin/xtAdmin/login')->with('errors','验证码不正确');
+        }
 
 //        3.1 判断是否有此用户
 

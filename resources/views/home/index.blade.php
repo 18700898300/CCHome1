@@ -1,5 +1,4 @@
 <html ng-app="eleme" perf-error="desktop/">
-
 <head>
     <meta charset="utf-8" />
     <meta name="renderer" content="webkit" />
@@ -20,33 +19,35 @@
     <meta property="qc:admins" content="2263606250655" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="apple-touch-icon-precomposed" href="https://static2.ele.me/apple-touch-icon.png?v=2" />
-    <link rel="shortcut icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-16x16.png" type="image/png" />
-    <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-16x16.png" type="image/png" sizes="16x16" />
-    <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-32x32.png" type="image/png" sizes="32x32" />
-    <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon.png" type="image/png" sizes="96x96" />
-    <link href="{{asset('/wf/home/css/vendor.d724a8_2.css')}}" rel="stylesheet">
-    <link href="{{asset('/wf/home/css/main.0a7669.css')}}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{asset('a/image/favicon-16x16.png')}}" type="image/png" />
+    <link rel="icon" href="{{asset('a/image/favicon-16x16.png')}}" type="image/png" sizes="16x16" />
+    <link rel="icon" href="{{asset('a/image/favicon-32x32.png')}}" type="image/png" sizes="32x32" />
+    <link rel="icon" href="{{asset('a/image/favicon.png')}}" type="image/png" sizes="96x96" />
+    <link href="{{asset('a/css/vendor.d724a8_2.css')}}" rel="stylesheet">
+    <link href="{{asset('a/css/main.0a7669.css')}}" rel="stylesheet">
     <!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
-    <script src="{{asset('/wf/home/js/69e30c57868b46e7a0d2b4a6c711970a.js')}}" data-ref="API_CONFIG"></script>
+    <script src="{{asset('a/js/69e30c57868b46e7a0d2b4a6c711970a.js')}}" data-ref="API_CONFIG"></script>
     <script src="{{asset('/wf/home/js/perf.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{asset('/wf/home/js/vendor.8c3a5a.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{asset('/wf/home/js/main.a0cd82.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="{{asset('/layer/layer.js')}}"></script>
+    <script type="text/javascript" src="{{asset('wf/admin/style/js/jquery.js')}}"></script>
 </head>
 
 <body cute-title ng-class="{hidesidebar: layoutState && layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}">
 <!-- <eleme-topbar state="layoutState"></eleme-topbar> -->
 <div class="ng-isolate-scope" ng-switch="state.type" state="layoutState">
-    <div class="ng-scope ng-isolate-scope" ng-switch-default="" topbar-default="" state="state">
+    <div class="ng-scope ng-isolate-scope"  state="state">
         <header class="topbar" role="navigation" ng-class="{shoptopbar: state.type === 'shop'}">
             <div class="container clearfix">
                 <h1>
                     <a class="topbar-logo icon-logo" href="{{url('/home/index')}}" hardjump="">
-                        <span>饿了么</span>
+                        <span>曹操到家</span>
                     </a>
                 </h1>
                 <a class="topbar-item topbar-homepage focus" href="{{url('/home/index')}}" hardjump="">首页</a>
                 <a class="topbar-item" href="/profile/order" hardjump="" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a>
-                <a class="topbar-item cooperation" href="{{url('')}}" target="_blank">加盟合作</a>
+                <a class="topbar-item cooperation" href="{{url('home/reg')}}" target="_blank">加盟合作</a>
                 <nav class="topbar-nav">
                     <a class="topbar-nav-link" href="/support/center" hardjump="" target="_blank">
                         <i class="topbar-nav-icon icon-service"></i> 服务中心
@@ -56,26 +57,39 @@
                         <i class="topbar-nav-icon icon-mobile"></i> 手机应用
                         <div class="dropbox topbar-mobile-dropbox">
                             <span>扫一扫, 手机订餐更方便</span>
-                            <img class="topbar-nav-qrcode" src="{{asset('/wf/home/img/appqc.95e532.png')}}" alt="扫一扫下载饿了么手机 App">
+                            <img class="topbar-nav-qrcode" src="{{asset('a/image/appqc.95e532.png')}}" alt="扫一扫下载饿了么手机 App">
                         </div>
                     </div>
-                    <div topbar-profilebox="">
+                    <div>
                         <div class="topbar-profilebox">
                             <span class="topbar-profilebox-avatar icon-profile" ng-show="!$root.user.username"></span>
                             <span class="" ng-show="!$root.user.username">
-<a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F" target="_blank" href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F">登录/注册</a>
-</span>
+                                <a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F" target="_blank" href="#">/注册</a>
+                            </span>
                             <span class="topbar-profilebox-wrapper ng-hide" ng-show="$root.user.username">
-<span class="topbar-profilebox-username ng-binding"></span>
+                                <span class="topbar-profilebox-username ng-binding"></span>
+
+                                @if(empty($_SESSION['user']))
+                                <span>你好,
+					            <a  target="_blank" href="{{asset('home/login')}}">登录</a>
+					            </span>
+                                @else
+                                <span>
+							        您好,{{$_SESSION['user']->uname}}
+						        </span>
+                               @endif
+
+                            </span>
+
                                 <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span>
                                 <div class="dropbox topbar-profilebox-dropbox">
-                                    <a class="icon-profile" href="/profile" hardjump="">个人中心</a>
+                                    <a class="icon-profile" href="{{url('home/person')}}" hardjump="">个人中心</a>
                                     <a class="icon-star" href="/profile/favor" hardjump="">我的收藏</a>
-                                    <a class="icon-location" href="/profile/address" hardjump="">我的地址</a>
+                                    <a class="icon-location" href="{{url('home/address')}}" hardjump="">我的地址</a>
                                     <a class="icon-setting" href="/profile/security" hardjump="">安全设置</a>
                                     <a class="icon-logout" href="JavaScript:" ng-click="logout()">退出登录</a>
                                 </div>
-                                </span>
+                            </span>
                         </div>
                     </div>
                 </nav>
@@ -113,8 +127,11 @@
 <!-- <eleme-sidebar ng-hide="layoutState && layoutState.hideSidebar"></eleme-sidebar> -->
 <!-- <div ng-view role="main"></div> -->
 <!-- 地址栏 -->
+
 <div class="container clearfix ng-scope">
     <span>当前位置:</span>
+
+
     <!-- <span class="location-current">
             <a class="inherit ng-binding" ng-href="/place/wx4eyv2e1qf" ubt-click="401" ng-bind="place.name || place.address" href="/place/wx4eyv2e1qf">昌平区回龙观村东区(龙域中街南70米)</a>
         </span>
@@ -135,7 +152,7 @@
             <span class="ng-scope">服务中心</span>
         </span>-->
 </div>
-</div>
+
 <div class="container ng-scope" ng-show="!recentBoughtOnly">
     <div class="excavator container">
         <div class="excavator-filter ng-scope">
@@ -158,6 +175,17 @@
             <div class="excavator-filter-subbox ng-hide" ng-show="subCategories"></div>
         </div>
     </div>
+    <div class="alert alert-danger">
+        <ul>
+            @if(session('msg'))
+                <li class="dh" style="color:red">{{session('msg')}}</li>
+            @endif
+        </ul>
+    </div>
+    <script>
+        //    提示信息淡出
+        $('.dh').fadeOut(2000);
+    </script>
     <div class="place-rstbox clearfix">
         <div class="clearfix"  style="height: 800px;">
             <a class="rstblock" href="{{url('home/shop')}}" data-rst-id="152185819" data-bidding="" target="_blank">

@@ -70,7 +70,6 @@ return [
             'domain'     => env('QINIU_DOMAIN', 'http://p0bvp893u.bkt.clouddn.com'), // or host: https://xxxx.clouddn.com
         ],
 
-
     ],
 
 ];

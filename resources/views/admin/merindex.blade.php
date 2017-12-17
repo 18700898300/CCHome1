@@ -16,7 +16,7 @@
         <ul>
             <li>管理员：admin</li>
             <li><a href="pass.html" target="main">修改密码</a></li>
-            <li><a href="#">退出</a></li>
+            <li><a href="{{url('admin/logout')}}">退出</a></li>
         </ul>
     </div>
 </div>
@@ -36,9 +36,6 @@
                     <ul class="sub_menu">
                     <li><a href="{{url('admin/flinkt/create')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>添加类别</a></li>
                     <li><a href="{{url('admin/flinkt')}}" target="main"><i class="fa fa-fw fa-list-alt"></i>类别列表</a></li>
-
-
-
                  </ul>
             </li>
                 <li>

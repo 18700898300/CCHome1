@@ -31,7 +31,9 @@ class VerifyController extends Controller
 //        dd($request->input());
         $input = $request->except('_token');
 //        dd($sid);
+//        dd($input);
         $res = Shop::where('sid',$sid)->update($input);
+//        dd($res);
         if($res){
             return redirect('admin/xtAdmin/verify')->with('msg','处理成功!');
         }else{

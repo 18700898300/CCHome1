@@ -91,12 +91,6 @@ class MerchantController extends Controller
 //        4.登录成功将用户信息存入session
         Session::put('meruser',$meruser);
         return redirect('admin/merindex');
-
-
-
-
-
-
     }
 
 
@@ -114,5 +108,13 @@ class MerchantController extends Controller
      //dd(111);
         $code = new Code();
         $code ->make();
+    }
+
+
+    public function logout()
+    {
+        session()->flush();
+
+        return redirect('admin/mlogin');
     }
 }

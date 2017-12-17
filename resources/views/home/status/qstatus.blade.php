@@ -13,14 +13,14 @@
             <form action="{{asset('/home/doqstatus')}}" method="post">
                 {{csrf_field()}}
                 @if (count($errors) > 0)
-                    <div class="alert alert-danger">
-                        <ul>
+                    <div class="alert alert-danger info" >
+                        <ul class="info">
                             @if(is_object($errors))
                                 @foreach ($errors->all() as $error)
-                                    <li style="color:red">{{ $error }}</li>
+                                    <li style="color:red" class="info">{{ $error }}</li>
                                 @endforeach
                             @else
-                                <li style="color:red;">{{$errors}}</li>
+                                <li style="color:red;" class="info">{{$errors}}</li>
                             @endif
 
                         </ul>
@@ -48,4 +48,8 @@
         </div>
     </div>
     @endsection
+    <script>
+        $('.info').fadeOut(2000);
+    </script>
+
     </body>

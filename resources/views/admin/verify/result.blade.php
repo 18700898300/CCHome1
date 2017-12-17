@@ -1,6 +1,6 @@
 @extends('admin.xtAdmin.common')
 @section('title')
-    <title>后台商户分类修改页面</title>
+    <title>系统后台商户入驻状态修改</title>
 @endsection
 @section('body')
     <!--面包屑导航 开始-->
@@ -48,13 +48,13 @@
                     <th><i class="require">*</i>审核状态：</th>
 {{--                    @foreach($status as $k=>$v)--}}
                     <td>
-                        待审核:<input type="radio" class="a b c" @if($status->status==0)  checked @endif name="status" value="0" onclick="show(this)" >
+                        待审核:<input type="radio" class="a b c" @if($status->vstatus==0)  checked @endif name="vstatus" value="0" onclick="show(this)" >
 
-                        审核中:<input type="radio" class=" a b c" @if($status->status==1) checked @endif name="status" value="1" onclick="show(this)"/>
+                        审核中:<input type="radio" class=" a b c" @if($status->vstatus==1) checked @endif name="vstatus" value="1" onclick="show(this)"/>
 
-                        审核通过:<input type="radio"  class="a c " @if($status->status==2) checked @endif name="status" value="2" onclick="show(this)"/>
+                        审核通过:<input type="radio"  class="a c " @if($status->vstatus==2) checked @endif name="vstatus" value="2" onclick="show(this)"/>
 
-                        未通过审核:<input type="radio"   class="a" @if($status->status==3) checked @endif name="status" value="3" onclick="show(this)" />
+                        未通过审核:<input type="radio"   class="a" @if($status->vstatus==3) checked @endif name="vstatus" value="3" onclick="show(this)" />
                     </td>
                 </tr>
                 {{--默认隐藏--}}

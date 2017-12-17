@@ -5,8 +5,9 @@
         /* Code tidied up by ScrapBook */
         body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
         #allmap {
-            width:100%;
-            height:500px;
+            width:800px;
+            height:400px;
+            margin:60px auto;
         }
         /*p{margin-left:5px; font-size:14px;}*/
     </style>
@@ -39,9 +40,9 @@
     <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32">
     <link rel="icon" href="favicon.png" type="image/png" sizes="96x96">
 
-    <link href="{{asset('home/css')}}/vendor.162d72.css" rel="stylesheet">
+    <link href="{{asset('home')}}/vendor.162d72.css" rel="stylesheet">
 
-    <link href="{{asset('home/css')}}/home.be652d.css" rel="stylesheet">
+    <link href="{{asset('home')}}/home.be652d.css" rel="stylesheet">
 
 
     <!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
@@ -63,7 +64,7 @@
     <meta content="undefined" name="mobile-agent"><meta content="”饿了么”2008年创立于上海，是中国领先的本地生活平台。截至目前，饿了么在线外卖交易平台已覆盖全国2000个城市，加盟餐厅130万家，用户量达2.6亿" name="description"><meta content="饿了么，网上订餐，外卖，快餐外卖，外卖网" name="keywords"></head>
 <body class="hidesidebar whitebody" cute-title="" ng-class="{hidesidebar: layoutState &amp;&amp; layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}">
 
-<!-- ngView:  --><div class="ng-scope" ng-view="" role="main"><div class="map ng-scope" ng-class="{mapmode: mapMode}"><div class="container mapcontainer"><div map-header="" class="map-header clearfix"><h1><a href="https://www.ele.me/" ubt-click="1433"><img src="map-logo.9a26ef.png" alt="eleme"></a></h1><!-- ngIf: user.user_id --> <!-- ngIf: !user.user_id --><span class="map-header-right ng-scope" ng-if="!user.user_id"><a href="https://h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fhome%2F" ng-href="//h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fhome%2F" target="_blank" ubt-click="1430">注册</a> <span>|</span> <a href="https://h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fhome%2F" ng-href="//h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fhome%2F" ubt-click="1431">登录</a> <a class="btn-security btn-sm" href="https://kaidian.ele.me/" target="_blank" ubt-click="1432">我要开店</a></span><!-- end ngIf: !user.user_id --></div><div map-main="" map-mode="mapMode" class="map-main ng-isolate-scope" ng-class="{mapmode: mapMode}"><h2 class="map-logo"><img src="{{asset('home')}}/map-logo-center.425427.svg" alt="eleme"></h2><div class="map-navbar clearfix" ng-class="{hasuserinfo: $root.user.user_id}"><div map-city="" hide-search-result="hideSearchResult" current-city="currentCity" class="map-city ng-isolate-scope" map-mode="mapMode"><a class="mapcity-current ng-binding" ng-bind="mapCity.current.name" ng-click="mapCity.toggle($event)">北京</a><!-- ngIf: mapCity.showCities --></div><div map-search="" hide-search-result="hideSearchResult" current-city="currentCity" map-mode="mapMode" class="map-search ng-isolate-scope">
+<!-- ngView:  --><div class="ng-scope" ng-view="" role="main"><div class="map ng-scope" ng-class="{mapmode: mapMode}"><div class="container mapcontainer"><div map-header="" class="map-header clearfix"><h1><a href="https://www.ele.me/" ubt-click="1433"><img src="map-logo.9a26ef.png" alt="eleme"></a></h1><!-- ngIf: user.user_id --> <!-- ngIf: !user.user_id --><span class="map-header-right ng-scope" ng-if="!user.user_id"><a class="btn-security btn-sm" href="{{url('admin/merindex')}}" target="_blank" ubt-click="1432">商户店铺详情</a><a class="btn-security btn-sm" href="{{url('home/qstatus')}}" target="_blank" ubt-click="1432">开店申请状态查询</a><a href="https://h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fhome%2F" ng-href="//h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fhome%2F" target="_blank" ubt-click="1430">注册</a> <span>|</span> <a href="https://h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fhome%2F" ng-href="//h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fhome%2F" ubt-click="1431">登录</a> <a class="btn-security btn-sm" href="{{url('home/reg')}}" target="_blank" ubt-click="1432">我要开店</a></span><!-- end ngIf: !user.user_id --></div><div map-main="" map-mode="mapMode" class="map-main ng-isolate-scope" ng-class="{mapmode: mapMode}"><h2 class="map-logo"><img src="{{asset('home')}}/map-logo-center.425427.svg" alt="eleme"></h2><div class="map-navbar clearfix" ng-class="{hasuserinfo: $root.user.user_id}"><div map-city="" hide-search-result="hideSearchResult" current-city="currentCity" class="map-city ng-isolate-scope" map-mode="mapMode"><a class="mapcity-current ng-binding" ng-bind="mapCity.current.name" ng-click="mapCity.toggle($event)">北京</a><!-- ngIf: mapCity.showCities --></div><div map-search="" hide-search-result="hideSearchResult" current-city="currentCity" map-mode="mapMode" class="map-search ng-isolate-scope">
                         <div class="mapsearch-inputbar ng-pristine ng-valid" ng-submit="search.showSuggests($event, search.keyword)">
                             <input class="ng-pristine ng-valid" id="text_"  placeholder="请输入你的收货地址（写字楼，小区，街道或者学校）" ng-model="search.keyword" ng-keyup="search.showSuggests($event, search.keyword)" ng-keydown="search.chooseSuggest($event)" ng-click="search.showSuggests($event)" ng-focus="search.showSuggests($event, search.keyword)">
                             {{--<input id="result_"  name="position" type="hidden" /><br>--}}
@@ -112,7 +113,7 @@
               url:"{{url('home/query')}}",
                 type:"post",
                 success:function (data){
-//                    console.log(data);
+                    console.log(data);
                     var s = data.avatar;
 //                    console.log(data.sid);
                     var sContent =

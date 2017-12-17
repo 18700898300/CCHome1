@@ -42,6 +42,11 @@ class Flinkt extends Model
         return $arr;
     }
 
+    public function flink(){
+        return $this->hasMany('App\Http\Model\Flink\Flink','fltid','fltid');
+    }
+
+
 }
 
 /*[

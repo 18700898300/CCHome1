@@ -37,4 +37,10 @@ class IndexController extends Controller
         $shop->sum = $sum;
         return view('home/shop',compact('shop','foods'));
     }
+
+    //退出登录
+    public function quit()
+    {
+        return redirect('home/login');
+    }
 }

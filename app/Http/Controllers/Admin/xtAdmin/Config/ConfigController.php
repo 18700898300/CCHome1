@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Config;
+namespace App\Http\Controllers\Admin\xtAdmin\Config;
 
 use App\Http\Model\Config\Config;
 use Illuminate\Http\Request;
@@ -49,15 +49,22 @@ class ConfigController extends Controller
 //        dd($input);
 //        dd($input['conf_id']);
 //        dd($input['conf_content']);
+//        dd($input);
             foreach($input['conf_id'] as $k=>$v){
 //                找到一条需要修改的网站配置记录
                 $conf = Config::find($v);
+//                if($conf->field_type=='image') {
+//                    //$k--;
+//                    //dd($k);
+//                    continue;
+//                }
+//                dd($conf);
 //                return $input['conf_content'][$k];
                 $conf->update(['conf_content'=>$input['conf_content'][$k]]);
             }
                 $this::PutRedis();
 //            $this->PutFile();
-        return redirect('admin/config');
+        return redirect('admin/xtAdmin/config');
     }
     public function index()
     {
@@ -102,7 +109,9 @@ class ConfigController extends Controller
                     $v->conf_contents=$str;
                     break;
                 case 'image':
-                    $v->conf_contents =  '<input type="text" class = "lg" size="50" id="art_thumb" name="conf_content[]" value='.htmlspecialchars($v->conf_content).'>';
+//                    name 属性中的[]必须有，否则值被覆盖最终只有一个值,隐藏域的作用。
+                    $v->conf_contents =  '<img src = "'.$v->conf_content.'"   style="width:80px;height:80px;">
+                    <input type ="hidden" name = "conf_content[]" value = "'.$v->conf_content.'"> ';
                     break;
             }
         }
@@ -150,7 +159,7 @@ class ConfigController extends Controller
 //        如果表单验证失败
 
         if($validator->fails()){
-            return redirect('admin/config/create')  //返回原添加页面
+            return redirect('admin/xtAdmin/config/create')  //返回原添加页面
             ->withErrors($validator)
                 ->withInput();//让页面输入的用户名保持在输入框
         }
@@ -160,7 +169,7 @@ class ConfigController extends Controller
         if($res){
 //            $this->PutFile();
             $this->PutRedis();
-            return redirect('admin/config')->with('msg','网站配置添加成功');
+            return redirect('admin/xtAdmin/config')->with('msg','网站配置添加成功');
         }else{
             return back()->with('msg','网站配置添加成功失败');
         }
@@ -189,7 +198,9 @@ class ConfigController extends Controller
      */
     public function edit($id)
     {
-        //
+//        dd($id);
+        $config = Config::find($id);
+        return view('admin/config/edit',compact('config'));
     }
 
     /**
@@ -201,7 +212,15 @@ class ConfigController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+//        dd($request->input);
+        $input = $request->except('_token','_method','fpic');
+//        dd($input);
+        $res = Config::where('conf_id',$id)->update($input);
+        if($res){
+            return  redirect('/admin/xtAdmin/config')->with('msg','修改成功');
+        }else{
+            return back();
+        }
     }
 
     /**
@@ -212,6 +231,15 @@ class ConfigController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = Config::find($id)->delete();
+        if($res){
+            $data['error']=0;
+            $data['msg']='删除成功！';
+            return $data;
+        }else{
+            $data['error']=1;
+            $data['msg']='删除失败，请重试！';
+            return $data;
+        };
     }
 }

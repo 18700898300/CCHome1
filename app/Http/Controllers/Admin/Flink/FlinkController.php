@@ -189,6 +189,16 @@ class FlinkController extends Controller
      */
     public function destroy($id)
     {
-        //
+//        return  $id;
+        $res = Flink::find($id)->delete();
+        if($res){
+            $data['error']=0;
+            $data['msg']='删除成功';
+            return $data;
+        }else{
+            $data['error']=1;
+            $data['msg']='删除失败';
+        }
+
     }
 }

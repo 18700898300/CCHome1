@@ -60,6 +60,9 @@ class Kernel extends HttpKernel
         'adminIslogin' => \App\Http\Middleware\AdminIslogin::class,
         'HasRole' => \App\Http\Middleware\HasRole::class,
         'islogin' => \App\Http\Middleware\Admin\Merchant\IsLogin::class,
+        'homeIslogin' => \App\Http\Middleware\Home\IsLogin::class,
+        'isloginreg' => \App\Http\Middleware\Home\IsLoginreg::class,
+
 
     ];
 }

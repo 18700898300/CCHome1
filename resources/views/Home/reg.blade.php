@@ -121,13 +121,13 @@
             <div class="control-group">
                 <label class="control-label" for="inputEmail">商户名称:</label>
                 <div class="controls">
-                    <input type="text" name = "name" style="width:850px;height:50px;" id="inputEmail" placeholder="请输入店铺名称">
+                    <input type="text" name = "name" value = "{{old('name')}}" style="width:850px;height:50px;" id="inputEmail" placeholder="请输入店铺名称">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="inputEmail">联系电话:</label>
                 <div class="controls">
-                    <input type="text" name="phone" style="width:850px;height:50px;" id="inputEmail" placeholder="请输入长期有效的电话号码">
+                    <input type="text" name="phone" value = "{{old('phone')}}" style="width:850px;height:50px;" id="inputEmail" placeholder="请输入长期有效的电话号码">
                 </div>
             </div>
             <div class="control-group">

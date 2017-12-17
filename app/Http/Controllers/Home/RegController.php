@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Home\Shop;
+use  Illuminate\Support\Facades\Session;
 class RegController extends Controller
 {
     public function reg()
@@ -33,6 +34,7 @@ class RegController extends Controller
             'statime'=>'required',//配送时长
             'staprice'=>'required',//起送价
             'sprice'=>'required',//配送费
+            'address'=>'required',
             'position'=>'required',
         ];
         $mess = [
@@ -50,7 +52,8 @@ class RegController extends Controller
             'statime.required'=>'配送时长必须输入',
             'staprice.required'=>'起送价必须输入',
             'sprice.required'=>'配送费必须输入',
-            'position.required'=>'公司地址必须输入',
+            'position.required'=>'公司地址不合法',
+            'address.required'=>'公司地址必须输入',
 
         ];
 
@@ -65,6 +68,7 @@ class RegController extends Controller
         $input['ctime']=time();
         //可以加入判断number是否已经存在
         $input['number']=time().rand(10000,99999);
+        $input['bid']=Session::get('meruser')['bid'];
 //        dd($input);
         $res = Shop::create($input);
 
@@ -90,6 +94,9 @@ class RegController extends Controller
         $input = $request->except('_token');
 //        dd($input);
         $shop = Shop::where('number',$input['number'])->first();
+        if($shop==null){
+            return back()->with('errors','您提交的申请件编号不存在，请查清后重新提交！');
+        }
 //        dd($shop);
         return view('home/status/doqstatus',compact('shop',$shop));
     }

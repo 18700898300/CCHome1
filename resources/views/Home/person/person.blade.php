@@ -1,7 +1,5 @@
-@extends('/Home/layouts.person')
-
+@extends('home.layouts.person')
 @section('body')
-
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -59,10 +57,10 @@
          });
      });
 
-    function qx() {
+     function qx() {
 //        alert(111);
-        layer.closeAll();
-    }
+         layer.closeAll();
+     }
 
 
 

@@ -3,8 +3,6 @@
 @section('body')
 
 
-
-
             <div class="LoginHeader-22Up7_0">
                 <a class="" href="/home/login2"> 短信登录 </a>
                 <a class="LoginHeader-33EiC_0"> 密码登录 </a>

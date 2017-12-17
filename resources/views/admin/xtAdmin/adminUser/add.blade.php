@@ -46,7 +46,7 @@
                 <tr>
                     <th><i class="require">*</i>管理员名称：</th>
                     <td>
-                        <input type="text" class="lg" name="aname" value="{{old('aname')}}">
+                        <input type="text" name="aname" value="{{old('aname')}}">
                         <span><i class="fa fa-exclamation-circle yellow"></i>管理员名称必须填写</span>
                     </td>
                 </tr>
@@ -71,7 +71,7 @@
     </div>
     <script>
         //    提示信息淡出
-        $('.dh').fadeOut('slow');
+        $('.dh').fadeOut(3000);
     </script>
 @endsection
 

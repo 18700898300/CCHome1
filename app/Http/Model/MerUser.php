@@ -10,4 +10,7 @@ class MerUser extends Model
     public $primaryKey = 'bid';
     public $guarded = [];
     public $timestamps = false;
+    public  function shop(){
+        return $this->hasOne('App\Models\Home\Shop','bid','bid');
+    }
 }

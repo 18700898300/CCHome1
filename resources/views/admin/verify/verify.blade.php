@@ -1,6 +1,6 @@
 @extends('admin.xtAdmin.common')
 @section('title')
-    <title>后台用户添加页面</title>
+    <title>系统后台商户入驻审核页面</title>
 @endsection
 @section('body')
     <!--面包屑导航 开始-->
@@ -91,13 +91,13 @@
                             <td class="tc">{{$v->phone}}</td>
                             <td class="tc">{{$v->ctime}}</td>
                             <td class="tc">{{$v->number}}</td>
-                            @if($v->status==0)
+                            @if($v->vstatus==0)
                             <td class="tc">待审核</td>
-                            @elseif($v->status==1)
+                            @elseif($v->vstatus==1)
                             <td class="tc">审核中</td>
-                            @elseif($v->status==2)
+                            @elseif($v->vstatus==2)
                             <td class="tc">审核通过</td>
-                            @elseif($v->status==3)
+                            @elseif($v->vstatus==3)
                             <td class="tc">未通过审核</td>
                             @endif
                             <td class="tc">{{$v->email}}</td>
