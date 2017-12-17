@@ -187,7 +187,7 @@ class Admin_userController extends Controller
         }
         DB::commit();
 
-
+        $data = [];
 //        判断是否删除
         if($res){
             $data =[

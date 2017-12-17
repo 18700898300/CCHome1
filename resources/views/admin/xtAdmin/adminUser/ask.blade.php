@@ -115,7 +115,7 @@
                 });
 
                 $.post("{{url('admin/xtAdmin/delask')}}/"+id,{"_token":"{{csrf_token()}}"},function(data){
-                    console.log(data);
+//                    console.log(data);
 //                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
 //                    var res =  JSON.parse(data);
                     var t=setTimeout("location.href = location.href;",1000);

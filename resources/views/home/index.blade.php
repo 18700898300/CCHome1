@@ -101,7 +101,7 @@
         <div class="toolbar-tabs-middle">
             <a class="toolbar-btn icon-order toolbar-close" href="/profile/order" hardjump="" tooltip="我的订单" tooltip-placement="left" ubt-click="toolbar_order"></a>
             <div class="toolbar-separator"></div>
-            <a class="toolbar-cartbtn icon-cart toolbar-open" href="JavaScript:" template="cart" ng-class="{'focus': (activeTemplate === 'cart' && isSidebarOpen), 'toolbar-cartbtn-shownum': foodCount.count}" ubt-click="390">购物车</a>
+            <a class="toolbar-cartbtn icon-cart toolbar-open" href="{{url('home/cart')}}" template="cart" ng-class="{'focus': (activeTemplate === 'cart' && isSidebarOpen), 'toolbar-cartbtn-shownum': foodCount.count}" ubt-click="390">购物车</a>
             <div class="toolbar-separator"></div>
             <a class="toolbar-btn icon-notice toolbar-open modal-hide" href="JavaScript:" template="message" ng-class="{'focus': (activeTemplate === 'message' && isSidebarOpen), 'toolbar-open': user, 'modal-hide': user}" tooltip="我的信息" tooltip-placement="left" ubt-click="392"></a>
         </div>
@@ -155,18 +155,15 @@
         <div class="excavator-filter ng-scope">
 
             <span>商家分类:</span>
-            <a class="excavator-filter-item ng-binding ng-scope active" href="javascript:">全部商家</a>
+            <a onclick="sho(0)" class="excavator-filter-item ng-binding ng-scope active" href="javascript:">全部商家</a>
         @foreach($cates as $m=>$n)
         @if($n->pid==0)
-            <a id="{{$n->tid}}"  class="excavator-filter-item ng-binding ng-scope" href="javascript:">{{$n->tname}}</a>
+            <a onclick="sho({{$n['tid']}})" id="{{$n['tid']}}"  class="excavator-filter-item ng-binding ng-scope" href="javascript:;">{{$n->tname}}</a>
         @endif
 
-            {{--<a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">特色菜系</a>--}}
-            {{--<a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">异国料理</a>--}}
-            {{--<a class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories" ng-class="{'focus': clickedCategory === category.id && (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 && !pumStream}" ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">小吃夜宵</a>--}}
-
         @endforeach
-            <div id="ciji"></div>
+
+        <div id="fenlei"></div>
 
         </div>
     </div>
@@ -181,9 +178,30 @@
     <script>
         //    提示信息淡出
         $('.dh').fadeOut(2000);
+
+
+        function sho(id) {
+            $('.excavator-filter-item').attr('class','excavator-filter-item ng-binding ng-scope ');
+
+            $.ajax({
+                type:'post',
+                data:{'_token':'{{csrf_token()}}'},
+                url:'/home/index/type/'+id,
+                success:function(data){
+//                    console.log(data[1][0][0]['name']);
+                    $('#fenlei').html(data[0]);
+                    $('#shop').html(data[1]);
+                    $('#'+id).attr('class','excavator-filter-item ng-binding ng-scope active');
+                }
+            });
+
+
+        }
+
+
     </script>
     <div class="place-rstbox clearfix">
-        <div class="clearfix"  style="height: 800px;">
+        <div id="shop" class="clearfix"  style="height: 800px;">
 
 
             @foreach($shops as $k=>$v)

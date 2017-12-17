@@ -31,7 +31,7 @@ Route::group(['middleware'=>['adminIslogin','HasRole'],'prefix'=>'admin/xtAdmin'
     Route::post('password/update','PasswordController@update');
 
 //    管理员模块
-    Route::resource('adminUser ','Admin_userController');
+    Route::resource('adminUser','Admin_userController');
 //    管理员申请列表
     Route::get('ask','Admin_userController@ask');
 //    删除申请表中的申请记录
@@ -100,6 +100,8 @@ Route::get('/crypt','Home\LoginController@crypt');
 Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 //    进入前台首页
     Route::get('index', 'IndexController@index');
+//    点击一级分类显示二级分类
+    Route::post('index/type/{id}','IndexController@type');
 //    进入商家店铺
     Route::get('shop/{id}', 'IndexController@shop');
 });

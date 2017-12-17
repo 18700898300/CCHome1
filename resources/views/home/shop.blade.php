@@ -53,7 +53,7 @@
             <div class="container clearfix">
                 <h1>
                     <a href="{{url('/home/index')}}" hardjump="" class="topbar-logo icon-logo">
-                        <span>饿了么</span></a>
+                        <span>曹操到家</span></a>
                 </h1>
                 <a name="top"></a>
                 <a href="{{url('home/index')}}" hardjump="" class="topbar-item topbar-homepage" ng-class="{&#39;focus&#39;: $root.locationpath[0] === &#39;place&#39;}">首页</a>
@@ -112,7 +112,7 @@
             <a class="toolbar-btn icon-order toolbar-close" href="https://www.ele.me/profile/order" hardjump="" tooltip="我的订单" tooltip-placement="left" ubt-click="toolbar_order">
                 <!-- ngIf: sidebarCount.uncompletedOrder> 0 --></a>
             <div class="toolbar-separator"></div>
-            <a class="toolbar-cartbtn icon-cart toolbar-open" href="JavaScript:" template="cart" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;cart&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-cartbtn-shownum&#39;: foodCount.count}" ubt-click="390">购物车
+            <a class="toolbar-cartbtn icon-cart toolbar-open" href="{{url('home/cart')}}" template="cart" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;cart&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-cartbtn-shownum&#39;: foodCount.count}" ubt-click="390">购物车
                 <!-- ngIf: foodCount.count --></a>
             <div class="toolbar-separator"></div>
             <a class="toolbar-btn icon-notice toolbar-open modal-hide" href="JavaScript:" template="message" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;message&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-open&#39;: user, &#39;modal-hide&#39;: user}" tooltip="我的信息" tooltip-placement="left" ubt-click="392">
@@ -267,12 +267,14 @@
                 <!-- ngIf: type==='normal' --></div>
             <div ng-show="!loading &amp;&amp; !searchEnv" class="shopmenu-nav ng-isolate-scope" sticky="" sticky-class="sticky" sticky-body-class="shopmenu-nav-sticky" sticky-fn="shopNavSticky">
                 <!-- ngRepeat: category in categorys -->
-                <a href="javascript:" ng-repeat="category in categorys" ng-click="scrollToCategory(category)" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope">热销榜</a>
                 <!-- end ngRepeat: category in categorys -->
 
 
                 @foreach($labels as $kk=>$vv)
-                <a href="#{{$vv->name}}" ng-repeat="category in categorys" ng-onclick="scrollTo()" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope">{{$vv->name}}</a>
+
+                {{--<a href="{{$id}}/#{{$vv['name']}}" ng-repeat="category in categorys" ng-onclick="scrollTo()" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope">{{$vv->name}}</a>--}}
+                <a href="javascript:;" onclick="scroll('{{$vv->name}}')" ng-repeat="category in categorys" ng-onclick="scrollToCategory(category)" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope">{{$vv->name}}</a>
+
                 @endforeach
 
 
@@ -281,49 +283,13 @@
                 <!-- ngIf: filterData===' default' && !searchEnv -->
                 <div ng-if="filterData === &#39;default&#39; &amp;&amp; !searchEnv" class="ng-scope">
                     <!-- ngRepeat: category in categorys -->
-                    <div class="shopmenu-list clearfix ng-scope" ng-repeat="category in categorys">
-                        <h3 class="shopmenu-title ng-binding">热销榜
-                            <span class="shopmenu-des ng-binding">大家喜欢吃，才叫真好吃。</span></h3>
-                        <!-- ngRepeat: food in category.foods -->
-                        <div class="shopmenu-food ng-isolate-scope" ng-class="{noimg: !food.image_path}" id="626104394" ng-repeat="food in category.foods" shop-menu-item="" food="food" shop="shopCache">
-                            <!-- ngIf: food.image_path -->
-                            <span class="col-1 ng-scope" ng-if="food.image_path">
-                    <a href="javascript:" ng-click="showInfo(food)">
-                      <img ng-src="//fuss10.elemecdn.com/d/7c/6940261e9231d507a67ba49300f4cjpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85" alt="单个狮子头的图片" src="{{asset('/wf/home/elm/7e0844ca398f08aa8b8ea08483ae0a87.jpg')}}"></a>
-                  </span>
-                            <!-- end ngIf: food.image_path -->
-                            <div class="col-2 shopmenu-food-main">
-                                <h3 class="shopmenu-food-name ui-ellipsis ng-binding">单个狮子头</h3>
-                                <p class="color-mute ui-ellipsis ng-binding" tooltip="单个狮子头">单个狮子头</p>
-                                <p>
-                                <div class="starrating icon-star ng-isolate-scope" title="评分4.2分" rate-star="" rating="food.rating">
-                                    <span class="icon-star" ng-style="{ width: (rating * 20) + &#39;%&#39; }" style="width: 84.8%;"></span>
-                                </div>
-                                <span class="color-mute ng-binding">(29)</span>
-                                <span class="color-mute ng-binding">月售228份</span></p>
-                            </div>
-                            <span class="col-3 shopmenu-food-price color-stress ng-binding">3
-                    <small class="ng-binding"></small></span>
-                            <span class="col-4">
-                    <div shop-cartbutton="" food="food" ng-hide="shop.id == &#39;656683&#39;" class="ng-isolate-scope">
-                      <!-- ngIf: !menuFood.hasSpec -->
-                      <div ng-if="!menuFood.hasSpec" class="ng-scope">
-                        <!-- ngIf: !cartItem.quantity && menuFood.stock -->
-                       <a href="{{url('/home/addcart/')}}"> <button class="shop-cartbutton ng-binding ng-scope" ng-if="!cartItem.quantity &amp;&amp; menuFood.stock" ng-click="cartItem.add($event)">加入购物车 </button></a>
-                          <!-- end ngIf: !cartItem.quantity && menuFood.stock -->
-                          <!-- ngIf: !menuFood.stock -->
-                          <!-- ngIf: cartItem.quantity> 0 || cartItem.quantity === '' --></div>
-                        <!-- end ngIf: !menuFood.hasSpec -->
-                        <!-- ngIf: menuFood.hasSpec --></div>
-                  </span>
-                        </div>
-                        <!-- end ngRepeat: food in category.foods --></div>
+
                     <!-- end ngRepeat: category in categorys -->
 
 
                     @foreach($labels as $ll=>$mm)
-                        <a name="{{$mm->name}}"></a>
-                    <div  class="shopmenu-list clearfix ng-scope" ng-repeat="category in categorys">
+
+                    <div id="{{$mm->name}}" class="shopmenu-list clearfix ng-scope" ng-repeat="category in categorys">
                         <h3 class="shopmenu-title ng-binding">{{$mm->name}}
                             <span class="shopmenu-des ng-binding"></span></h3>
                         <!-- ngRepeat: food in category.foods -->
@@ -342,22 +308,10 @@
                         <div class="shopmenu-food ng-isolate-scope" ng-class="{noimg: !food.image_path}" id="667240426" ng-repeat="food in category.foods" shop-menu-item="" food="food" shop="shopCache">
                             <!-- ngIf: food.image_path -->
                             <span class="col-1 ng-scope" ng-if="food.image_path">
-                    <a href="javascript:" onclick="info({{$v}})" ng-click="showInfo(food)">
+                    <a href="javascript:"  ng-click="showInfo(food)">
                       <img ng-src="//fuss10.elemecdn.com/e/e8/cc3d941aa785d2f0c603fb08a0bfcjpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85" alt="碳烧鸡饭的图片" src="{{asset($v->fpic)}}">
                     </a>
-                    <script>
 
-                        function info(food){
-                            layer.open({
-                                type: 1,
-                                title: false,
-                                area: ['700px', '360px'],
-                                shadeClose: true, //点击遮罩关闭
-                                content: '<div style="padding:20px;position:relative"><div style="float:left"><img style="width:300px;height:300px" src="{{asset($v->fpic)}}"></div><div style="float:left"><h5>ewrewrw</h5></div></div>'
-                            })
-                        }
-
-                    </script>
 
                   </span>
                             <!-- end ngIf: food.image_path -->
@@ -391,15 +345,13 @@
                             </form>
 
 
-
-
-
-
                   @endif
                 @endforeach
                     </div>
             @endforeach
+
                     <!-- end ngRepeat: category in categorys --></div>
+
 
                 <!-- end ngIf: filterData===' default' && !searchEnv -->
                 <!-- ngIf: filterData !==' default' || searchEnv -->
@@ -545,7 +497,14 @@
 </footer>
 <script src="{{asset('/wf/home/elm/home')}}"></script>
 <script src="{{asset('/wf/home/js/textStatic.js')}}"></script>
+<script>
+    function scroll(name) {
+//        alert(name);
 
+        $('html,body').animate({scrollTop:$('#'+name).offset().top},1000);
+
+    }
+</script>
 </body>
 
 </html>
