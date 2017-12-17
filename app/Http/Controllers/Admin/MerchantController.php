@@ -92,15 +92,11 @@ class MerchantController extends Controller
         Session::put('meruser',$meruser);
 
         $id = session('meruser')['bid'];
+//        dd($id);
         $shop = MerUser::find($id)->shop;
+        dd($shop);
         session('meruser')['sid'] = $shop['sid'];
         return redirect('admin/merindex');
-
-
-
-
-
-
     }
 
 
@@ -118,5 +114,13 @@ class MerchantController extends Controller
      //dd(111);
         $code = new Code();
         $code ->make();
+    }
+
+
+    public function logout()
+    {
+        session()->flush();
+
+        return redirect('admin/mlogin');
     }
 }

@@ -6,7 +6,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{$conf['logo1']}}">首页</a> &raquo; <a href="#">{{$conf['keywords']}}</a> &raquo; 添加商品
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#"></a> &raquo; 添加商品
     </div>
     <!--面包屑导航 结束-->
 
@@ -26,7 +26,7 @@
     <!--结果集标题与导航组件 结束-->
 
     <div class="result_wrap">
-        <form action="{{url('admin/config')}}" id = "art_form" method="post">
+        <form action="{{url('admin/xtAdmin/config')}}" id = "art_form" method="post">
             {{csrf_field()}}
             @if (count($errors) > 0)
                 <div class="alert alert-danger">

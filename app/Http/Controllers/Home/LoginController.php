@@ -7,6 +7,7 @@ use Gregwar\Captcha\PhraseBuilder;
 
 
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -127,24 +128,38 @@ class LoginController extends Controller
 //执行短信验证码的方法
     public function sendcode(Request $request)
     {
+
         $input = $request->except('_token');
-
+//        return $input;
+        if($input['phone'] == null){
+            return '手机号码不能为空';
+        }
        // return $input;
+        $token = Redis::get('token');
+        if(!$token){
+            $options['accountsid']='e85874b47ad67fa2273122fe1de0fed8';
+            $options['token']='0af8e8e98476032b2a246db2df0d2ffc';
 
-        $options['accountsid']='e85874b47ad67fa2273122fe1de0fed8';
-        $options['token']='0af8e8e98476032b2a246db2df0d2ffc';
-        $ucpass = new Ucpaas($options);
+            $ucpass = new Ucpaas($options);
 //    1.appId：创建应用时系统分配的唯一标示，在“应用列表”中可以查询
 //    2.templateId：创建短信模板时系统分配的唯一标示，在“短信管理”中可以查询
 //    3. to：需要下发短信的手机号码,支持国际号码，需要加国家码。
 //    4.param：模板中的替换参数，如果有多个参数则需要写在同一个字符串中，以逗号分隔. （如：param=“a,b,c”）
-        $appId = "ff02050750a742c582a5a2b633c50dc6";
-        $to =  $input['phone'];
-        $templateId = "238242";
-        $param= mt_rand(1000,9999);
-      //发送验证码成功后，将验证码存入session中
-         Session::flash('phone',$param);
-       return $ucpass->templateSMS($appId,$to,$templateId,$param);
+
+            $appId = "ff02050750a742c582a5a2b633c50dc6";
+            $to =  $input['phone'];
+//            return $to;
+            $templateId = "238242";
+            $param= mt_rand(1000,9999);
+            //发送验证码成功后，将验证码存入session中
+            Session::put('phone',$param);
+            $token=Redis::setex('token',60,'60');//设置声明周期
+            return $ucpass->templateSMS($appId,$to,$templateId,$param);
+
+        }elseif($token){
+            return '请等待60秒后重新获取';
+        }
+
     }
 
     //实现手机号注册
@@ -176,13 +191,16 @@ class LoginController extends Controller
         //3.向用户表添加注册用户
         $phone = $input['phone'];
         $name = mt_rand(1000000,9999999);
+
         $pic = '/a/image/1.jpg';
 //        dd($input);
         //从数据库中获取手机号
+
         $aa =  \DB::table('users')->where('phone',$phone)->get();
         $aa=$aa->toArray();
 
         if($aa == []){
+
             //如果注册的手机号没有与数据库中重复,就将注册的手机号添加到数据库中
             $res = \DB::table('users')->insert(['phone'=>$phone,'uname'=>$name,'avatar'=>$pic]);
 
@@ -210,4 +228,9 @@ class LoginController extends Controller
 
 
     }
+
+
+
+
+
 }

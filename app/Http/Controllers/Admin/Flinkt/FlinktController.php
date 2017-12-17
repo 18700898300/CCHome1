@@ -187,21 +187,25 @@ class FlinktController extends Controller
             $mark['error']='no';//此步必须有,否则报错500
         }
     }
-    if($mark['error'] =='ok'){
+    $haslink = Flinkt::with('flink')->where('fltid',$id)->get()[0]->flink;
+//        return $haslink;
+        $data=[];
+    if($mark['error'] =='ok' || $haslink != '[]'){
         $res=false;
+        $data['msg']='有子分类或者有存在友情链接，无法删除！';
     }else{
         $res = $flinkt->delete();
     }
-//    return ($flinkt);
+//
 
-        $data=[];
+
 
     if($res){
         $data['error']=0;
         $data['msg']='删除成功';
     }else{
         $data['error']=1;
-        $data['msg']='删除失败';
+        $data['msg'] ? $data['msg'] : '删除失败';
         }
         return $data;//不用json格式化,因为laravel框架已经格式化好了
     }

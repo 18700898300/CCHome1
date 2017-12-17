@@ -442,6 +442,22 @@
 </div>
 
 <footer class="footer" role="contentinfo">
+
+    <div class="container clearfix">
+        @foreach($flink as $k=>$v)
+        <div class="footer-link"><h3 class="footer-link-title">{{$v['fname']}} </h3>
+            <a class="footer-link-item" href="{{$v['fpath']}}" target="_blank"><img src = "{{$v['ffpic']}}" style="width:150px;height:100px;" alt="点我"></a>
+        </div>
+        @endforeach
+    </div>
+
+
+
+
+
+
+
+
     <div class="container clearfix">
         <div class="footer-link">
             <h3 class="footer-link-title">用户帮助</h3>

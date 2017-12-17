@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Home;
 
+
 use App\Models\Admin\Shop_type;
 use App\Models\Home\Food_label;
 use App\Models\Home\Shop;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 
 class IndexController extends Controller
 {
@@ -163,6 +165,9 @@ class IndexController extends Controller
 //        dd($f);
 //        dd($foods[0]['food'][0]['sum']);
 //        求得店铺总销量
+        $flink = Shop::with('flink')->where('sid',$id)->get();
+        $flink = $flink[0]->flink;
+//        dd($flink);
         $sum = 0;
 //        所有菜品
         $foods = [];
@@ -178,7 +183,9 @@ class IndexController extends Controller
 //        dd($foods);
 //        dd($s);
         $shop->sum = $sum;
-        return view('home/shop',compact('shop','foods','labels','id'));
+
+        return view('home/shop',compact('shop','foods','labels','id','flink'));
+
     }
 
     //退出登录

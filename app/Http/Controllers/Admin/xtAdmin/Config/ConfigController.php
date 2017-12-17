@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Config;
+namespace App\Http\Controllers\Admin\xtAdmin\Config;
 
 use App\Http\Model\Config\Config;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redis;
-
+use Illuminate\Support\Facades\Storage;
 
 class ConfigController extends Controller
 {
@@ -48,14 +48,23 @@ class ConfigController extends Controller
 //        根据conf_id[]数组获取要修改的网站记录,然后从conf_content的同下标中取出次网站配置需要修改成的值
 //        dd($input);
 //        dd($input['conf_id']);
+//        dd($input['conf_content']);
+//        dd($input);
             foreach($input['conf_id'] as $k=>$v){
 //                找到一条需要修改的网站配置记录
                 $conf = Config::find($v);
+//                if($conf->field_type=='image') {
+//                    //$k--;
+//                    //dd($k);
+//                    continue;
+//                }
+//                dd($conf);
+//                return $input['conf_content'][$k];
                 $conf->update(['conf_content'=>$input['conf_content'][$k]]);
             }
                 $this::PutRedis();
 //            $this->PutFile();
-        return redirect('admin/config');
+        return redirect('admin/xtAdmin/config');
     }
     public function index()
     {
@@ -100,7 +109,9 @@ class ConfigController extends Controller
                     $v->conf_contents=$str;
                     break;
                 case 'image':
-                    $v->conf_contents =  '<input type="text" class = "lg" size="50" id="art_thumb" name="conf_content[]" value='.htmlspecialchars($v->conf_content).'>';
+//                    name 属性中的[]必须有，否则值被覆盖最终只有一个值,隐藏域的作用。
+                    $v->conf_contents =  '<img src = "'.$v->conf_content.'"   style="width:80px;height:80px;">
+                    <input type ="hidden" name = "conf_content[]" value = "'.$v->conf_content.'"> ';
                     break;
             }
         }
@@ -148,7 +159,7 @@ class ConfigController extends Controller
 //        如果表单验证失败
 
         if($validator->fails()){
-            return redirect('admin/config/create')  //返回原添加页面
+            return redirect('admin/xtAdmin/config/create')  //返回原添加页面
             ->withErrors($validator)
                 ->withInput();//让页面输入的用户名保持在输入框
         }
@@ -158,7 +169,7 @@ class ConfigController extends Controller
         if($res){
 //            $this->PutFile();
             $this->PutRedis();
-            return redirect('admin/config')->with('msg','网站配置添加成功');
+            return redirect('admin/xtAdmin/config')->with('msg','网站配置添加成功');
         }else{
             return back()->with('msg','网站配置添加成功失败');
         }
@@ -187,7 +198,9 @@ class ConfigController extends Controller
      */
     public function edit($id)
     {
-        //
+//        dd($id);
+        $config = Config::find($id);
+        return view('admin/config/edit',compact('config'));
     }
 
     /**
@@ -199,7 +212,16 @@ class ConfigController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+//        dd($request->input);
+        $input = $request->except('_token','_method','fpic');
+//        dd($input);
+        $res = Config::where('conf_id',$id)->update($input);
+        if($res){
+            $this::PutRedis();
+            return  redirect('/admin/xtAdmin/config')->with('msg','修改成功');
+        }else{
+            return back();
+        }
     }
 
     /**
@@ -210,6 +232,60 @@ class ConfigController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = Config::find($id)->delete();
+        if($res){
+            $data['error']=0;
+            $data['msg']='删除成功！';
+            return $data;
+        }else{
+            $data['error']=1;
+            $data['msg']='删除失败，请重试！';
+            return $data;
+        };
+    }
+
+    public  function upload(Request $request)
+    {
+
+//    return 1111;
+//    $file = $request->file('fpic');
+//
+        // 多文件上传????????????
+//        return $request->input();
+        $file = $request->file('fpic');
+
+//        return $file;
+//        return 111;
+//        return $file;
+//        $file =$file[0];
+//        return $file[2];
+//        return $request;
+//        $arr=[];
+//        foreach($file as $k=>$file){
+//            return $file;
+        if($file->isValid()){
+            //获取文件上传对象后的后缀名
+            $ext = $file->getClientOriginalExtension();
+            //生成一个唯一的文件名,保证所有的文件不重名
+            $newfile=time().rand(1000,9999).uniqid().'.'.$ext;
+            //设置上传文件的目录
+//            $dirpath  = public_path().'/uploads/'; //获取public目录的绝对路径并拼接新的上传文件路径
+//            将文件移动到本地服务器的指定位置,并以新文件名命名
+//            $file->move(移动到的目录,新文件名);
+//            $file->move($dirpath,$newfile);
+            //将文件移动到七牛云,并以新文件名命名
+
+            $disk = Storage::disk('qiniu')->writeStream('uploads/'.$newfile, fopen($file->getRealPath(), 'r'));
+            //将文件移动到阿里云并以新文件名命名
+
+//                OSS::upload($newfile,$file->getRealPath());
+//                 $arr[]=$file;
+//
+
+        }
+//        }
+        return $newfile;
+//        return $arr;
+
     }
 }

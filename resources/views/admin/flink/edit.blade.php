@@ -117,7 +117,7 @@
 //                                var formData = new FormData($('#art_form')[0]);
                                 //console.log($('#art_form')[0]);
                                 var formData = new FormData();
-                                formData.append('fpic', $('#fpic')[0].files[0]);
+                                formData.append('fpic', $('#fpic')[0].files[0]);//传到控制器中的名称，接收也必须用fpic
                                 formData.append('_token',"{{csrf_token()}}");
                                 $.ajax({
                                     type: "POST",

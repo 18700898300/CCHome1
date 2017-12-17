@@ -1,4 +1,4 @@
-y<!DOCTYPE html>
+<!DOCTYPE html>
 <html perf-error="desktop/home/" ng-app="eleme" class="ng-scope">
 <head>
     <style type="text/css">

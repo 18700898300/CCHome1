@@ -76,18 +76,26 @@
 				</ul>
 			</li>
 			<li>
+
 				<h3><i class="fa fa-fw fa-clipboard"></i>订单模块</h3>
 				<ul class="sub_menu">
 					<li><a href="{{url('admin/xtAdmin/orderlist')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>订单浏览</a></li>
+
+
+				<h3><i class="fa fa-fw fa-clipboard"></i>商户入驻审核模块</h3>
+				<ul class="sub_menu">
+					<li><a href="{{url('admin/xtAdmin/verify')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>审核</a></li>
 
 				</ul>
 			</li>
             <li>
             	<h3><i class="fa fa-fw fa-cog"></i>系统设置</h3>
-                <ul class="sub_menu">
-                    <li><a href="#" target="main"><i class="fa fa-fw fa-cubes"></i>网站配置</a></li>
-                    <li><a href="#" target="main"><i class="fa fa-fw fa-database"></i>备份还原</a></li>
-                </ul>
+				<ul class="sub_menu">
+					<li><i class="fa fa-fw fa-cubes"></i>网站配置</li>
+					<li><a href="{{url('admin/xtAdmin/config/create')}}" target="main"><i class="fa fa-fw fa-cubes"></i>网站配置添加</a></li>
+					<li><a href="{{url('admin/xtAdmin/config')}}" target="main"><i class="fa fa-fw fa-cubes"></i>网站配置信息</a></li>
+					<li><a href="#" target="main"><i class="fa fa-fw fa-database"></i>备份还原</a></li>
+				</ul>
             </li>
             <li>
             	<h3><i class="fa fa-fw fa-thumb-tack"></i>工具导航</h3>

@@ -35,7 +35,7 @@
 
             <ul>
                 <li>
-                    <input type="text" name="bname" placeholder = "请输入用户名" value="{{old('bname')}}" class="text"/>
+                    <input type="text" name="bname" placeholder = "请输入用户名|注册手机号" value="{{old('bname')}}" class="text"/>
                     <span><i class="fa fa-user"></i></span>
                 </li>
                 <li>

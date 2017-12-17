@@ -14,9 +14,31 @@ Route::post('admin/xtAdmin/dologin','Admin\xtAdmin\LoginController@doLogin');
 // 系统后台
 Route::group(['middleware'=>['adminIslogin','HasRole'],'prefix'=>'admin/xtAdmin','namespace'=>'Admin\xtAdmin'],function(){
     //进入系统后台首页
+
 Route::get('index','IndexController@index');
 Route::get('info','IndexController@info');
 Route::get('logout','IndexController@logout');
+
+
+
+    //商户入驻申请审核
+    Route::get('verify','VerifyController@index');
+    Route::get('verify/result/{sid}','VerifyController@result');
+    Route::post('verify/update/{sid}','VerifyController@update');
+//    网站配置
+    Route::resource('config','Config\ConfigController');
+    Route::post('config/contentchange','Config\ConfigController@ContentChange');
+    Route::post('upload','Config\ConfigController@upload');
+
+
+
+
+//    修改密码
+    Route::get('password/edit/{id}','PasswordController@edit');
+//    执行修改
+    Route::post('password/update','PasswordController@update');
+
+
 
 //    管理员模块
 
@@ -219,8 +241,29 @@ Route::get('/order/ddsx','OrderController@ddsx');
 
 
 
+
+Route::get('/shop',function (){
+    return view('shop');
+});
+
+Route::get('/order',function (){
+    return view('order');
+});
+
+Route::get('/index',function(){
+    return view('index');
+});
+
+
+
+
 //商户注册
-Route::get('/admin/meregister','Admin\MerregController@meregister');
+Route::get('/admin/meregistere','Admin\MerregController@meregistere');
+Route::get('/admin/meregisterm','Admin\MerregController@meregisterm');
+Route::post('/admin/domeregisterm','Admin\MerregController@domeregisterm');
+
+
+
 
 
 //商户登录
@@ -228,13 +271,16 @@ Route::get('/admin/mlogin','Admin\MerchantController@mlogin');
 Route::post('/admin/domlogin','Admin\MerchantController@domlogin');
 Route::get('/admin/yzm','Admin\MerchantController@yzm');
 Route::get('/admin/crypt','Admin\MerchantController@crypt');
+
+//商户退出登录
+Route::get('admin/logout','Admin\MerchantController@logout');
 //商户后台
 //进入商户后台首页的路由组
 //注册好中间件之后,直接用别名islogin就可以
 Route::group(['middleware'=>'islogin','islogin','prefix'=>'admin','namespace'=>'shAdmin'],function(){
     Route::get('merindex','MerController@merindex');
-//    Route::get('info','MerController@info');
-    //新订单详情
+
+    Route::get('info','MerController@info');
 
 
 //    //友情链接类别管理
@@ -260,6 +306,52 @@ Route::get('/shadmin/order/jd/{id}','orederController@jd');
 
 
 
+    //友情链接类别管理
+    Route::resource('flinkt','Flinkt\FlinktController');
+//    排序,必须有路由,不是资源路由,因自己定义方法,否则报错方法不允许
+    Route::post('flinkt/changeOrder','Flinkt\FlinktController@changeOrder');
+
+    //    友情链接管理
+    Route::post('flink/{id}','Flink\FlinkController@update');
+    Route::resource('flink','Flink\FlinkController');
+    Route::post('upload','Flink\FlinkController@upload');//控制器的位置写对,不可忘加Flink
+    //网站配置转至系统后台
+//    Route::resource('config','Config\ConfigController');
+//    Route::post('config/contentchange','Config\ConfigController@ContentChange');
+    //后台评论管理
+    Route::get('comment','Comment\CommentController@index');
+
+
+});
+Route::group(['middleware'=>'isloginreg','prefix'=>'home','namespace'=>'Home'],function(){
+//商户的入驻申请
+        Route::get('reg','RegController@reg');
+        Route::post('reg/upload','RegController@upload');
+
+        Route::post('doreg','RegController@doreg');
+        Route::get('status','RegController@status');
+        //入驻申请状态查询
+        Route::get('qstatus','RegController@qstatus');
+        Route::post('doqstatus','RegController@doqstatus');
+});
+
+//前台中间件
+// 登录后,前台用户评论  未写
+Route::get('home/comment/comment','Home\Comment\CommentController@index');
+Route::post('/comment/add','Home\Comment\CommentController@addComment');
+
+
+//前台登录
+Route::get('home/login','Home\LoginController@login');
+Route::get('home/login2','Home\LoginController@login2');
+Route::get('home/yzm','Home\LoginController@yzm');
+
+Route::get('/code/captcha/{tmp}', 'Home\LoginController@captcha');
+
+
+Route::post('home/dologin','Home\LoginController@dologin');
+
+
 
 //用户评论
 Route::get('home/comment/index','home/CommentController@index');
@@ -272,10 +364,50 @@ Route::resource('foodlabel','shAdmin\FoodLabelController');
 Route::resource('food','shAdmin\FoodController');
 //执行菜品图片上传
 Route::post('food/upload','shAdmin\FoodController@upload');
+
+
+//前台搜索查询店铺
+Route::get('home/home','Home\Home\HomeController@index');
+Route::post('/home/query','Home\Home\HomeController@query');
+
+
+
+
+
+
+
+
+//前台的个人资料
+Route::get('home/person',function(){
+    return view('Home.person');
+});
+
+Route::get('home/person','Home\PersonController@index');
+Route::post('home/person/edit','Home\PersonController@edit');
+//编辑头像
+Route::get('home/avatar',function(){
+    return view('Home.avatar');
+});
+
+Route::post('home/avatar/upload','Home\PersonController@upload');
+
+//设置密码
+Route::get('home/setpwd','Home\PersonController@setpwd');
+Route::post('home/dosetpwd','Home\PersonController@dosetpwd');
+
+
+//修改密码
+Route::get('home/changepwd','Home\PersonController@changepwd');
+Route::post('home/dochangepwd','Home\PersonController@dochangepwd');
+
+//地址管理
+Route::get('home/address',function(){
+    return view('Home.address');
 });
 
 
-//商户的入驻申请
-Route::get('home/reg','Home\RegController@reg');
+//安全中心
+Route::get('home/safe',function(){
+    return view('Home.safe');
+});
 
-Route::post('home/doreg','Home\RegController@doreg');

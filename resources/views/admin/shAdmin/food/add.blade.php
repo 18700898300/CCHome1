@@ -114,8 +114,8 @@
                                     processData: false,
                                     success: function(data) {
                                         console.log(data);
-                                        $('#img1').attr('src','/uploads/'+data);
-//                                            $('#img1').attr('src','http://p09v2gc7p.bkt.clouddn.com/uploads/'+data);
+//                                        $('#img1').attr('src','/uploads/'+data);
+                                            $('#img1').attr('src','http://p0bvp893u.bkt.clouddn.com/uploads/'+data);
 //                                            $('#img1').attr('src','http://project193.oss-cn-beijing.aliyuncs.com/'+data);
                                         $('#img1').show();
                                         $('#art_thumb').val('/uploads/'+data);

@@ -327,11 +327,19 @@
                 </div>
             </div>
         </footer>
+<<<<<<< HEAD
 
         <script src="{{asset('a/js/6936dbf3e7d94cffa954bcbcf2b79f38.js')}}"></script>
 
     </div>
 </div>
+=======
+        <script src="{{asset('/wf/home/js/6936dbf3e7d94cffa954bcbcf2b79f38.js')}}"></script>
+        <script>
+            $('#info').fadeOut(2000);
+
+        </script>
+>>>>>>> origin/qym
 </body>
 
 

@@ -117,7 +117,7 @@
                                 //console.log($('#art_form')[0]);
                                 {{--var formData = new FormData();--}}
                                 {{--formData.append('file_upload', $('#file_upload')[0].files[0]);--}}
-                                {{--formData.append('_token',"{{csrf_token()}}");--}}
+                                formData.append('_token',"{{csrf_token()}}");
                                 $.ajax({
                                     type: "POST",
                                     url: "/admin/upload",
@@ -139,8 +139,8 @@
                                         //多文件上传
 //                                        console.log(data[0]['newfile']);
 //                                        for(var b in data){
-//                                          console.log(data[b]);//打印出来任然为对象
-//                                          $('#img1').attr('src','http://ccchome.oss-cn-beijing.aliyuncs.com/'+data[b]['newfile']);
+//                                  console.log(data[b]);//打印出来任然为对象
+//                                                  $('#img1').attr('src','http://ccchome.oss-cn-beijing.aliyuncs.com/'+data[b]['newfile']);
 //                                          $('#img1').show();
 //                                          $('#art_thumb').val('/uploads/'+data[b]['newfile']);
 //                                      }

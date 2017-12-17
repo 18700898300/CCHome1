@@ -9,9 +9,7 @@
     <script type="text/javascript" src="{{asset('admin/assets/style/js/ch-ui.admin.js')}}"></script>
     <script type="text/javascript" src="{{asset('layer/layer.js')}}"></script>
     {{--<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3&ak=pPGRydBmCrtAwDteGOey3EgsZFGKXqBj"></script>--}}
-    <style>
 
-    </style>
 </head>
 <body style="background:#F3F3F4;">
 <div class="top_box">
