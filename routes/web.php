@@ -27,6 +27,11 @@ Route::post('adminUser/doauth','Admin_userController@doauth');
 // 个人用户模块
 //显示个人用户列表
 Route::get('person/lists','PersonController@lists');
+//用户禁用
+Route::post('person/disable/{id}','PersonController@disable');
+//用户启用
+Route::post('person/enable/{id}','PersonController@enable');
+
 //用户删除
 Route::post('person/del/{id}','PersonController@del');
 
@@ -70,7 +75,7 @@ Route::get('errors/auth',function(){
 });
 
 //前台登录
-//短信登录页面
+//密码登录页面
 Route::get('/home/login','Home\LoginController@login');
 //验证码
 Route::get('home/yzm','Home\LoginController@yzm');
@@ -78,6 +83,8 @@ Route::get('home/yzm','Home\LoginController@yzm');
 Route::get('/code/captcha/{tmp}', 'Home\LoginController@captcha');
 //执行登录
 Route::post('home/dologin','Home\LoginController@dologin');
+
+
 //手机号登录页面
 Route::get('home/login2','Home\LoginController@login2');
 //获取手机短信验证码

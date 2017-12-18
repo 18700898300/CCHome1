@@ -79,18 +79,31 @@
                         <th class="tc" width="10%">手机号</th>
                         <th class="tc" width="10%">邮箱</th>
                         <th class="tc" width="10%">身份证</th>
+                        <th class="tc" width="10%">状态</th>
                         <th class="tc" width="10%">操作</th>
                     </tr>
 
                     @foreach($boss as $k=>$v)
-                        <tr>
+                        <tr align="center">
                             <td>{{$v->bid}}</td>
                             <td>{{$v->bname}}</td>
                             <td>{{$v->phone}}</td>
                             <td>{{$v->email}}</td>
                             <td>{{$v->card}}</td>
                             <td>
-                                <a href="{{url('')}}">修改</a>
+
+                                @if($v->status == 0)
+                                    禁用
+                                @else
+                                    启用
+                                @endif
+                            </td>
+                            <td>
+                                @if($v->status == 1)
+                                    <a id="disable" href="javascript:;">禁用</a>
+                                @else
+                                    <a id="enable" href="javascript:;">启用</a>
+                                @endif
                                 <a onclick="bossDel({{$v->bid}})" href="javascript:;">删除</a>
                             </td>
 
@@ -143,7 +156,7 @@
 //                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
                     //var res =  JSON.parse(data);
 //                    删除成功
-                    console.log(data);
+//                    console.log(data);
                     if(data.error == 0){
                         //console.log("错误号"+res.error);
                         //console.log("错误信息"+res.msg);
@@ -165,6 +178,10 @@
 
             });
         }
+
+        $("#disable").on('click',function(){
+            layer
+        })
 
 
 

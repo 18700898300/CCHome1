@@ -84,7 +84,7 @@
                     </tr>
 
                     @foreach($users as $k=>$v)
-                    <tr>
+                    <tr align="center">
                         <td>{{$v->uid}}</td>
 
                         <td>{{$v->uname}}</td>
@@ -92,17 +92,18 @@
                         <td>{{$v->email}}</td>
                         <td><img src="{{$v->avatar}}" style="width:50px;"></td>
                         <td>
-
-                            <a href="javascript:;">禁用</a>
-
-                            <a href="javascript:;">启用</a>
-
+                            @if($v->status == 0)
+                                    禁用
+                            @else
+                                启用
+                            @endif
                         </td>
                         <td>
-                            <a href="javascript:;">禁用</a>
-
-                            <a href="javascript:;">启用</a>
-
+                            @if($v->status == 1)
+                            <a  id="{{$v->uid}}" class="jy" href="javascript:;">禁用</a>
+                            @else
+                            <a id="{{$v->uid}}" class="qy" href="javascript:;">启用</a>
+                            @endif
                             <a onclick="userDel({{$v->uid}})" href="javascript:;">删除</a>
                         </td>
 
@@ -155,7 +156,7 @@
 //                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
                 //var res =  JSON.parse(data);
 //                    删除成功
-                console.log(data);
+//                console.log(data);
                 if(data.error == 0){
                     //console.log("错误号"+res.error);
                     //console.log("错误信息"+res.msg);
@@ -178,6 +179,66 @@
         });
     }
 
+
+
+
+    $('.qy').on('click',function()
+    {
+        var id = $(this).attr('id');
+        var ts = $(this);
+
+        layer.confirm('您确认启用吗？', {
+            btn: ['确认','取消'] //按钮
+        }, function(){
+            $.post("{{url('admin/xtAdmin/person/disable')}}/"+id,{"_token":"{{csrf_token()}}"},function(data) {
+                console.log(data);
+                if(data  ==1){
+                    //console.log("错误号"+res.error);
+                    //console.log("错误信息"+res.msg);
+                    layer.msg(data.msg, {icon: 6});
+//                       location.href = location.href;
+                      ts.parent().prev().html('启用');
+                      ts.html('禁用');
+//                    var t=setTimeout("location.href = location.href;",2000);
+                }else{
+                    layer.msg(data.msg, {icon: 5});
+
+                    var t=setTimeout("location.href = location.href;",2000);
+                    //location.href = location.href;
+                }
+            });
+        },function(){
+
+        });
+    });
+    $('.jy').on('click',function() {
+        var id = $(this).attr('id');
+        var ts = $(this);
+
+        layer.confirm('您确认禁用吗？', {
+            btn: ['确认', '取消'] //按钮
+        }, function () {
+            $.post("{{url('admin/xtAdmin/person/enable')}}/" + id, {"_token": "{{csrf_token()}}"}, function (data) {
+
+                if (data == 1) {
+                    //console.log("错误号"+res.error);
+                    //console.log("错误信息"+res.msg);
+                    layer.msg(data.msg, {icon: 6});
+//
+                    ts.parent().prev().html('禁用');
+                    ts.html('启用');
+//                    var t = setTimeout("location.href = location.href;", 2000);
+                } else {
+                    layer.msg(data.msg, {icon: 5});
+
+                    var t = setTimeout("location.href = location.href;", 2000);
+                    //location.href = location.href;
+                }
+            });
+        }, function () {
+
+        });
+    });
 
 
 

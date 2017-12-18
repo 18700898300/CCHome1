@@ -8,6 +8,7 @@
     <script type="text/javascript" src="{{asset('wf/admin/style/js/jquery.js')}}"></script>
     <script type="text/javascript" src="{{asset('wf/admin/style/js/ch-ui.admin.js')}}"></script>
     <script type="text/javascript" src="{{asset('wf/layer/layer.js')}}"></script>
+    <script src="{{asset('/js/jquery-1.8.3.min.js')}}" type="text/javascript"></script>
 </head>
 <body style="background:#F3F3F4;">
 @section('body')

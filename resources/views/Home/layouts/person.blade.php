@@ -147,7 +147,7 @@
                 </ul></li>
             <li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的资料</h2>
                 <ul>
-                    <li ng-class="{ active: pageName === 'info' }" class="active"><a href="{{asset('home/person')}}">个人资料</a></li>
+                    <li ng-class="{ active: pageName === 'info' }" ><a href="{{asset('home/person')}}">个人资料</a></li>
                     <li ng-class="{ active: pageName === 'address' }"><a href="{{asset('home/address')}}">地址管理</a></li>
                     <li ng-class="{ active: pageName === 'security-center' }"><a href="{{asset('home/safe')}}">安全中心</a></li>
                     <li ng-class="{ active: pageName === 'changepassword' }"><a href="{{asset('home/changepwd')}}">修改密码</a></li>

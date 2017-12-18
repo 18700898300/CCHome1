@@ -24,10 +24,6 @@ class LoginController extends Controller
     //密码登录的页面
     public function login()
     {
-//        dd(session('user'));
-//      /  dd(session('user')[0]->uname);
-//        dd(session()->forget('user'));
-        //dd(session('user'));
         return view('home.login.login');
     }
 
@@ -69,7 +65,7 @@ class LoginController extends Controller
     {
         //1.获取用户提交的登录数据,
         $input = $request->except('_token');
-
+//        dd($input);
         //2.对数据进行后台表单验证
         $rule = [
             'uname' => 'required|regex:/^[\x{4e00}-\x{9fa5}A-Za-z0-9_]+$/u|between:5,20',
@@ -109,12 +105,17 @@ class LoginController extends Controller
         if( Crypt::decrypt($user->password) != trim($input['password']) ){
             return redirect('home/login')->with('errors','密码不正确')->withInput();
         }
-//       $user = $user->toArray();
-//        dd($user);
 
-        Session::put('user',$user);
-        //dd( Session::get('user'));
-        return redirect('home/index');
+
+        //判断用户状态
+        if($user->status == 0){
+            return redirect('home/login');
+        }else{
+            Session::put('user',$user);
+            return redirect('home/index');
+        }
+
+
     }
 
 

@@ -31,6 +31,29 @@ class PersonController extends Controller
 
    }
 
+   public function disable($id)
+   {
+//
+        $res = User::find($id)->update(['status'=>1 ]);
+        if($res){
+            return 1;
+        }else{
+            return 0;
+        }
+//
+   }
+
+   public function enable($id)
+   {
+
+       $res = User::find($id)->update(['status'=>0 ]);
+       if($res){
+           return 1;
+       }else{
+           return 0;
+       }
+   }
+
     public function del($id)
     {
 
