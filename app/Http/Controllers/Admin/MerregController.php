@@ -17,7 +17,7 @@ class MerregController extends Controller
         return view('admin/mer/merregm');
     }
     public  function domeregisterm(Request $request){
-//        dd(111);
+
         $input = $request->except('_token');
 //        dd($input);
         $rule =[

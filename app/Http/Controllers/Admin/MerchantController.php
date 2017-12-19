@@ -30,7 +30,8 @@ class MerchantController extends Controller
 
     public function domlogin(Request $request)
     {
-//        dd(111);表单中有{{csrf_field()}}才可以提交到此处
+//        dd(111);
+//表单中有{{csrf_field()}}才可以提交到此处
 //           1.获取数据
         $input = $request->except('_token');
 //        dd($input);
@@ -69,7 +70,7 @@ class MerchantController extends Controller
 //        3.1判断是否有此用户
 
             $meruser= MerUser::where('bname',$input['bname'])->first();
-//            dd($user);
+//            dd($meruser);
             if(!$meruser){
                 return redirect('admin/mlogin')->with('errors','用户名不存在');
             }
@@ -94,8 +95,8 @@ class MerchantController extends Controller
         $id = session('meruser')['bid'];
 //        dd($id);
         $shop = MerUser::find($id)->shop;
-        dd($shop);
-        session('meruser')['sid'] = $shop['sid'];
+//        dd($shop);
+        session('meruser')['sid'] = $shop[0]['sid'];
         return redirect('admin/merindex');
     }
 
@@ -105,7 +106,7 @@ class MerchantController extends Controller
 
         $str = 666666;
         $bpassword = Crypt::encrypt($str);
-       dd($bpassword);
+//       dd($bpassword);
     }
 
 

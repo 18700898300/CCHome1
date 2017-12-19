@@ -32,7 +32,7 @@
             <li>
             	<h3><i class="fa fa-fw fa-clipboard"></i>管理员模块</h3>
                 <ul class="sub_menu">
-                    <li><a href="{{url('admin/xtAdmin/adminUser/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加管理员</a></li>
+                    <li><a href="{{url('admin/xtAdmin/ask')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>管理员申请</a></li>
                     <li><a href="{{url('admin/xtAdmin/adminUser')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>管理员列表</a></li>
 
                 </ul>

@@ -38,30 +38,36 @@
     <!--结果集标题与导航组件 结束-->
 
     <div class="result_wrap">
-        <form action="{{url('/admin/xtAdmin/adminUser')}}" method="post">
+        <form action="{{url('admin/xtAdmin/password/update')}}" method="post">
             <table class="add_tab">
                 {{csrf_field()}}
                 <tbody>
-
+                <input type="hidden" name="id" value="{{$id}}">
                 <tr>
-                    <th><i class="require">*</i>管理员名称：</th>
+                    <th><i class="require">*</i>旧密码：</th>
                     <td>
-                        <input type="text" name="aname" value="{{old('aname')}}">
-                        <span><i class="fa fa-exclamation-circle yellow"></i>管理员名称必须填写</span>
+                        <input type="password" placeholder="请输入旧密码" name="oldpassword">
                     </td>
                 </tr>
 
                 <tr>
-                    <th><i class="require">*</i>密码aa：</th>
+                    <th><i class="require">*</i>新密码：</th>
                     <td>
-                        <input type="password" name="password">
+                        <input type="password" placeholder="请输入新密码" name="password">
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><i class="require">*</i>确认密码：</th>
+                    <td>
+                        <input type="password" placeholder="请确认新密码" name="re_password">
                     </td>
                 </tr>
 
                 <tr>
                     <th></th>
                     <td>
-                        <input type="submit" value="提交">
+                        <input type="submit" value="修改">
                         <input type="button" class="back" onclick="history.go(-1)" value="返回">
                     </td>
                 </tr>

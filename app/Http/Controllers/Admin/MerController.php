@@ -10,7 +10,7 @@ class MerController extends Controller
 {
     public function merindex()
     {
-//        dd(0);
+//        dd(01111);
         $meruser = Session::get('meruser');
 //        dd($meruser);
         $shop = MerUser::with('shop')->where('bid',$meruser['bid'])->get();

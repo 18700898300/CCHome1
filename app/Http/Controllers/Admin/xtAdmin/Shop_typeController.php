@@ -164,14 +164,47 @@ class Shop_typeController extends Controller
 
 
 //    删除分类
-    public function delete($id)
+    public function del($id)
     {
-//        找到要删除的记录
+//        return 111;
+//      1.  找到要删除的记录
         $cate = Shop_type::find($id);
+//        dd($cate) ;
 
-//        执行删除
+//        获得所有分类的父类字段
+        $pids = Shop_type::pluck('pid');
+        $a = [];
+        foreach ($pids as $k=>$v){
+            $a[] = $v;
+        }
+        $pids = array_unique($a);
+//        return $pids;
+//      2.  判断要删除的分类ID是否在父类中
+        if(in_array($id,$pids)){
+            $data =[
+                'status'=> 1,
+                'msg'=>'删除失败,含有子分类'
+            ];
+            return $data;
+        }
+
+//        3. 判断要删除的分类下面是否存在商户
+        $shop = Shop_type::find($id)->shop;
+        $b = [];
+        foreach($shop as $m=>$n){
+            $b[] = $n->sid;
+        }
+        if($b){
+            $data =[
+                'status'=> 1,
+                'msg'=>'删除失败,分类下含有商家'
+            ];
+            return $data;
+        }
+
+//        4. 执行删除
         $res = $cate->delete();
-//        判断是否删除
+//        5. 判断是否删除
         if($res){
             $data =[
                 'status'=> 0,

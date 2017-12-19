@@ -23,9 +23,9 @@ class CartController extends Controller
       $input = $request->except('_token');
 //    dd($input);
      $goods= Food::find($input['fid']);
-//       dd($goods);
+//     dd($goods['sid']);
         //添加到购物车
-     Cart::add($goods['fid'],$goods['fname'],1, $goods['price'],['did'=>$goods['did'],'sprice'=>$input['sprice']]);
+     Cart::add($goods['fid'],$goods['fname'],1, $goods['price'],['did'=>$goods['sid'],'sprice'=>$input['sprice']]);
 
        return redirect('/home/cart');
 

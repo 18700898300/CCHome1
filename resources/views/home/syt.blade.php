@@ -90,24 +90,25 @@
             });
 
  		var oid = $('#oid').text();
-		$('.btn').on('click',function(){
-			layer.open({
-            type: 1,
-            skin: '', //加上边框
-            area: ['600px', '460px'], //宽高
-            content: '<div id ="ids"><span id="spans">使用支付宝支付<span id ="sprice">￥{{$syt[7]}}</span></span><div><img src="{{asset('/syt/zfb.png')}}"></div><div><div class="wx-qrcode-footer" data-reactid=".0.1.3.2.0.0.3"><i class="eleme-icon icon-scan" data-reactid=".0.1.3.2.0.0.3.0"></i><div data-reactid=".0.1.3.2.0.0.3.1"><p data-reactid=".0.1.3.2.0.0.3.1.0"><span data-reactid=".0.1.3.2.0.0.3.1.0.0">请使用</span><span data-reactid=".0.1.3.2.0.0.3.1.0.1">支付宝</span><span data-reactid=".0.1.3.2.0.0.3.1.0.2">扫一扫</span></p><p data-reactid=".0.1.3.2.0.0.3.1.1">扫描二维码完成支付</p></div></div></div></div>'
-       	 });
+            $('.btn').on('click',function(){
+//                alert(111);
+                    layer.open({
+                    type: 1,
+                    skin: '', //加上边框
+                    area: ['600px', '460px'], //宽高
+                    content: '<div id ="ids"><span id="spans">使用支付宝支付<span id ="sprice">￥{{$syt[7]}}</span></span><div><img src="{{asset('/syt/zfb.png')}}"></div><div><div class="wx-qrcode-footer" data-reactid=".0.1.3.2.0.0.3"><i class="eleme-icon icon-scan" data-reactid=".0.1.3.2.0.0.3.0"></i><div data-reactid=".0.1.3.2.0.0.3.1"><p data-reactid=".0.1.3.2.0.0.3.1.0"><span data-reactid=".0.1.3.2.0.0.3.1.0.0">请使用</span><span data-reactid=".0.1.3.2.0.0.3.1.0.1">支付宝</span><span data-reactid=".0.1.3.2.0.0.3.1.0.2">扫一扫</span></p><p data-reactid=".0.1.3.2.0.0.3.1.1">扫描二维码完成支付</p></div></div></div></div>'
+                 });
 
-			//获取订单id
+			    //获取订单id
 			
 
 
-			$.get('/home/order/js',{oid:oid},function(data){
-					if(data == 1){
-					  window.clearInterval(timer1);				
-					}
-			});
-		});
+                    $.get('/home/order/js',{oid:oid},function(data){
+                            if(data == 0){
+                              window.clearInterval(timer1);
+                            }
+                    });
+		    });
 	
 	</script>
 <style>
@@ -165,8 +166,7 @@
 
 
       
-			
-    <body>
+
 	
 
 </html>

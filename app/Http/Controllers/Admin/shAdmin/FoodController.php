@@ -179,8 +179,8 @@ class FoodController extends Controller
                 ->withInput();
         }
 
-//        3. 执行添加操作
-        $res = Food::create($input);
+//        3. 执行修改操作
+        $res = Food::find($id)->update($input);
 //        4. 判断是否成功
         if($res){
             return redirect('admin/food')->with('msg','修改成功');

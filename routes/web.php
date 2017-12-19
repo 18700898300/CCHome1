@@ -83,7 +83,7 @@ Route::post('boss/del/{id}','BossController@del');
 //    执行修改
     Route::post('/shop_type/update','Shop_typeController@update');
 //    删除分类
-    Route::post('/shop_type/delCate/{id}','Shop_typeController@delete');
+    Route::post('/shop_type/delCate/{id}','Shop_typeController@del');
 
 //    角色模块
     Route::resource('role','RoleController');
@@ -241,18 +241,18 @@ Route::get('/order/ddsx','OrderController@ddsx');
 
 
 
-
-Route::get('/shop',function (){
-    return view('shop');
-});
-
-Route::get('/order',function (){
-    return view('order');
-});
-
-Route::get('/index',function(){
-    return view('index');
-});
+//
+//Route::get('/shop',function (){
+//    return view('shop');
+//});
+//
+//Route::get('/order',function (){
+//    return view('order');
+//});
+//
+//Route::get('/index',function(){
+//    return view('index');
+//});
 
 
 
@@ -277,10 +277,36 @@ Route::get('admin/logout','Admin\MerchantController@logout');
 //商户后台
 //进入商户后台首页的路由组
 //注册好中间件之后,直接用别名islogin就可以
-Route::group(['middleware'=>'islogin','islogin','prefix'=>'admin','namespace'=>'shAdmin'],function(){
-    Route::get('merindex','MerController@merindex');
+Route::group(['middleware'=>'islogin','islogin','prefix'=>'admin'],function(){
+    Route::get('merindex','shAdmin\MerController@merindex');
+    //商家后台, 菜品标签模块
+    Route::resource('foodlabel','Admin\shAdmin\FoodLabelController');
+//商家后台, 菜品管理模块
+    Route::resource('food','Admin\shAdmin\FoodController');
+//执行菜品图片上传
+    Route::post('food/upload','Admin\Admin\shAdmin\FoodController@upload');
 
-    Route::get('info','MerController@info');
+    //友情链接类别管理
+    Route::resource('flinkt','Admin\Flinkt\FlinktController');
+//    排序,必须有路由,不是资源路由,因自己定义方法,否则报错方法不允许
+    Route::post('flinkt/changeOrder','Admin\Flinkt\FlinktController@changeOrder');
+
+    //    友情链接管理
+    Route::post('flink/{id}','Admin\Flink\FlinkController@update');
+    Route::resource('flink','Admin\Flink\FlinkController');
+    Route::post('upload','Flink\FlinkController@upload');//控制器的位置写对,不可忘加Flink
+    //网站配置
+    Route::resource('config','Admin\xtAdmin\Config\ConfigController');
+    Route::post('config/contentchange','Admin\xtAdmin\Config\ConfigController@ContentChange');
+    //后台评论管理
+    Route::get('comment','Admin\Comment\CommentController@index');
+//新订单页面
+Route::get('shadmin/neworder/{id?}','shAdmin\orederController@NewOrder');
+//预订单页面
+Route::get('/shadmin/yuneworder/{id?}','shAdmin\orederController@info');
+//接单
+Route::get('/shadmin/order/jd/{id}','shAdmin\orederController@jd');
+
 
 
 //    //友情链接类别管理
@@ -292,29 +318,6 @@ Route::group(['middleware'=>'islogin','islogin','prefix'=>'admin','namespace'=>'
 //    Route::post('flink/{id}','Flink\FlinkController@update');
 //    Route::resource('flink','Flink\FlinkController');
 //    Route::post('upload','Flink\FlinkController@upload');//控制器的位置写对,不可忘加Flink
-//    //网站配置
-//    Route::resource('config','Config\ConfigController');
-//    Route::post('config/contentchange','Config\ConfigController@ContentChange');
-//    //后台评论管理
-//    Route::get('comment','Comment\CommentController@index');
-//新订单页面
-Route::get('shadmin/neworder/{id?}','orederController@NewOrder');
-//预订单页面
-Route::get('/shadmin/yuneworder/{id?}','orederController@info');
-//接单
-Route::get('/shadmin/order/jd/{id}','orederController@jd');
-
-
-
-    //友情链接类别管理
-    Route::resource('flinkt','Flinkt\FlinktController');
-//    排序,必须有路由,不是资源路由,因自己定义方法,否则报错方法不允许
-    Route::post('flinkt/changeOrder','Flinkt\FlinktController@changeOrder');
-
-    //    友情链接管理
-    Route::post('flink/{id}','Flink\FlinkController@update');
-    Route::resource('flink','Flink\FlinkController');
-    Route::post('upload','Flink\FlinkController@upload');//控制器的位置写对,不可忘加Flink
     //网站配置转至系统后台
 //    Route::resource('config','Config\ConfigController');
 //    Route::post('config/contentchange','Config\ConfigController@ContentChange');
@@ -358,12 +361,7 @@ Route::get('home/comment/index','home/CommentController@index');
 Route::post('comment/add','CommentController@add');
 
 
-//商家后台, 菜品标签模块
-Route::resource('foodlabel','shAdmin\FoodLabelController');
-//商家后台, 菜品管理模块
-Route::resource('food','shAdmin\FoodController');
-//执行菜品图片上传
-Route::post('food/upload','shAdmin\FoodController@upload');
+
 
 
 //前台搜索查询店铺
@@ -378,16 +376,11 @@ Route::post('/home/query','Home\Home\HomeController@query');
 
 
 //前台的个人资料
-Route::get('home/person',function(){
-    return view('Home.person');
-});
+
 
 Route::get('home/person','Home\PersonController@index');
 Route::post('home/person/edit','Home\PersonController@edit');
 //编辑头像
-Route::get('home/avatar',function(){
-    return view('Home.avatar');
-});
 
 Route::post('home/avatar/upload','Home\PersonController@upload');
 
@@ -400,14 +393,10 @@ Route::post('home/dosetpwd','Home\PersonController@dosetpwd');
 Route::get('home/changepwd','Home\PersonController@changepwd');
 Route::post('home/dochangepwd','Home\PersonController@dochangepwd');
 
-//地址管理
-Route::get('home/address',function(){
-    return view('Home.address');
-});
 
 
 //安全中心
-Route::get('home/safe',function(){
-    return view('Home.safe');
-});
+//Route::get('home/safe',function(){
+//    return view('Home.safe');
+//});
 

@@ -13,6 +13,7 @@ class Shop extends Model
     public $timestamps = false;
 
 
+
 //    关联Food_label 模型,获得当前商户菜品的所有标签
     public function food_label()
     {
@@ -26,6 +27,7 @@ class Shop extends Model
 
 
     }
+
     public function cate(){
         return $this->belongsTo('App\Models\Admin\Shop_type','tid','tid');
     }

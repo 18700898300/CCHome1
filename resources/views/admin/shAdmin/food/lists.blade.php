@@ -1,4 +1,4 @@
-@extends('admin.xtAdmin.common')
+@extends('layouts.admin')
 @section('title')
     <title>商户菜品浏览页面</title>
 @endsection
@@ -65,7 +65,7 @@
 
                         <td class="tc">{{$n->fname}}</td>
                         <td class="tc">{{$n->price}}</td>
-                        <td class="tc"><img style="width:80px;height:80px" src="{{asset($n->fpic)}}"></td>
+                        <td class="tc"><img style="width:80px;height:80px" src="http://p0bvp893u.bkt.clouddn.com{{$n->fpic}}"></td>
                         <td class="tc">
                             @if($n->status == 1)
                                 在售

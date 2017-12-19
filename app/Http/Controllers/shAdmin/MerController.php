@@ -11,13 +11,15 @@ class MerController extends Controller
 {
     public function merindex(Request $request)
     {
+
+
 //        今日总订单数/
        $bid = \Session::get('meruser');
 //        dd($bid);
 //       dd($bid['bid']);
         $meruser=MerUser::with('shop')->find($bid['bid']);
 
-
+//        dd($meruser);
         $sid=$meruser->shop[0]['sid'];
         //昨天最后一秒
         $beginToday=mktime(0,0,0,date('m'),date('d'),date('Y'));

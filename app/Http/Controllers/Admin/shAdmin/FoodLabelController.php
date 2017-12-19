@@ -31,6 +31,7 @@ class FoodLabelController extends Controller
      */
     public function create()
     {
+
         return view('admin/shAdmin/foodLabel/add');
     }
 

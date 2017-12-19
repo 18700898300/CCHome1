@@ -1,4 +1,4 @@
-@extends('admin.xtAdmin.common')
+@extends('layouts.admin')
 @section('title')
     <title>后台商户分类添加页面</title>
 @endsection

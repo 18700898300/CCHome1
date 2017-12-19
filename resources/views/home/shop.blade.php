@@ -31,7 +31,7 @@
     <script>window.location.href = 'https://h.ele.me/activities/landing';</script>
     <![endif]-->
     <script src="{{asset('/wf/home/elm/api')}}" data-ref="API_CONFIG"></script>
-    <script src="{{asset('wf/home/js/perf.js')}}" type="text/javascript"></script>
+{{--    <script src="{{asset('wf/home/js/perf.js')}}" type="text/javascript"></script>--}}
     <script src="{{asset('/wf/home/js/vendor.6b3834.js')}}" type="text/javascript"></script>
     <script src="{{asset('/wf/home/js/222.js')}}" type="text/javascript"></script>
     <script type="text/javascript" src="{{asset('wf/admin/style/js/jquery.js')}}"></script>
@@ -92,7 +92,7 @@
                     <div class="dropbox topbar-profilebox-dropbox">
                       <a class="icon-profile" href="{{url('home/percenter')}}" hardjump="">个人中心</a>
                       <a class="icon-star" href="https://www.ele.me/profile/favor" hardjump="">我的收藏</a>
-                      <a class="icon-location" href={{url('home/address')}}" hardjump="">我的地址</a>
+                      <a class="icon-location" href="{{url('home/address')}}" hardjump="">我的地址</a>
                       <a class="icon-setting" href="{{url('home/safe')}}" hardjump="">安全设置</a>
                       <a class="icon-logout" href="{{url('home/quit')}}" ng-click="logout()">退出登录</a></div>
                   </span>
@@ -518,7 +518,7 @@
 <script>
     function scroll(name) {
 //        alert(name);
-
+alert(11);
         $('html,body').animate({scrollTop:$('#'+name).offset().top},1000);
 
     }

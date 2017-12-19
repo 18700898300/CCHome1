@@ -13,7 +13,9 @@ class orederController extends Controller
 
     public function NewOrder($id = 0)
     {
+//        dd(111);
         $bid = \Session::get('meruser');
+//        dd(111);
         $meruser = MerUser::with('shop')->find($bid['bid']);
         //昨天最后一秒
         $beginToday = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
@@ -24,6 +26,7 @@ class orederController extends Controller
         $data['endToday'] = $endToday;
         //获取商户的id
         $sid = $meruser->shop[0]['sid'];
+//        dd($sid);
         //通过订单主表去排序查找订单详情,
         $order = Order::orderBy('oid')->with('order_detail')->where('sid', '=', $sid)
             //查找订单为下单已支付的状态
@@ -35,7 +38,7 @@ class orederController extends Controller
                         $query->where('otime', '<', $data['endToday']);
                     });
             })->get();
-
+//        dd($order);
 //            dd( date('Y-m-d H:i:s',$data['endToday']) .'===='. date('Y-m-d H:i:s',$data['beginToday']));
 //          static  $arr['xdd'] = 0;
 //          static  $arr['cg'] = 0;
@@ -60,10 +63,10 @@ class orederController extends Controller
 
 
 
-        if(empty($order)){
+        if(!empty($order1)){
             $order = $order1;
             $ord = $order1[$id];
-
+           ;
               return view('/admin/shAdmin/order/order', compact('order', 'count', 'cprice', 'ord'));
          }else{
             return '没有新的订单';

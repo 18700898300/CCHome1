@@ -38,23 +38,24 @@
     <!--结果集标题与导航组件 结束-->
 
     <div class="result_wrap">
-        <form action="{{url('/admin/xtAdmin/adminUser')}}" method="post">
+        <form action="{{url('/admin/xtAdmin/role')}}/{{$role->rid}}" method="post">
             <table class="add_tab">
                 {{csrf_field()}}
+                {{method_field('put')}}
                 <tbody>
 
                 <tr>
-                    <th><i class="require">*</i>管理员名称：</th>
+                    <th><i class="require">*</i>角色名称：</th>
                     <td>
-                        <input type="text" name="aname" value="{{old('aname')}}">
-                        <span><i class="fa fa-exclamation-circle yellow"></i>管理员名称必须填写</span>
+                        <input type="text" name="name" value="{{$role->name}}">
+                        <span><i class="fa fa-exclamation-circle yellow"></i>角色名称必须填写</span>
                     </td>
                 </tr>
 
                 <tr>
-                    <th><i class="require">*</i>密码aa：</th>
+                    <th><i class="require">*</i>角色描述：</th>
                     <td>
-                        <input type="password" name="password">
+                        <textarea name="description">{{$role->description}}</textarea>
                     </td>
                 </tr>
 

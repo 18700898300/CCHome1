@@ -1,4 +1,4 @@
-@extends('admin.xtAdmin.common')
+@extends('layouts.admin')
 @section('title')
     <title>后台用户添加页面</title>
 @endsection

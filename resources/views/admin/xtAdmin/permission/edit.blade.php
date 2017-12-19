@@ -38,30 +38,31 @@
     <!--结果集标题与导航组件 结束-->
 
     <div class="result_wrap">
-        <form action="{{url('/admin/xtAdmin/adminUser')}}" method="post">
+        <form action="{{url('/admin/xtAdmin/permission')}}/{{$perm->pid}}" method="post">
             <table class="add_tab">
                 {{csrf_field()}}
+                {{method_field('put')}}
                 <tbody>
 
                 <tr>
-                    <th><i class="require">*</i>管理员名称：</th>
+                    <th><i class="require">*</i>权限名称：</th>
                     <td>
-                        <input type="text" name="aname" value="{{old('aname')}}">
-                        <span><i class="fa fa-exclamation-circle yellow"></i>管理员名称必须填写</span>
+                        <input type="text" name="name" value="{{$perm->name}}">
+                        <span><i class="fa fa-exclamation-circle yellow"></i>权限名称必须填写</span>
                     </td>
                 </tr>
 
                 <tr>
-                    <th><i class="require">*</i>密码aa：</th>
+                    <th><i class="require">*</i>权限描述：</th>
                     <td>
-                        <input type="password" name="password">
+                        <textarea name="description">{{$perm->description}}</textarea>
                     </td>
                 </tr>
 
                 <tr>
                     <th></th>
                     <td>
-                        <input type="submit" value="提交">
+                        <input type="submit" value="修改">
                         <input type="button" class="back" onclick="history.go(-1)" value="返回">
                     </td>
                 </tr>

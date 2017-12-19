@@ -23,9 +23,10 @@
     <link rel="icon" href="{{asset('a/image/favicon-16x16.png')}}" type="image/png" sizes="16x16" />
     <link rel="icon" href="{{asset('a/image/favicon-32x32.png')}}" type="image/png" sizes="32x32" />
     <link rel="icon" href="{{asset('a/image/favicon.png')}}" type="image/png" sizes="96x96" />
-    <link href="{{asset('a/css/vendor.162d72.css')}}" rel="stylesheet" />
-    <link href="{{asset('a/css/profile.fff1bd.css')}}" rel="stylesheet" />
-
+    {{--<link href="{{asset('a/css/vendor.162d72.css')}}" rel="stylesheet" />--}}
+    {{--<link href="{{asset('a/css/profile.fff1bd.css')}}" rel="stylesheet" />--}}
+    <link href="{{asset('a/css/vendor.d724a8_2.css')}}" rel="stylesheet">
+    <link href="{{asset('a/css/main.0a7669.css')}}" rel="stylesheet">
 
     <!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
 
@@ -163,9 +164,9 @@
             <span>商家分类:</span>
             <a onclick="sho(0)" class="excavator-filter-item ng-binding ng-scope active" href="javascript:">全部商家</a>
         @foreach($cates as $m=>$n)
-        @if($n->pid==0)
-            <a onclick="sho({{$n['tid']}})" id="{{$n['tid']}}"  class="excavator-filter-item ng-binding ng-scope" href="javascript:;">{{$n->tname}}</a>
-        @endif
+            @if($n->pid==0)
+                <a onclick="sho({{$n['tid']}})" id="{{$n['tid']}}"  class="excavator-filter-item ng-binding ng-scope" href="javascript:;">{{$n->tname}}</a>
+            @endif
 
         @endforeach
 
@@ -327,19 +328,18 @@
                 </div>
             </div>
         </footer>
-<<<<<<< HEAD
 
-        <script src="{{asset('a/js/6936dbf3e7d94cffa954bcbcf2b79f38.js')}}"></script>
+
 
     </div>
 </div>
-=======
+
         <script src="{{asset('/wf/home/js/6936dbf3e7d94cffa954bcbcf2b79f38.js')}}"></script>
         <script>
             $('#info').fadeOut(2000);
 
         </script>
->>>>>>> origin/qym
+
 </body>
 
 

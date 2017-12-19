@@ -1,4 +1,4 @@
-@extends('admin.xtAdmin.common')
+@extends('layouts.admin')
 @section('title')
     <title>商户后台菜品添加页面</title>
 @endsection
@@ -79,7 +79,7 @@
                     <th><i class="require">*</i>菜品图片：</th>
                     <td>
                         <input id="file_upload" type="file" name="pic" multiple><br>
-                        <img src="{{$food->fpic}}" id="img1" alt="" style="width:80px;height:80px"><br>
+                        <img src="http://p0bvp893u.bkt.clouddn.com{{$food->fpic}}" id="img1" alt="" style="width:80px;height:80px"><br>
                         <input type="hidden" name="fpic" id="art_thumb" value="{{$food->fpic}}">
 
                         <script type="text/javascript">

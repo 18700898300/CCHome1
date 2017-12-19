@@ -21,8 +21,10 @@ class OrderController extends Controller
 
         //全部商品信息
         $cart =  Cart::content();
+
         //总额
         $total= Cart::subtotal();
+   
         //购物车商品的数量
         $count = Cart::count();
 //        dd($cart);
@@ -38,7 +40,7 @@ class OrderController extends Controller
 
         $shop = Shop::find($did);
         $area = \DB::table('area')->get();
-//        dd($shop['sid']);
+//        dd($did);
         return view("/home/order",compact('cart','total','count','shop','addr','area'));
     }
 
@@ -174,7 +176,7 @@ class OrderController extends Controller
      * 确认下单,把数据加入数据库
      */
     public function insert(Request $request)
-    {   
+    {
 //        $data = $request->all();
 //        dd($data);
         $order = [];
@@ -230,6 +232,7 @@ class OrderController extends Controller
             //获取商家id
             $orderinfo['sid'] = $v['options']['did'];
             //获取运费价格
+//            dd($v['options']);
             $sprice = $v['options']['sprice'];
             //获取菜品名称
             $f['name'] = $v['name'];
@@ -240,13 +243,15 @@ class OrderController extends Controller
           $res =  Order_detail::create($orderinfo);
         }
      //运费价格
+//        dd($total);
         $order['sprice'] = $sprice;
         //订单总额
+//        dd($sprice);
         $order['cprice'] = $total + $sprice;
+
         //添加到订单主表
-//        dd($order);
         $order['sid'] = $orderinfo['sid'];
-//        dd($order['sid']);
+//        dd($order);
         $r =  Order::create($order);
 
         //查询商家店铺
@@ -280,7 +285,9 @@ class OrderController extends Controller
 
 
         if($res)
-        {   //重定向到收银台
+        {
+            Cart :: destroy();
+            //重定向到收银台
             return redirect("/home/order/syt/".$syt);
         }else{
             return back();
@@ -300,6 +307,7 @@ class OrderController extends Controller
     public function js(Request $request)
     {
         $oid = $request->except('_token');
+       $res =  Order::where('oid',$oid)->update(['status'=>1]);
        $res =  Order::where('oid',$oid)->update(['status'=>1]);
        if($res)
        {

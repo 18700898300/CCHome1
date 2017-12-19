@@ -49,12 +49,13 @@
             });
 
                 function sendcode(){
-                $phone = $('[name="phone"]').val();
 
+                var phone = $('[name="phone"]').val();
 //			2. 向服务器的发送短信的接口发送ajax请求
-                $.post("{{url('home/sendcode')}}",{"phone":$phone,"_token":"{{csrf_token()}}"},function(data){
+                $.post("{{url('home/sendcode')}}",{"phone":phone,"_token":"{{csrf_token()}}"},function(data){
 //                    console.log(data);
-                    var obj = JSON.parse(data);
+//                    var obj = JSON.parse(data);
+
                     if(obj.failure == 0){
                         layer.msg(obj.message, {icon: 5,area: ['100px', '80px']});
                     }else{

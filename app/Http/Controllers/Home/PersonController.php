@@ -106,7 +106,7 @@ class PersonController extends Controller
         $res = Order::find($id)->update(['status'=>3]);
         if($res)
         {
-//            return redirect('home/percenter');
+            return redirect('home/percenter');
         }else{
             return back();
         }
@@ -144,7 +144,7 @@ class PersonController extends Controller
            return redirect('home/person')->withErrors($validator)->withInput();
        }
        //将修改后的数据保存到users表中
-       $user = \DB::table('users')
+       $user = \DB::table('user')
            ->where('uid', $input['uid'])
            ->update(['uname' => $input['uname']]);
 
@@ -213,7 +213,7 @@ class PersonController extends Controller
         //将传过来的图片的路径保存到数据库中
         $uid = Session::get('user.uid');
 //        dd($uid);
-        $res = \DB::table('users')->where('uid',$uid)->update($input);
+        $res = \DB::table('user')->where('uid',$uid)->update($input);
 //        dd($res);
 
 
@@ -225,6 +225,7 @@ class PersonController extends Controller
     //显示地址管理页
     public function address()
     {
+
         $area = \DB::table('area')->get();
 
         $users = Session::get('user');
@@ -234,7 +235,7 @@ class PersonController extends Controller
 
 //        dd($addr);
 
-        return view('Home.person.address',compact('users','area','addr'));
+        return view('home.person.address',compact('users','area','addr'));
     }
     //执行添加地址
     public function insertsite(Request $request)
@@ -422,7 +423,7 @@ class PersonController extends Controller
 //        dd($re);
 
         //将新的手机号保存到数据库users表中
-        $res = \DB::table('users')->where('uid',$uid)->update(['phone'=>$input['phone']]);
+        $res = \DB::table('user')->where('uid',$uid)->update(['phone'=>$input['phone']]);
         if($res)
         {
 //
@@ -488,6 +489,7 @@ class PersonController extends Controller
         //将设置密码的数据添加并保存到users表中
 
         $res = \DB::table('users')->where('uname','bbbbb')->update(['password'=>$input['password']]);
+//        $res = User::find('')
         if($res)
         {
             return  redirect('home/safe');
@@ -545,7 +547,7 @@ class PersonController extends Controller
 
         //将设置密码的数据添加并保存到users表中
 
-        $res = \DB::table('users')->where('uid',$users['uid'])->update(['password'=>$input['password']]);
+        $res = \DB::table('user')->where('uid',$users['uid'])->update(['password'=>$input['password']]);
 //        dd($res);
         if($res)
         {

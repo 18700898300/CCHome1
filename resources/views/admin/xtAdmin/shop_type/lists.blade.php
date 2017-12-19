@@ -116,7 +116,7 @@
 //                $.get("请求服务器的路径","携带的参数", 获取执行成功后的额返回数据);
                 //admin/user/1
                 $.post("{{url('admin/xtAdmin/shop_type/delCate')}}/"+id,{"_token":"{{csrf_token()}}"},function(data){
-                    //alert(data);
+//                    alert(data);
 //                    data是json格式的字符串，在js中如何将一个json字符串变成json对象
                    //var res =  JSON.parse(data);
 //                    删除成功
